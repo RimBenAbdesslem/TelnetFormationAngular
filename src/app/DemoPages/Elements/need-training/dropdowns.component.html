@@ -1,0 +1,293 @@
+<!-- //popup add participant -->
+<div class="app-page-title">
+  <div class="page-title-wrapper">
+    <div class="page-title-actions">
+
+      <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success"
+        (click)=" openSmall(content1)">
+        <fa class="mr-2" name="plus"></fa>
+       Ajouter un participant
+      </button>
+
+      <div class="modal-body">
+        <ng-template #content1 let-c="close" let-d="dismiss">
+          <form >
+            <div class="modal-header">
+              <h4 class="modal-title"></h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+
+            <div class="card-body">
+              <form   [formGroup]="formation.ParticipantModel" class="mb-4" autocomplete="off">
+                <div class="form-group row">
+                  <label class="col-lg-3 col-form-label form-control-label" >Nom</label>
+                  <div class="col-lg-9">
+                    <input class="form-control" name="nom" formControlName="nom" type="text">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-lg-3 col-form-label form-control-label"  >Prenom</label>
+                  <div class="col-lg-9">
+                    <input class="form-control" type="text"  name="prenom" formControlName="prenom">
+                  </div>
+                </div>
+              </form>
+            </div>
+
+        
+            <div class="modal-footer">
+
+              <button type="submit" class="btn btn-primary" (click)="OnSubmitPar()">Ajouter</button>
+            </div>
+          </form>
+        </ng-template>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="main-card mb-3 card">
+  <div class="card-body">
+
+
+    <h5 class="card-title"></h5>
+    <form [formGroup]="formation.formModel" autocomplete="off" >
+      <!--(submit)="onSubmit()"-->
+      <div class="position-relative row form-group">
+
+        <label for="examplePassword" class="col-sm-2 col-form-label">Activité:</label>
+
+        <div class="position-relative form-group">
+          <input list="StaticUserIds" formControlName="Activite" name="Activite" style="width: 200px;"
+            class="form-control">
+          <datalist id="StaticUserIds">
+            <option *ngFor="let item of formation.BesFormation , let i = index">
+              {{formation.tabLab[i]}}
+
+
+              <!--  <input type="checkbox"  (change)="PrioriteChange($event)"> -->
+            </option>
+          </datalist>
+        </div>
+
+        <label for="examplePassword" class="col-sm-2 col-form-label">Intitulé formation:</label>
+
+        <div class="position-relative form-group">
+          <input name="Intitule_Formation" style="width: 200px;" type="text" class="form-control"
+            formControlName="Intitule_Formation">
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+      <div class="position-relative row form-group">
+
+        <label class="col-sm-2 col-form-label" name="Justification_du_besoin">Justification du besoin: </label>
+        <div class="form-group required">
+          <div class="position-relative form-group">
+
+
+
+
+            <input type="text" list="staticUserIds" name="select" class="form-control"
+              formControlName="Justification_du_besoin" name="Justification_du_besoin" style="width: 200px;" />
+            <datalist id="staticUserIds">
+              <option *ngFor="let participant of formation.besoins  , let i = index">
+                {{formation.JustificationBesoin[i]}} </option>
+
+            </datalist>
+          </div>
+        </div>
+        <!---->
+        <label for="examplePassword" class="col-sm-2 col-form-label">Nombre de participants: </label>
+        <div class="position-relative form-group">
+          <input name="Nombre_de_participants" type="number" class="form-control"
+            formControlName="Nombre_de_participants" style="width: 200px;">
+        </div>
+      </div>
+
+      <div class="position-relative row form-group" style="text-align: center;">
+        <label class="col-sm-2 col-form-label" style="text-align: center;">Priorité: </label>
+        <form [formGroup]="formation.reactiveForm">
+          <div class="position-relative form-group">
+            <div class="custom-control custom-radio custom-control-inline">
+
+              <label class="form-check-label" for="materialUnchecked2">1</label>
+              <input class="form-check" class="custom-control-input" type="radio" class="form-check-input"
+                id="materialUnchecked2" [value]="1" formControlName="reactiveRadio" name="reactiveRadio" mdbInput>
+            </div>
+
+
+            <div class="custom-control custom-radio custom-control-inline">
+              <input class="form-check" class="custom-control-input" type="radio" class="form-check-input"
+                id="materialChecked2" [value]="2" formControlName="reactiveRadio" name="reactiveRadio" mdbInput>
+              <label class="form-check-label" for="materialChecked2">2</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+              <input class="form-check" class="custom-control-input" type="radio" class="form-check-input"
+                id="materialChecked2" [value]="3" formControlName="reactiveRadio" name="reactiveRadio" mdbInput>
+              <label class="form-check-label" for="materialChecked2">3</label>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- <div class="position-relative form-group">participants</div>-->
+
+
+
+
+
+      <span *ngIf="closeResult" class="kt-section__sub">
+        <pre>{{closeResult}}</pre>
+      </span>
+
+      <!--c'est la formulaire de participant-->
+      <ng-template #content let-c="close" let-d="dismiss">
+        <form [formGroup]="formation.formModele" autocomplete="off" (submit)="onSubmitParticipant()">
+          <!--onSubmitParticipant()-->
+          <div class="modal-header">
+            <h4 class="modal-title"></h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!--formular d'ajout d'un nouveau participant-->
+
+
+            <ng-template #content let-c="close" let-d="dismiss">
+              <form [formGroup]="formation.formModele" autocomplete="off" (submit)="onSubmitParticipant()">
+                <!--onSubmitParticipant()-->
+                <div class="modal-header">
+                  <h4 class="modal-title"></h4>
+                  <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <!--  [formGroup]="formation.formeModel"-->
+                <div class="card-body">
+                  <form [formGroup]="formation.ParticipantModel" autocomplete="off" class="form" role="form"
+                    class="mb-4" autocomplete="off">
+                    <div class="form-group row">
+                      <label class="col-lg-3 col-form-label form-control-label">Activité</label>
+                      <div class="col-lg-9">
+                        <input class="form-control" type="text" formControlName="nom" name="nom">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+
+                <div class="modal-footer">
+                   
+                  <button type="submit" class="btn btn-primary" (click)="RegisterNewParticipant()">Ajouter</button>
+                </div>
+              </form>
+            </ng-template>
+
+
+
+
+
+
+
+
+
+            <div style="text-align: right;">
+              <button class="btn btn-primary" type="button" (click)="openCentred(content)"><i
+                class="icon fa fa-user fa-lg"></i></button>
+
+            </div>
+            <div class="col-md-6">
+
+
+              <!--style="width: 300px"
+                   <div class="modal-footer">
+                    <input name="" placeholder=" Add participant" type="text" class="form-control">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                  </div>
+                  -->
+
+
+              <!-- Search form -->
+
+              <div class="input-group">
+
+
+                <input type="text" class="form-control" placeholder="Rechercher" [ngModelOptions]="{standalone: true}"
+                  id="filter-string" [(ngModel)]="userFilter.userName" [value]="userFilter.userName">
+
+                <div class="input-group-append">
+                  <button class="btn btn-secondary" type="button">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+
+              </div>
+
+
+              <div class="card-body">
+                <!--<div class="form-group ">
+      <input type="text" [(ngModel)]="searchTerm"  placeholder="Search text" class="form-control"/>
+     </div>-->
+
+
+
+
+                <div *ngFor="let participant of participants ">
+                  <div class="form-group required">
+                    <div class="position-relative form-check form-check-inline">
+                      <label class="form-check-label">
+
+                        <input type="checkbox" value="{{participant.id}}"
+                          (change)="ParticipantChange(participant)">
+
+                        {{participant.userName}} </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+            <!-- <button type="submit" class="btn btn-primary" >Ajouter</button> -->
+          </div>
+        </form>
+      </ng-template>
+    </form>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="submit" (click)="onSubmit()">Valider</button>
+          <button class="btn btn-warning" (click)="resetAll()">Reset</button>
+          <button class="btn btn-secondary" type="submit" (click)="open(content)">Affecté un participant</button>
+        </div>
+
+  </div>
+</div>

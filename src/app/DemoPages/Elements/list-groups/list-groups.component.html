@@ -1,0 +1,177 @@
+<!--<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>-->
+
+<div class="main-card mb-3 card">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"></div>
+  </div>
+  <form [formGroup]="formation.formeModel" class="mb-4" autocomplete="off">
+    <div class="table-responsive">
+      <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+        <thead>
+          <tr>
+
+            <th class="text-center">Intitulé formation</th>
+            <th class="text-center">Activité</th>
+
+            <th class="text-center">Type de Formation</th>
+            <th class="text-center">Nombre de jour</th>
+            <th class="text-center">Durée(H)</th>
+
+          </tr>
+        </thead>
+
+        <tbody *ngFor="let format of formatsDateTest">
+          <tr *ngFor="let item of formation.besoins " >
+            <!--*ngFor="let item of formation.BesFormation "   [hidden]="item.date_Fin |date:format >today |date:format"-->
+
+            <td class="text-center" >{{item.intitule_Formation}} </td>
+            <!--{{item.-->
+            <td class="text-center" >{{item.activite}}</td>
+            <td class="text-center" >{{item.type_de_formation}}</td>
+            <td class="text-center" >{{item.nombre_de_jours}}</td>
+            <td class="text-center" >{{item.duree}}</td>
+
+            <td class="text-center" style="width: 200px;">
+              <div role="group" class="btn-group-sm btn-group">
+
+                <span *ngIf="closeResult" class="kt-section__sub">
+                  <pre>{{closeResult}}</pre>
+                </span>
+                <div class="divider"></div>
+
+                <ng-template #content let-c="close" let-d="dismiss" >
+                  <div class="modal-header" >
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+
+
+                    <div class="card-body">
+                      <h5 class="card-title"></h5>
+
+
+
+
+
+
+                      <!--formControlName="nombre_de_participants" [(ngModel)]="formation.formData.nombre_de_participants"-->
+                      <div class="position-relative form-group"><label for="exampleText"> Nombre de
+                          participants</label><input name="nombre_de_participants" class="form-control"
+                          formControlName="nombre_de_participants"
+                          [(ngModel)]="formation.EtatFormation.nombre_de_participants"></div>
+
+
+
+                      <div class="position-relative form-group"><label for="exampleEmail">Organisme de
+                          formation</label><input name="organisme_de_formation" placeholder="" type="text"
+                          class="form-control" [(ngModel)]="formation.EtatFormation.organisme_de_formation"
+                          formControlName="organisme_de_formation">
+                        <!---->
+                      </div>
+                      <div class="position-relative form-group"><label>Date debut formation</label><input
+                          name="date_Debut" placeholder="date debut" type="text" class="form-control"
+                          [(ngModel)]="formation.EtatFormation.date_Debut" formControlName="date_Debut">
+                        <!---->
+                      </div>
+                      <div class="position-relative form-group"><label>Date fin formation</label><input name="date_Fin"
+                          placeholder="date fin" type="text" class="form-control"
+                          [(ngModel)]="formation.EtatFormation.date_Fin" formControlName="date_Fin">
+                        <!---->
+                      </div>
+
+
+
+                      <div class="position-relative form-group"><label for="exampleEmail">Coùt unitaire</label><input
+                          name="cout_unitaire" placeholder="" type="text" class="form-control"
+                          [(ngModel)]="formation.EtatFormation.cout_unitaire" formControlName="cout_unitaire">
+                        <!---->
+                      </div>
+                      <div class="position-relative form-group"><label>Frais de déplacement</label><input
+                          name="frais_de_deplacement" placeholder="" type="text" class="form-control"
+                          [(ngModel)]="formation.EtatFormation.frais_de_deplacement"
+                          formControlName="frais_de_deplacement">
+                        <!---->
+                      </div>
+                      <div class="position-relative form-group"><label>Coùt Totale prévisionnel</label><input
+                          name="cout_Totale_previsionnel" placeholder="" type="text" class="form-control"
+                          [(ngModel)]="formation.EtatFormation.cout_Totale_previsionnel"
+                          formControlName="cout_Totale_previsionnel">
+                        <!---->
+                      </div>
+                      <div class="position-relative form-group"><label>Imputation aux mecanismes de
+                          financement</label><input name="imputation" id="exampleEmail" placeholder="" type="text"
+                          class="form-control" [(ngModel)]="formation.EtatFormation.imputation"
+                          formControlName="imputation">
+                        <!---->
+                      </div>
+
+                      <div class="position-relative form-group"><label>Montant prévisionnel à récupérer</label><input
+                          name="montant_recuperer" placeholder="" type="text" class="form-control"
+                          [(ngModel)]="formation.EtatFormation.montant_recuperer" formControlName="montant_recuperer">
+                        <!---->
+                      </div>
+
+                      <div class="position-relative form-group"><label>Compétence Visée</label><input
+                          name="montant_recuperer" placeholder="" type="text" class="form-control"
+                          formControlName="Competence_visee"> <!-- -->
+                      </div>
+                      <div class="position-relative form-group"><label>Date d'évaluation à froid</label><input
+                          name="montant_recuperer" placeholder="" type="text" class="form-control"
+                          formControlName="Date_EvaluationFroid"> <!-- -->
+                      </div>
+                      <div class="position-relative form-group"><label>Evaluation manquantes</label>
+                        <select class="form-control" formControlName="Evaluation_Manquantes" name="type_de_formation">
+                          <option>Evaluation à chaud</option>
+                          <option>Evaluaion à froid</option>
+
+                        </select> <!-- -->
+                      </div>
+
+
+
+
+
+
+
+
+
+                    </div>
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+                    <button type="button" class="btn btn-primary"  (click)="c('Close click')" (click)="RegisterEtatFormation()">Save
+                      changes</button>
+                    <!--(click)="envoyer()"-->
+                  </div>
+
+                </ng-template>
+
+
+                <button class="btn btn-primary" (click)="openLarge(content)" (click)="Edit(item)">Edit
+                  formation</button>
+                <!--(click)="populateForm(item)"-->
+
+
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+  </form>
+  <div class="d-block p-4 text-center card-footer">
+    <button class="btn-pill btn-shadow btn-wide fsize-1 btn btn-dark btn-lg">
+      <span class="mr-2 opacity-7">
+        <i class="fa fa-cog fa-spin"></i>
+      </span>
+      <span class="mr-1">View Complete Report</span>
+    </button>
+  </div>
+</div>

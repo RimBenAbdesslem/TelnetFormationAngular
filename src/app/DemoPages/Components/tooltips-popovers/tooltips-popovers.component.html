@@ -1,0 +1,87 @@
+
+
+
+<div class="card-body">
+  <div id="table" class="table-editable">
+    <div class="table-responsive">
+
+<table class="table table-striped table-responsive-md btn-table">
+
+  <thead>
+    <tr>
+      <th></th>
+      <th *ngFor="let domaine of competence.UserDomaineList" class="text-center" >
+       {{domaine.nomDomaine}}
+     
+        <tr class="text-center" >
+          <th *ngFor="let label of competence.UserLabelList"  [hidden]="domaine.domaineId!=label.domaineId ">
+
+             <span  class="text-center" >
+         {{label.nomLabel}}  </span> 
+         
+
+          </th>
+           
+         
+       
+         </tr>
+
+      </th>
+     
+    </tr>
+  </thead>
+
+ 
+     
+
+ 
+         <!--item.userName {{item.fullName}}-->
+
+         <tbody>
+          <tr *ngIf = "competence.user">
+            <th scope="row"  >  {{competence.user.userName}} {{competence.user.fullName}}
+         
+            </th>
+      
+      
+            <td *ngFor="let domaine of competence.UserDomaineList" class="text-center" >
+            <tr  >
+           
+            <th >
+             
+              <tr class="text-center" >
+                <th  *ngFor="let label of competence.UserLabelList" [hidden]="domaine.domaineId!=label.domaineId " >
+              <!--    {{competence.List.indexOf(label.labelId)}}-->
+                  <select class="form-control" style="width: 60px;" >
+                    <option *ngFor="let item of competence.List, let i = index" [selected]="item.labelId==label.labelId" >
+                         {{i}}
+                    </option>
+                    <option  >
+                     3
+                 </option>
+                 <option  >
+                  4
+              </option>
+                      
+                  
+                  
+                  
+                    </select>
+                     
+                   
+               
+                </th>
+                 
+               
+             
+               </tr>
+          </tr>
+              </td>
+              </tr>
+      </tbody>
+ 
+
+</table>
+</div>
+</div>
+</div>

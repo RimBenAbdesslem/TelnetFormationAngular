@@ -1,0 +1,70 @@
+<div class="card">
+  <form class="form" role="form" class="mb-4" autocomplete="off">
+    <div class="card-body">
+      <div id="table" class="table-editable">
+        <div class="table-responsive">
+          <table class="table table-bordered table-responsive-md table-striped text-center">
+            <!-- head -->
+            <thead>
+              <tr>
+                <th>
+                  User
+                </th>
+                <ng-container *ngFor="let domaine of competence.DomaineList">
+                  <th *ngIf="domaine.labels && domaine.labels.length>0" class="text-center"
+                    [hidden]="!competence.DomaineList.length">
+
+                    {{domaine.nomDomaine}}
+
+              <tr class="text-center">
+                <th *ngFor="let label of competence.LabeList" [hidden]="domaine.domaineId!=label.domaineId ">
+              <tr>
+                <td> <span class="text-center">
+                    {{label.nomLabel}} </span> </td>
+              </tr>
+              </th>
+              </tr>
+              </th>
+              </ng-container>
+              </tr>
+            </thead>
+            <!-- end head -->
+
+            <!-- body -->
+            <tbody>
+              <tr *ngFor="let user of competence.usersTrue ">
+                <th scope="row"> {{user.userName}} {{user.fullName}}
+                </th>
+                <ng-container *ngFor="let domaine of competence.DomaineList">
+                  <td *ngIf="domaine.labels && domaine.labels.length>0" class="text-center">
+              <tr>
+                <th>
+              <tr *ngIf="user" class="text-center">
+                <th *ngFor="let label of competence.LabeList" [hidden]="domaine.domaineId!=label.domaineId ">
+                  <div class="form-control" style="width: 60px;" *ngIf="getUserLabelSum(user,label)>0;else xBloc;">
+                    <select [ngModel]="getUserLabelSum(user,label)" (ngModelChange)="changeSelect(user,label,$event)" [ngModelOptions]="{standalone: true}" style="border: 0px;">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                    </select>
+
+                  </div>
+                  <ng-template #xBloc>
+                    <div class="form-control" style="width: 60px;">
+                      x
+                    </div>
+                  </ng-template>
+                </th>
+              </tr>
+              </tr>
+              </td>
+              </ng-container>
+            </tbody>
+            <!-- End body -->
+          </table>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,440 @@
+<ngb-carousel *ngIf="images">
+  <ng-template ngbSlide *ngIf="competence.userConnecte">
+    <img [src]="images[0]" width="100%" alt="Random first slide">
+    <div class="carousel-caption">
+      <a class="User-Profile-Image">
+        <img class="img-80 img-radius" src="./assets/images/avatars/10.jpg" alt="user-img">
+      </a>
+      <div class="media-body row">
+        <div class="col-lg-12">
+          <div class="user-title">
+            <h2>{{competence.userConnecte.userName}} {{competence.userConnecte.fullName}}</h2>
+            <span class="text-white">Web designer</span>
+          </div>
+        </div>
+        <div>
+
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide *ngIf="competence.userConnecte">
+    <img [src]="images[1]" width="100%" alt="Random second slide" *ngIf="images.length > 0">
+    <div class="carousel-caption">
+      <a class="User-Profile-Image">
+        <img class="img-80 img-radius" src="./assets/images/avatars/10.jpg" alt="user-img">
+      </a>
+      <div class="media-body row">
+        <div class="col-lg-12">
+          <div class="user-title">
+            <h2>{{competence.userConnecte.userName}} {{competence.userConnecte.fullName}}</h2>
+            <span class="text-white">Web designer</span>
+          </div>
+        </div>
+        <div>
+
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide >
+    <img [src]="images[2]" width="100%" alt="Random third slide">
+    <div class="carousel-caption" *ngIf="competence.userConnecte">
+      <a class="User-Profile-Image">
+        <img class="img-80 img-radius" src="./assets/images/avatars/10.jpg" alt="user-img">
+      </a>
+      <div class="media-body row">
+        <div class="col-lg-12">
+          <div class="user-title">
+            <h2>{{competence.userConnecte.userName}} {{competence.userConnecte.fullName}}</h2>
+            <span class="text-white">Web designer</span>
+          </div>
+        </div>
+        <div>
+
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ngb-carousel>
+
+
+
+
+<div class="page-body">
+  <!--profile cover start-->
+
+  <!--profile cover end-->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="md-tabs md-card-tabs">
+        <ngb-tabset>
+
+
+
+          <ngb-tab title="Me Competence">
+            <ng-template ngbTabContent>
+   <div class="card-body">
+                <div id="table" class="table-editable">
+                  <div class="table-responsive">
+
+                    <table class="table table-striped table-responsive-md btn-table">
+
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th *ngFor="let domaine of competence.UserDomaineList">
+                            {{domaine.nomDomaine}}
+
+                        <tr class="text-center">
+                          <th *ngFor="let label of competence.UserLabelList" class="text-center"
+                            [hidden]="domaine.domaineId!=label.domaineId ">
+
+                            <span class="text-center">
+                              {{label.nomLabel}} </span>
+
+
+                          </th>
+
+
+
+                        </tr>
+
+                        </th>
+
+                        </tr>
+                      </thead>
+
+
+
+
+
+                      <!--item.userName {{item.fullName}}-->
+
+                      <tbody>
+                        <tr *ngIf="competence.user">
+                          <th scope="row"> {{competence.user.userName}} {{competence.user.fullName}}
+
+                          </th>
+
+
+                          <td *ngFor="let domaine of competence.UserDomaineList" class="text-center">
+                        <tr>
+
+                          <th>
+
+                        <tr class="text-center">
+                          <th *ngFor="let label of competence.UserLabelList"
+                            [hidden]="domaine.domaineId!=label.domaineId ">
+                            <!--    {{competence.List.indexOf(label.labelId)}}-->
+  
+                            <select class="form-control" style="width: 60px;" [ngModel]="label.niveaus"  (ngModelChange)="changeSelect(competence.user,label,$event)" [ngModelOptions]="{standalone: true}" style="border: 0px;">
+                              
+                              <option>
+                                3
+                              </option>
+                              <option>
+                                4
+                              </option>
+
+
+
+
+                            </select>
+                          
+
+
+                          </th>
+
+
+
+                        </tr>
+                        </tr>
+                        </td>
+                        </tr>
+                      </tbody>
+
+
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+            </ng-template>
+          </ngb-tab>
+
+         
+
+
+
+          <ngb-tab title="" *ngIf="competence.userConnecte" >
+            <ng-template ngbTabTitle>
+              <div (click)="populateForm()">Information Personnel</div>
+          </ng-template>
+            <ng-template ngbTabContent >
+              <div class="m-t-15" (click)="populateForm()">
+                <!-- personal card start -->
+                <div class="card">
+
+                  <div class="card-body">
+                  
+                    <!-- end of view-info -->
+                    <div class="edit-info" *ngIf="!editProfile">
+                      <form [formGroup]="user.FormModel" class="mb-4" autocomplete="off"  (submit)="onSubmit(form)">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="general-info form-material">
+                              <div class="row">
+                                <div class="col-lg-6 ">
+                                  <div class="material-group">
+                                    <div class="material-addone">
+                                      <i class="icofont icofont-user"></i>
+                                    </div>
+                                    <div class="form-group form-primary"><!--user.formData.userName-->
+                                      <input type="text" [(ngModel)]="user.formData.userName" class="form-control"
+                                      placeholder="userName"  formControlName="UserName" class="form-control" required=""
+                                        value={{competence.user.userName}}>
+                                      
+                                      <span class="form-bar"></span>
+                                      <label class="float-label">Nom</label>
+
+                                    </div>
+                                  </div>
+
+                                  <!--   <div class="material-group">
+                                  <div class="material-addone">
+                                    <i class="fa fa-heart"></i>
+                                  </div>
+                                  <div class="form-group form-primary">
+                                    <select id="hello-single" class="form-control">
+                                      <option value="">---- Marital Status ----</option>
+                                      <option value="married">Married</option>
+                                      <option value="unmarried">Unmarried</option>
+                                    </select>
+                                    <span class="form-bar"></span>
+
+                                  </div>
+                                </div>-->
+
+
+
+                                  <div class="material-group">
+                                    <div class="material-addone">
+                                      <i class="icofont icofont-location-pin"></i>
+                                    </div>
+
+                                  </div>
+
+
+                                </div>
+                                <!-- end of table col-lg-6 -->
+                                <div class="col-lg-6">
+
+                                  <div class="material-group">
+                                    <div class="material-addone">
+                                      <i class="icofont icofont-mobile-phone"></i>
+                                    </div>
+                                    <div class="form-group form-primary">
+                                      <input type="text"  formControlName="FullName"
+                                        [(ngModel)]="user.formData.fullName" class="form-control" required=""
+                                        value={{competence.user.fullName}}>
+                                      <span class="form-bar"></span>
+                                      <label class="float-label">Prenon</label>
+                                    </div>
+                                  </div>
+
+
+                                  <div class="material-group">
+                                    <div class="material-addone">
+                                      <i class="icofont icofont-social-twitter"></i>
+                                    </div>
+                                    <div class="form-group form-primary">
+                                      <input type="text" [(ngModel)]="user.formData.email" class="form-control"
+                                      placeholder="Email"  formControlName="Email" class="form-control" required=""  value={{competence.user.email}}>
+                                      <label class="text-danger" *ngIf="user.FormModel.get('Email').touched && user.FormModel.get('Email').errors?.email">Invalid email address.</label>
+                                      <span class="form-bar"></span>
+                                      <label class="float-label">Email </label>
+                                    </div>
+                                  </div>
+
+
+
+                                  <div class="material-group">
+                                    <div class="material-addone">
+                                      <i class="icofont icofont-social-skype"></i>
+                                    </div>
+
+                                  </div>
+
+
+
+
+                                  <div class="material-group">
+                                    <div class="material-addone">
+                                      <i class="icofont icofont-earth"></i>
+                                    </div>
+
+                                  </div>
+
+
+
+                                </div>
+                                <!-- end of table col-lg-6 -->
+                              </div>
+                              <!-- end of row -->
+                              <div class="text-center">
+                                <button type="submit" class="btn btn-primary"  >Sauvgarder</button>
+
+                              </div>
+                            </div>
+                            <!-- end of edit info -->
+                          </div>
+                          <!-- end of col-lg-12 -->
+                        </div>
+                        <!-- end of row -->
+                      </form>
+                    </div>
+                    <!-- end of edit-info -->
+                  </div>
+                  <!-- end of card-body -->
+                </div>
+                
+                <!-- personal card end-->
+              </div>
+            </ng-template>
+          </ngb-tab>
+         
+          <ngb-tab title="changer photo de profile">
+            <ng-template ngbTabContent>
+              <div class="m-t-15">
+                <div class="card">
+
+                  <div class="card-body">
+                    <ul class="media-list">
+                      <li class="media">
+                        <div class="media-left" style="width: 50px; height: 50px;">
+
+                          <img class="media-object img-radius comment-img" src="./assets/images/avatars/10.jpg"
+                            alt="Generic placeholder image">
+
+                        </div>
+
+                      </li>
+                      <!-- Nested media object -->
+                      <div class="position-relative form-group"><label for="exampleFile"></label><input name="file"
+                        id="exampleFile"
+                        type="file"
+                        class="form-control-file">
+
+</div>
+                    </ul>
+
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+
+<!--commence d'ici-->
+<ngb-tab>
+  <ng-template ngbTabTitle>
+      <div (click)="populateForm()">Active</div>
+  </ng-template>
+  <ng-template ngbTabContent>
+    <table class="table table-sm table-striped" (click)="populateForm()">
+      <div class="card">
+        <form class="form" role="form" class="mb-4" autocomplete="off">
+          <div class="card-body">
+            <div id="table" class="table-editable">
+              <div class="table-responsive">
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                  <!-- head -->
+                  <thead>
+                    <tr>
+                      <th>
+                        User
+                      </th>
+                      <ng-container *ngFor="let domaine of competence.DomaineList">
+                        <th *ngIf="domaine.labels && domaine.labels.length>0" class="text-center"
+                          [hidden]="!competence.DomaineList.length">
+      
+                          {{domaine.nomDomaine}}
+      
+                    <tr class="text-center">
+                      <th *ngFor="let label of competence.LabeList" [hidden]="domaine.domaineId!=label.domaineId ">
+                    <tr>
+                      <td> <span class="text-center">
+                          {{label.nomLabel}} </span> </td>
+                    </tr>
+                    </th>
+                    </tr>
+                    </th>
+                    </ng-container>
+                    </tr>
+                  </thead>
+                  <!-- end head -->
+      
+                  <!-- body -->
+                  <tbody>
+                    <tr *ngIf="competence.user">
+                      <th scope="row"> {{competence.user.userName}} {{competence.user.fullName}}
+                      </th>
+                      <ng-container *ngFor="let domaine of competence.DomaineList">
+                        <td *ngIf="domaine.labels && domaine.labels.length>0" class="text-center">
+                    <tr>
+                      <th>
+                    <tr *ngIf="competence.user" class="text-center">
+                      <th *ngFor="let label of competence.LabeList" [hidden]="domaine.domaineId!=label.domaineId ">
+                        <div class="form-control" style="width: 60px;" *ngIf="getUserLabelSum(competence.user,label)>0;else xBloc;">
+                          <select [ngModel]="getUserLabelSum(competence.user,label)" (ngModelChange)="changeSelect(competence.user,label,$event)" [ngModelOptions]="{standalone: true}" style="border: 0px;">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                          </select>
+      
+                        </div>
+                        <ng-template #xBloc>
+                          <div class="form-control" style="width: 60px;">
+                            x
+                          </div>
+                        </ng-template>
+                      </th>
+                    </tr>
+                    </tr>
+                    </td>
+                    </ng-container>
+                  </tbody>
+                  <!-- End body -->
+                </table>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </table>
+  </ng-template>
+</ngb-tab>
+<!--ce termine ici-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+</div>

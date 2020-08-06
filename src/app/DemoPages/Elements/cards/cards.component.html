@@ -1,0 +1,142 @@
+<!--<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>-->
+
+<div class="main-card mb-3 card">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"></div>
+  </div>
+  <form class="mb-4" autocomplete="off">
+    <div class="table-responsive">
+      <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+        <thead>
+          <tr  >
+
+            <th class="text-center">Intitulé formation</th>
+            <th class="text-center">Activité</th>
+            <th class="text-center">Nombre de participants</th>
+            <th class="text-center">Priorité</th>
+            <th class="text-center">Justification du besoin</th>
+            <th class="text-center">Organisme de formation</th>
+            <th class="text-center"></th>
+            <th class="text-center"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of formationsListing">
+            <!--*ngFor="let item of formation.BesFormation "-->
+
+            <td class="text-center">{{item.intitule_Formation}}</td>
+            <td class="text-center">{{item.activite}}</td>
+            <td class="text-center">{{item.nombre_de_participants}}</td>
+            <td class="text-center">{{item.priorite}}</td>
+            <td class="text-center">{{item.justification_du_besoin}}</td>
+            <td class="text-center"> {{item.organisme_de_formation}}</td>
+            <td class="text-center">
+              <!--  <div class="d-block text-center card-footer">--> 
+                   <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" (click)="DeleteBesoin(item.besoinFormationId)" >
+                     <i class="pe-7s-trash btn-icon-wrapper"> </i>
+                   </button>
+                <!-- </div> -->
+               </td>
+            <td class="text-center" style="width: 200px;">
+              <div role="group" class="btn-group-sm btn-group">
+
+                <span *ngIf="closeResult" class="kt-section__sub">
+                  <pre>{{closeResult}}</pre>
+                </span>
+                <div class="divider"></div>
+
+                <ng-template #content let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+
+
+                    <div class="card-body">
+                      <h5 class="card-title"></h5>
+                      <div class="table-responsive">
+                      <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+                        <thead>
+                          <tr>
+
+                            
+                            <th class="text-center">Date debut </th>
+                            <th class="text-center">Date debut </th>
+                            <th class="text-center">type de formation</th>
+                            <th class="text-center">Nombre de jours</th>
+                            <th class="text-center">Durée(H)</th>
+                            <th class="text-center">Coùt unitaire</th>
+                            <th class="text-center">Frais de déplacement</th>
+                            <th class="text-center">Coùt Totale prévisionnel</th>
+                            <th class="text-center">Imputation aux mecanismes de financement</th>
+                            <th class="text-center">Barème TFP applicable</th>
+                            <th class="text-center">Montant prévisionnel à récupérer</th>
+                            
+
+
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          <tr *ngFor="let format of formatsDateTest" >
+                            <!--*ngFor="let item of formation.BesFormation "-->
+
+                            <td class="text-center">{{item.date_Debut  | date: format}}</td>
+                            <td class="text-center">{{item.date_Fin | date: format}}</td>
+                            <td class="text-center">{{item.type_de_formation}}</td>
+                            <td class="text-center">{{item.nombre_de_jours}}</td>
+                            <td class="text-center">{{item.duree}}</td>
+                            <td class="text-center"> {{item.cout_unitaire}}</td>
+                            <td class="text-center"> {{item.frais_de_deplacement}}</td>
+                            <td class="text-center"> {{item.cout_Totale_previsionnel}}</td>
+                            <td class="text-center"> {{item.imputation}}</td>
+                            <td class="text-center"> {{item.bareme_TFP}}</td>
+                            <td class="text-center"> {{item.montant_recuperer}}</td>
+                           
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+
+
+
+                    </div>
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+              
+                    <!--(click)="envoyer()"-->
+                  </div>
+
+                </ng-template>
+
+
+                <button class="btn btn-primary" (click)=" openLarge(content)">Detail</button>
+                <!--(click)="populateForm(item)"-->
+
+
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+
+      </table>
+    </div>
+  </form>
+  <div class="d-block p-4 text-center card-footer">
+    <button class="btn-pill btn-shadow btn-wide fsize-1 btn btn-dark btn-lg">
+      <span class="mr-2 opacity-7">
+        <i class="fa fa-cog fa-spin"></i>
+      </span>
+      <span class="mr-1">View Complete Report</span>
+    </button>
+  </div>
+</div>

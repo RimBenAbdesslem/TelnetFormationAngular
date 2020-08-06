@@ -1,0 +1,14 @@
+@import "assets/base";
+#toast-container > div{
+    opacity: 1;
+}
+table tr:hover{
+    cursor: pointer;
+}
+/* styles.scss */
+/* You can add global styles to this file, and also import other style files */
+
+//@import "~node_modules/@swimlane/ngx-datatable/release/index";
+//@import "~node_modules/@swimlane/ngx-datatable/release/themes/material";
+//@import "~node_modules/@swimlane/ngx-datatable/release/themes/bootstrap";
+//@import "~node_modules/@swimlane/ngx-datatable/release/assets/icons";

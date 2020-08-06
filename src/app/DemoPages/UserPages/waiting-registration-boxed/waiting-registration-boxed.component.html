@@ -1,0 +1,215 @@
+<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>
+
+
+<div class="main-card mb-3 card">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"></div>
+  </div>
+  <div class="table-responsive">
+    <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+      <thead>
+      <tr>
+        <th class="text-center">Avatar</th>
+        <th class="text-center">Name</th>
+        <th class="text-center">Email</th>
+        <th class="text-center">Action</th>
+  
+      </tr>
+      </thead>
+      <tbody>
+      <tr  *ngFor="let item of notification.UsersFalse " > 
+        <td class="text-center" style="width: 80px;">
+          <img width="40" class="rounded-circle" src="./assets/images/avatars/2.jpg" alt="">
+        </td>
+        <td class="text-center">{{item.userName}}</td>
+        <td class="text-center">{{item.email}}</td>
+     
+        <td class="text-center">
+          <div role="group" class="btn-group-sm btn-group">
+           <!-- <button type="button" class="btn-shadow btn btn-primary">Edit role</button>-->
+           <div class="card-body" class="text-center">
+            <div role="group" class="btn-group-sm btn-group">
+            <span *ngIf="closeResult" class="kt-section__sub">
+              <pre>{{closeResult}}</pre>
+            </span>
+            <div class="divider"></div>
+            <ng-template #content let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form [formGroup]="notification.formModel" autocomplete="off" >
+              <div class="modal-body">
+
+       <!--ici la sous formulaire de role de la boutton edit role-->
+
+                <div class="main-card mb-3 card">
+                  <div class="card-body">
+                    <div>
+                      <div class="table-responsive">
+                      <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+                      <thead>
+                        <tr>
+                          <th class="text-center">Avatar</th>
+                          <th class="text-center">Name</th>
+                          <th class="text-center">Email</th>
+                      
+                        </tr>
+                        </thead>
+
+                       <tbody>
+                        <tr  > 
+                          <td class="text-center" style="width: 80px;">
+                            <img width="40" class="rounded-circle" src="./assets/images/avatars/2.jpg" alt="">
+                          </td>
+                          <td class="text-center">{{item.userName}}</td>
+                          <td class="text-center">{{item.email}}</td>
+
+                        </tr>
+                       </tbody>
+                      </table>
+                    </div>
+                   
+                      <div class="divider"></div>
+                      
+                     
+                     <!--
+                       <thead>
+                        <tr>
+                          <th class="text-center">Role</th>
+                        </tr>
+                        </thead>
+                        <div  *ngFor="let role of notification.roles ">
+                          <div class="form-group required" >
+                            <div class="position-relative form-check form-check-inline">
+                              <label class="form-check-label">
+                             <input type="checkbox" value="{{role.name}}" (change)="RoleChange($event)"> {{role.name}}</label>
+                              </div>
+                            </div>
+                          </div>
+                     -->   
+                        
+
+
+
+                          <table>
+
+                            <thead>
+                              <tr>
+                                <th class="text-center"> Attribuer un role</th>
+                                <th></th>
+                              </tr>
+                              </thead>
+                           <tbody>
+                             <tr *ngFor="let role of notification.roles; let i = index;let j = index"> 
+                               <td >
+                                 <div  >
+                                   <div class="form-group required" >
+                                     <div class="position-relative form-check form-check-inline">
+                                       <label class="form-check-label">
+                                       {{role.name}}</label>
+                                       </div>
+                                     </div>
+                                   </div>
+                               </td>
+                             <td >
+                            
+                               <button (click)="i=!j" (click)="RegisterUserRole(item.id, role)">
+                                 <i [ngClass]="i ? ' fa fa-times': 'fa fa-check'" ></i>
+                               </button>
+                              
+                             </td>
+                             </tr>
+                           </tbody>
+                         
+                           
+                           </table>
+                         
+
+
+
+
+
+
+
+
+                      
+                     
+                      
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <div class="modal-footer" class="text-center">
+                <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+            <!--   <button type="submit" class="btn btn-primary" (click)="c('Close click')" >Sauvgarder</button>(click)="OnRegisterRole(item)"-->  
+              </div>
+            </form>
+            </ng-template>
+  
+  
+  
+            <td class="text-center">
+            <div role="group" class="btn-group-sm btn-group">
+            <button class="btn btn-primary" (click)="open(content)">Edit Role</button>
+          </div>
+            </td>
+            </div>
+        </div>
+          
+          
+          
+          
+          </div>
+
+        </td>
+     <!--   <td class="text-center">
+          <div role="group" class="btn-group-sm btn-group">
+            <button type="submit" class="btn-shadow btn btn-primary">Submit</button>
+          </div>
+        </td>-->
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-block p-4 text-center card-footer">
+    <button class="btn-pill btn-shadow btn-wide fsize-1 btn btn-dark btn-lg">
+      <span class="mr-2 opacity-7">
+          <i class="fa fa-cog fa-spin"></i>
+      </span>
+      <span class="mr-1">View Complete Report</span>
+    </button>
+  </div>
+</div>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+.fa {
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+  color: green;
+}
+
+
+
+.fa:hover {
+  color: green;
+}
+</style>
+</head>
+<body>
+
+
+
+
+
+</body>
+</html>

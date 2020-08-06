@@ -1,0 +1,887 @@
+
+
+
+<!--table de formation a evaluer-->
+
+<div class="main-card mb-3 card">
+  
+  <div class="table-responsive">
+  
+    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+      <thead>
+      <tr>
+      
+      
+        <th ><strong style="color: blue;">Théme</strong></th>
+        <th ><strong style="color: blue;"></strong></th>
+       
+     
+      </tr>
+      </thead>
+      <tbody>
+      <tr  *ngFor="let evaluation of evaluation.EvaluationFroidParticipant">
+      
+        
+        <td  >{{evaluation.theme}}</td>
+        <td >
+          
+        
+   
+      </td>
+    
+        <td >
+         <!-- <button type="button" class="btn btn-primary btn-sm">Details</button> -->
+
+
+         <div role="group" class="btn-group-sm btn-group">
+          <!-- <button type="button" class="btn-shadow btn btn-primary">Edit role</button>-->
+          <div class="card-body" class="text-center">
+           <div role="group" class="btn-group-sm btn-group">
+           <span *ngIf="closeResult" class="kt-section__sub">
+             <pre>{{closeResult}}</pre>
+           </span>
+           <div class="divider"></div>
+           <!-- [formGroup]="competence.FormModel" class="mb-4" autocomplete="off" (submit)="onSubmit(form)"-->
+         <!-- <input type="hidden" name="id" [value]="notification.formData.id">-->  
+           <ng-template #content let-c="close" let-d="dismiss">
+             <div class="modal-header">
+               <h4 class="modal-title"></h4> <!--Demo Basic-->
+               <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+         
+             <div class="modal-body">
+
+      <!--ici la sous formulaire de role de la boutton edit role-->
+           
+               <div class="main-card mb-3 card">
+                 <div class="card-body">
+                   <div>
+                     <div class="table-responsive">
+               
+
+<!--la formulaire a rempli-->
+<div class="row" class="text-center">
+
+  <div class="col-md-6" class="text-center">
+   
+      <ngb-accordion (panelChange)="beforeChange($event)">
+      <ngb-panel id="preventchange-1">
+      <ng-template ngbPanelTitle>
+
+      <h6 class="mb-3" class="text-center">
+        FORMATION
+      </h6>
+    </ng-template>
+      <div class="divider"></div>
+
+
+
+      <ng-template ngbPanelContent>
+     
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+
+        
+                <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+               
+
+               
+                 <thead>
+                   <tr>
+                     <th class="text-center"><strong>Théme</strong> </th>
+                     <th class="text-center"><strong>Lieu</strong> </th>
+                     <th class="text-center"><strong>Organisme</strong> </th>
+                     <th class="text-center"><strong>Formateur</strong> </th>
+                     <th class="text-center"><strong>Date debut</strong> </th>
+                     <th class="text-center"><strong>Date fin</strong> </th>
+                 
+                   </tr>
+                   </thead>
+                   <tbody>
+                     <tr ><!--*ngFor="let role of notification.role "-->
+                   
+                       <td class="text-center" > {{evaluation.theme}}  </td>
+                       <td class="text-center"> {{evaluation.lieu}}  </td>
+                       <td class="text-center"> {{evaluation.organisme}} </td>
+                       <td class="text-center"> {{evaluation.formateur}}  </td>
+                       <td class="text-center"> {{evaluation.date_Debut}}  </td>
+                       <td class="text-center"> {{evaluation.date_Fin}}  </td>
+                       </tr>
+                       </tbody>
+                </table>
+            
+            
+
+
+
+
+
+        </div>
+    
+
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+
+
+
+<ngb-accordion (panelChange)="beforeChange($event)">
+  <ngb-panel id="preventchange-1">
+<ng-template ngbPanelTitle>
+
+      <h6 class="mb-3 mt-3">
+        PARTICIPANT
+      </h6>
+    </ng-template>
+      <div class="divider"></div>
+      <ng-template ngbPanelContent>
+
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+
+        
+                <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+               
+
+               
+                 <thead>
+                   <tr>
+                     <th class="text-center"><strong>Nom</strong> </th>
+                     <th class="text-center"><strong>Prénom</strong> </th>
+                     <th class="text-center"><strong>Matricule</strong> </th>
+                     <th class="text-center"><strong>Direction</strong> </th>
+                     <th class="text-center"><strong>Date d'evaluation</strong> </th>
+                 
+                   </tr>
+                   </thead>
+                   <tbody>
+                     <tr ><!--*ngFor="let role of notification.role "-->
+                   
+                       <td class="text-center" > {{evaluation.nom_Participant}}  </td>
+                       <td class="text-center"> {{evaluation.prenom_Participant}}  </td>
+                       <td class="text-center"> {{evaluation.matricule}} </td>
+                       <td class="text-center"> {{evaluation.direction}}  </td>
+                       <td class="text-center"> {{evaluation.date_Evaluation_Froid}}  </td>
+                      
+                       </tr>
+                       </tbody>
+                </table>
+            
+ 
+
+        </div>
+
+
+
+
+
+
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+
+
+      <ngb-accordion (panelChange)="beforeChange($event)">
+        <ngb-panel id="preventchange-1">
+      <ng-template ngbPanelTitle>
+      <h6 class="mb-3 mt-3">
+        EVALUATION Participant
+      </h6>
+    </ng-template>
+      <div class="divider"></div>
+      <ng-template ngbPanelContent>
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <label for="examplePassword">a. Avez- vous mis en application les connaissances acquises lors de votre
+            formation ? </label>
+          <ng-container *ngIf="evaluation.question_A != oui ; then oui; else non">
+           
+         </ng-container>
+<ng-template #oui>
+  <div style="text-align: left;" >
+    <strong style="color:blue;">{{evaluation.question_A}}</strong>
+
+  </div>
+
+  <div class="position-relative row form-group">
+
+
+    <label for="examplePassword" class="col-sm-2 col-form-label">Lesquelles ?  </label>
+
+    <div class="position-relative form-group">
+     <strong> {{evaluation.lesquelles}}</strong> 
+    </div>
+
+
+  </div>
+</ng-template>
+          
+        <!---->  <ng-template #non>
+          <div class="position-relative row form-group">
+            <label class="form-check-label">
+              <strong style="color:blue;">{{evaluation.question_A}}</strong>
+
+            </label>
+
+          </div>
+
+          <div class="position-relative row form-group">
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Pourquoi ? </label>
+            <strong style="color:blue;">{{evaluation.pourquoiA}}</strong>
+          
+          
+
+
+
+
+
+          </div>
+        </ng-template>
+          <div class="position-relative row form-group">
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Autres : <strong>{{evaluation.autres1}}</strong>
+              </label>
+          </div>
+          <div class="divider"></div>
+
+          <div style="text-align: left;">
+            <label for="examplePassword">b. La formation vous a-t-elle permis d’améliorer votre efficacité dans votre
+              travail ? </label>
+
+          </div>
+          <ng-container *ngIf="evaluation.question_A != oui ; then ouiB; else nonB">
+           
+          </ng-container>
+          <ng-template #ouiB>
+            <div class="position-relative row form-group">
+              <label class="form-check-label">
+                <strong style="color:blue;">{{evaluation.question_B}}</strong>
+  
+              </label>
+  
+            </div>
+            <div class="position-relative row form-group">
+  
+              <label for="examplePassword" class="col-sm-2 col-form-label">Comment ? </label>
+  
+              <div class="position-relative form-group">
+                <strong style="color:blue;">{{evaluation.Comment}}</strong>
+              </div>
+  
+  
+  
+            </div>    
+          
+          </ng-template>
+          <ng-template #nonB>
+
+            <div class="position-relative row form-group">
+              <label class="form-check-label">
+                <strong style="color:blue;">{{evaluation.question_B}}</strong>
+  
+  
+              </label>
+  
+            </div>
+  
+            <div class="position-relative row form-group">
+  
+              <label for="examplePassword" class="col-sm-2 col-form-label">Pourqoui ? </label>
+  
+              <div class="position-relative form-group">
+                <strong style="color:blue;">{{evaluation.PourquoiB}}</strong>
+  
+              </div>
+  
+  
+  
+            </div>
+          </ng-template>
+
+
+
+          <div class="divider"></div>
+
+          <div class="position-relative row form-group"><label for="exampleFile"
+              class="col-sm-2 col-form-label"></label>
+
+          </div>
+
+
+          <div style="text-align: left;">
+            <label for="examplePassword">c. Quels compléments seraient nécessaires à la formation suivie ? </label>
+
+          </div>
+          <div class="position-relative row form-group">
+
+
+            <div class="position-relative form-group">
+              <strong style="color:blue;">{{evaluation.question_C}}</strong>
+            </div>
+
+
+
+          </div>
+
+          <div style="text-align: left;">
+            <label for="examplePassword">COMMENTAIRES / OBSERVATIONS / SUGGESTIONS </label>
+
+          </div>
+          <div class="position-relative row form-group">
+
+
+            <div class="position-relative form-group">
+              <strong style="color:blue;">{{evaluation.Commentaire1}}</strong>
+            </div>
+
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+
+
+      <ngb-accordion (panelChange)="beforeChange($event)">
+     
+        <ngb-panel id="preventchange-1">
+      <ng-template ngbPanelTitle>
+      <h6 class="mb-3 mt-3">
+        Evaluation Hiérarchie
+      </h6>
+    </ng-template>
+      <div class="divider"></div>
+      <ng-template ngbPanelContent>
+      
+        <div class="col-md-6" class="text-center">   
+          <form [formGroup]="evaluation.EvaluaFroidModel" class="mb-4" autocomplete="off"  >
+          <h5 class="card-title"></h5>
+         <table>
+         <tr>
+    <th class="text-center"></th>
+    <th class="text-center"></th>
+  </tr>
+  <tr>
+    <td class="text-center">Suite à la formation, une meilleure qualité d’éxecution des tâches a été
+      constatée.</td>
+      <td class="text-center"> 
+        <select class="form-control" formControlName="Critere1" name="Critere1" >
+          <!-- formControlName="type_de_formation" name="type_de_formation"-->
+          <option></option>
+          <option>oui</option>
+          <option>non</option>
+        </select>
+      </td>
+  </tr>
+</table>
+
+       
+
+         
+
+        
+
+         
+          <div class="divider"></div>
+          <table>
+            <tr>
+       <th class="text-center"></th>
+       <th class="text-center"></th>
+     </tr>
+     <tr>
+       <td class="text-center">La productivité des participants a été améliorée suite à la formation.</td>
+         <td class="text-center"> 
+           <select class="form-control" formControlName="Critere2" name="Critere2" >
+             <!-- formControlName="type_de_formation" name="type_de_formation"-->
+             <option></option>
+             <option>oui</option>
+             <option>non</option>
+           </select>
+         </td>
+     </tr>
+   </table>
+
+          <div class="divider"></div>
+
+          <table>
+            <tr>
+       <th class="text-center"></th>
+       <th class="text-center"></th>
+     </tr>
+     <tr>
+       <td class="text-center">La motivation du personnel est meilleure après avoir suivi la
+        formation.</td>
+         <td class="text-center"> 
+           <select class="form-control" formControlName="Critere3" name="Critere3" >
+             <!-- formControlName="type_de_formation" name="type_de_formation"-->
+             <option></option>
+             <option>oui</option>
+             <option>non</option>
+           </select>
+         </td>
+     </tr>
+   </table>
+
+
+
+
+
+
+       
+
+          <div class="divider"></div>
+
+          <table>
+            <tr>
+       <th class="text-center"></th>
+       <th class="text-center"></th>
+     </tr>
+     <tr>
+       <td class="text-center">La formation a permis de développer l’esprit d’initiative et l’autonomie du
+        personnel.</td>
+         <td class="text-center"> 
+           <select class="form-control" formControlName="Critere4" name="Critere4">
+             <!-- formControlName="type_de_formation" name="type_de_formation"-->
+             <option></option>
+             <option>oui</option>
+             <option>non</option>
+           </select>
+         </td>
+     </tr>
+   </table>
+
+
+
+
+
+          <div class="divider"></div>
+
+
+          <table>
+            <tr>
+       <th class="text-center"></th>
+       <th class="text-center"></th>
+     </tr>
+     <tr>
+       <td class="text-center">La formation a permis de résoudre le dysfonctionnement présent dans le
+        service/département.</td>
+         <td class="text-center"> 
+           <select class="form-control" formControlName="Critere5" name="Critere5">
+             <!-- formControlName="type_de_formation" name="type_de_formation"-->
+             <option></option>
+             <option>oui</option>
+             <option>non</option>
+           </select>
+         </td>
+     </tr>
+   </table>
+
+          <div class="divider"></div>
+
+
+
+          <table>
+            <tr>
+       <th class="text-center"></th>
+       <th class="text-center"></th>
+     </tr>
+     <tr>
+       <td class="text-center">
+        Suite à la formation, le nombre de plaintes des clients a diminué de manière importante.</td>
+         <td class="text-center"> 
+           <select class="form-control" formControlName="Critere6" name="Critere6">
+             <!-- formControlName="type_de_formation" name="type_de_formation"-->
+             <option></option>
+             <option>oui</option>
+             <option>non</option>
+           </select>
+         </td>
+     </tr>
+   </table>
+
+
+          <div class="divider"></div>
+
+
+          <table>
+            <tr>
+       <th class="text-center"></th>
+       <th class="text-center"></th>
+     </tr>
+     <tr>
+       <td class="text-center">La fomation a permis de réduire les problèmes se posant au sein des
+        services/départements.</td>
+         <td class="text-center"> 
+           <select class="form-control" formControlName="Critere7" name="Critere7">
+             <!-- formControlName="type_de_formation" name="type_de_formation"-->
+             <option></option>
+             <option>oui</option>
+             <option>non</option>
+           </select>
+         </td>
+     </tr>
+   </table>
+
+
+
+          <div class="divider"></div>
+
+
+
+          <table>
+            <tr>
+       <th class="text-center"></th>
+       <th class="text-center"></th>
+     </tr>
+     <tr>
+       <td class="text-center">La formation a permis d’améliorer le mode opératoire du projet (utilisation du
+        matériel, logiciel, etc.).</td>
+         <td class="text-center"> 
+           <select class="form-control" formControlName="Critere8" name="Critere8" >
+             <!-- formControlName="type_de_formation" name="type_de_formation"-->
+             <option></option>
+             <option>oui</option>
+             <option>non</option>
+           </select>
+         </td>
+     </tr>
+   </table>
+
+
+          <div class="divider"></div>
+
+
+
+          <table>
+            <tr>
+       <th class="text-center"></th>
+       <th class="text-center"></th>
+     </tr>
+     <tr>
+       <td class="text-center">Pensez-vous que l’action de formation a été efficace ?</td>
+         <td class="text-center"> 
+           <select class="form-control" formControlName="Critere9" name="Critere9">
+             <!-- formControlName="type_de_formation" name="type_de_formation"-->
+             <option></option>
+             <option>oui</option>
+             <option>non</option>
+           </select>
+         </td>
+     </tr>
+   </table>
+
+
+          <div class="divider"></div>
+          <div style="text-align: left;">
+            <label for="examplePassword"> Si Non :
+              Actions correctives à proposer :
+            </label>
+
+          </div>
+
+          <div class="position-relative form-group">
+            <input  type="text" class="form-control" style="width: 200px;"  formControlName="Sinon" name="Sinon">
+          </div>
+          <div class="divider"></div>
+          <div style="text-align: left;">
+            <label for="examplePassword">Autres :</label>
+
+          </div>
+
+
+          <div class="position-relative form-group">
+            <input  type="text" class="form-control" style="width: 200px;">
+          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+          <ng-template #content let-c="close" let-d="dismiss">
+      <!-- <form [formGroup]="evaluation.CompetenceEvalFroidModel" autocomplete="off">-->     
+              <!--onSubmitParticipant()-->
+              <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+
+              <!-- Search form -->
+
+
+
+
+
+
+
+
+
+
+              <div class="card-body">
+
+
+
+
+
+                <div class="position-relative form-group">
+                  <!-- Editable table -->
+                  <div class="card">
+                    <label> Niveau des compétences et correspondance avec les niveaux de la matrice des
+                      compétences:</label>
+                    <label> 1 -> C (MC): Niveau élémentaire : avoir des notions, découvrir.</label>
+                    <label> 2 -> B (MC): Maitrise avec assistance : savoir-faire, pratiquer.</label>
+                    <label> 3 -> B (MC): Maîtrise avancée : consolider, maîtriser.</label>
+                    <label> 4 -> A (MC): Maîtrise de référence : faire évoluer, transmettre, avoir un impac
+                    </label>
+                    <div class="divider"></div>
+                    <div class="card-body">
+
+                      <div style="text-align: left;">
+                        <label for="examplePassword">(*)Suite à la formation, de nouvelles compétences ont été mises en
+                          œuvre sur le lieu de travail.</label>
+
+                      </div>
+
+
+
+                      <div class="position-relative row form-group">
+                        <label class="form-check-label">
+                          <input type="checkbox"  /> Oui<!--formControlName="Critere10" name="Critere10"-->
+
+                        </label>
+
+                      </div>
+
+                      <div class="position-relative row form-group">
+                        <label class="form-check-label">
+                          <input type="checkbox"  /> Non<!--formControlName="Critere10" name="Critere10"-->
+
+                        </label>
+
+                      </div>
+                      <div id="table" class="table-editable">
+                        <span class="table-add float-right mb-3 mr-2">
+                          <a class="text-success" (click)="add()">
+                            <i class="fa fa-plus-circle" style="font-size:48px;color:blue"></i>
+                          </a>
+                        </span>
+                        <table class="table table-bordered table-responsive-md table-striped text-center">
+                          <tr>
+                            <th class="text-center">Compétences</th>
+                            <th class="text-center">Niveau actuel</th>
+                            <th class="text-center">Degré de maîtrise attendu</th>
+                            <th class="text-center">Niveau acquis</th>
+                            <th class="text-center"></th>
+                          </tr>
+                          <tr *ngFor="let person of personList; let id = index">
+                            <td >
+                              <input  contenteditable="true"  type=" text" /><!--formControlName="Competence" name="Competence"-->
+                            </td>
+                            <td>
+                              <input style="width: 20px;" type=" number" contenteditable="true" ><!--formControlName="Niveau_actuel" name="Niveau_actuel"-->
+                            </td>
+                            <td>
+                              <input contenteditable="true"  type=" text"/><!-- formControlName="Degre" name="Degre"-->
+                            </td>
+                            <td>
+                             
+                              <input contenteditable="true" type=" number" style="width: 20px;" /><!--formControlName="Niveau_acquis" name="Niveau_acquis"-->
+                            
+                            </td>
+
+
+
+                            <td>
+                              <span class="table-remove">
+                                <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
+                                  (click)="remove()">Ajouter</button>
+                              </span>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Editable table -->
+                </div>
+
+
+
+
+              </div>
+
+
+
+
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+              </div>
+     
+            <!--hadhi nn-->
+          </ng-template>
+
+
+          <div class="modal-footer">
+            <!-- <button class="btn btn-primary" type="button" (click)="open(content)">Ajouter un participant</button>-->
+
+            <button class="btn btn-primary" type="submit" (click)=" openLarge(content)" (click)="Register(evaluation)" (click)="Register(evaluation)">Valider</button></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          </form>
+          </div>
+    
+    </ng-template>
+  </ngb-panel>
+  
+</ngb-accordion>
+
+  
+  </div>
+
+</div>
+<!--houni toufa formulaire d'evaluation-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div>
+                  
+                   
+                  
+                   
+                      
+                    
+                     
+                    
+                     
+                   </div>
+                 </div>
+               </div>
+
+             </div>
+             <div class="modal-footer" class="text-center">
+             
+               <button type="button" class="btn btn-primary" type="submit"  (click)="c('Close click')"  >Modifier</button><!--(click)="onSubmit(form,item.id)"   (click)="onSubmit(form,domaine.domaineId)"-->
+             </div>
+           </ng-template>
+ 
+       
+ 
+           <td class="text-center">
+           <div role="group" class="btn-group-sm btn-group">
+           <button class="btn btn-primary" (click)="openLarge(content)"   >Detail</button> <!--  (click)="populateForm(domaine)" (click)="populateForm(item)"-->
+         </div>
+           </td>
+      
+           </div>
+       </div>
+         
+         
+         
+         
+         </div>
+
+
+        </td>
+      </tr>
+     
+      </tbody>
+    </table>
+  </div>
+  
+</div>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+.fa {
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+  color: green;
+}
+
+
+
+.fa:hover {
+  color: green;
+}
+</style>
+</head>
+<body>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+

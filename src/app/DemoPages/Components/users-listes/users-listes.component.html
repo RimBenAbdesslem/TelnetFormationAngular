@@ -1,0 +1,215 @@
+
+ <div class="main-card mb-3 card">
+  <div class="card-header">
+    Active Users
+  </div>
+  <div class="table-responsive">
+    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+      <thead>
+      <tr>
+      
+        <th>Image</th>
+        <th class="text-center">Nom</th>
+        <th class="text-center">Email</th>
+        <th class="text-center"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of notification.usersTrue ">
+      
+        <td class="text-center" style="width: 80px;">
+          <img width="40" class="rounded-circle" src="./assets/images/avatars/2.jpg" alt="">
+        </td>
+        <td class="text-center" >{{item.userName}}</td>
+        <td class="text-center" >{{item.email}}</td> 
+        <td class="text-center">
+       <!--  <div class="d-block text-center card-footer">--> 
+            <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" (click)="onDelete(item.id)">
+              <i class="pe-7s-trash btn-icon-wrapper"> </i>
+            </button>
+         <!-- </div> -->
+        </td>
+        <td class="text-center">
+         <!-- <button type="button" class="btn btn-primary btn-sm">Details</button> -->
+
+
+         <div role="group" class="btn-group-sm btn-group">
+          <!-- <button type="button" class="btn-shadow btn btn-primary">Edit role</button>-->
+          <div class="card-body" class="text-center">
+           <div role="group" class="btn-group-sm btn-group">
+           <span *ngIf="closeResult" class="kt-section__sub">
+             <pre>{{closeResult}}</pre>
+           </span>
+           <div class="divider"></div>
+           <form  [formGroup]="notification.formModel" class="mb-4" autocomplete="off" (submit)="onSubmit(form)">
+         <!-- <input type="hidden" name="id" [value]="notification.formData.id">-->  
+           <ng-template #content let-c="close" let-d="dismiss">
+             <div class="modal-header">
+               <h4 class="modal-title"></h4> <!--Demo Basic-->
+               <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                 <span aria-hidden="true">&times;</span>
+               </button>
+             </div>
+         
+             <div class="modal-body">
+
+      <!--ici la sous formulaire de role de la boutton edit role-->
+           
+               <div class="main-card mb-3 card">
+                 <div class="card-body">
+                   <div>
+                     <div class="table-responsive">
+                     <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+                     <thead>
+                       <tr>
+                         <th class="text-center"></th>
+                         <th class="text-center"></th>
+                         <th class="text-center"></th>
+                     
+                       </tr>
+                       </thead>
+
+                      <tbody>
+                       <tr  > 
+                       
+                         <td class="text-center" style="width: 80px;">
+                           <img width="40" class="rounded-circle" src="./assets/images/avatars/2.jpg" alt="">
+                         </td>
+                         <div class="form-group ">
+                         <td class="text-center" > 
+                           <input name="userName"  [(ngModel)]="notification.formData.userName" class="form-control"
+                          placeholder="userName"  formControlName="UserName">
+                          <label class="text-danger" *ngIf="notification.formModel.get('UserName').touched && notification.formModel.get('UserName').errors?.required">This field is mandatory.</label></td>
+                       
+                          <td class="text-center" >
+                         <input name="email"  [(ngModel)]="notification.formData.email" class="form-control"
+                          placeholder="Email"  formControlName="Email">
+                          <label class="text-danger" *ngIf="notification.formModel.get('Email').touched && notification.formModel.get('Email').errors?.email">Invalid email address.</label></td></div>
+                         
+                       </tr>
+                      </tbody>
+                      <thead>
+                        <tr>
+                          <th class="text-center">Role</th>
+                          <th class="text-center"></th>
+                      
+                        </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let role of notification.role ">
+                        
+                            <td class="text-center" >{{role}}</td>
+                            <td class="text-center">
+                              <!--  <div class="d-block text-center card-footer">--> 
+                                   <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" (click)="DeleteRole(role,item.id)">
+                                     <i class="pe-7s-trash btn-icon-wrapper"> </i>
+                                   </button>
+                                <!-- </div> -->
+                               </td>
+                            </tr>
+                            </tbody>
+                     </table>
+                   </div>
+                  
+                     <div class="divider"></div>
+                     <table>
+
+                      <thead>
+                        <tr>
+                          <th class="text-center"> Attribuer un role</th>
+                          <th></th>
+                        </tr>
+                        </thead>
+                     <tbody>
+                       <tr *ngFor="let role of notification.roles; let i = index;let j = index"> 
+                         <td >
+                           <div  >
+                             <div class="form-group required" >
+                               <div class="position-relative form-check form-check-inline">
+                                 <label class="form-check-label">
+                                 {{role.name}}</label>
+                                 </div>
+                               </div>
+                             </div>
+                         </td>
+                       <td >
+                      
+                         <button *ngIf="notification.role" (click)="RegisterUserRole(item.id, role)">
+                           <i [ngClass]="notification.role.includes(role) ? ' fa fa-times': 'fa fa-check'" ></i>
+                         </button>
+                        
+                       </td>
+                       </tr>
+                     </tbody>
+                   
+                     
+                     </table>
+                   
+                      
+                    
+                     
+                    
+                     
+                   </div>
+                 </div>
+               </div>
+
+             </div>
+             <div class="modal-footer" class="text-center">
+               <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+               <button type="button" class="btn btn-primary" type="submit"  (click)="c('Close click')" (click)="onSubmit(form,item.id)" >Sauvgarder</button>
+             </div>
+           </ng-template>
+ 
+          </form>
+ 
+           <td class="text-center">
+           <div role="group" class="btn-group-sm btn-group">
+           <button class="btn btn-primary" (click)="openLarge(content)" (click)="populateForm(item)" >Detail</button>
+         </div>
+           </td>
+           </div>
+       </div>
+         
+         
+         
+         
+         </div>
+
+
+        </td>
+      </tr>
+     
+      </tbody>
+    </table>
+  </div>
+ 
+</div>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+.fa {
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+  color: green;
+}
+
+
+
+.fa:hover {
+  color: green;
+}
+</style>
+</head>
+<body>
+
+
+
+
+</body>
+</html>

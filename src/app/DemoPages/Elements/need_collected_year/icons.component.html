@@ -1,0 +1,227 @@
+<!--<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>-->
+
+<div class="main-card mb-3 card">
+  <div class="card-header">
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"></div>
+  </div>
+  <form [formGroup]="formation.formeModel" class="mb-4" autocomplete="off">
+    <div class="table-responsive">
+      <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+        <thead>
+          <tr>
+
+            <th class="text-center">Intitulé formation</th>
+            <th class="text-center">Activité</th>
+            <th class="text-center">Nombre de participants</th>
+            <th class="text-center">Priorité</th>
+            <th class="text-center">Justification du besoin</th>
+
+          </tr>
+        </thead>
+
+        <tbody *ngIf="formationsListing">
+          <tr *ngFor="let item of formationsListing ">
+
+            <td class="text-center">{{item.intitule_Formation}}</td>
+            <td class="text-center">{{item.activite}}</td>
+            <td class="text-center">{{item.nombre_de_participants}}</td>
+            <td class="text-center">{{item.priorite}}</td>
+            <td class="text-center">{{item.justification_du_besoin}}</td>
+
+            <td class="text-center" style="width: 200px;">
+              <div role="group" class="btn-group-sm btn-group">
+
+                <span *ngIf="closeResult" class="kt-section__sub">
+                  <pre>{{closeResult}}</pre>
+                </span>
+                <div class="divider"></div>
+
+                <ng-template #content let-c="close" let-d="dismiss">
+                  <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+
+
+                    <div class="card-body">
+                      <h5 class="card-title"></h5>
+
+                      <div class="position-relative row form-group">
+                        <label for="exampleEmail " class="col-sm-2 col-form-label"> <strong>Intitulé formation</strong>
+                        </label>
+                        <div class="position-relative form-group">
+                          <input name="intitule_Formation" style="width: 200px;"
+                            [(ngModel)]="formation.formData.intitule_Formation" formControlName="intitule_Formation"
+                            type="text" class="form-control">
+
+                        </div>
+
+                        <label for="exampleSelect" class="col-sm-2 col-form-label"> <strong>Activité</strong></label>
+                        <div class="position-relative form-group">
+                          <input name="activite" style="width: 200px;" [(ngModel)]="formation.formData.activite"
+                            type="text" class="form-control" formControlName="activite"></div>
+
+                      </div>
+                      <div class="position-relative row form-group">
+                        <label for="exampleSelect" class="col-sm-2 col-form-label"> <strong>Priorité</strong></label>
+                        <div class="position-relative form-group">
+                          <input name="priorite" formControlName="priorite" [(ngModel)]="formation.formData.priorite"
+                            class="form-control" placeholder="with a placeholder" type="text" class="form-control">
+                        </div>
+                        <label for="exampleSelect" class="col-sm-2 col-form-label"> <strong>Justification du
+                            besoin</strong></label>
+                        <div class="position-relative form-group">
+                          <input name="justification_du_besoin" formControlName="justification_du_besoin"
+                            [(ngModel)]="formation.formData.justification_du_besoin" type="text" class="form-control">
+                        </div>
+
+                      </div>
+                      <div class="position-relative row form-group">
+                        <label for="exampleText" class="col-sm-2 col-form-label"> <strong> Nombre de participants
+                          </strong></label>
+                        <div class="position-relative form-group"><input name="nombre_de_participants"
+                            class="form-control" formControlName="nombre_de_participants"
+                            [(ngModel)]="formation.formData.nombre_de_participants"></div>
+
+
+                        <label for="exampleEmail" class="col-sm-2 col-form-label"> <strong> Organisme de formation
+                          </strong> </label>
+                        <div class="position-relative form-group"><input name="organisme_de_formation" type="text"
+                            class="form-control" formControlName="organisme_de_formation">
+                        </div>
+                      </div>
+                      <div class="position-relative row form-group">
+                        <label class="col-sm-2 col-form-label"> <strong> Date debut formation </strong> </label>
+                        <div class="position-relative form-group"><input name="date_Debut" placeholder="date debut"
+                            type="date" class="form-control" formControlName="date_Debut">
+                        </div>
+                        <label class="col-sm-2 col-form-label"> <strong> Date fin formation </strong> </label>
+                        <div class="position-relative form-group"><input name="date_Fin" placeholder="date fin"
+                            type="date" class="form-control" formControlName="date_Fin">
+                        </div>
+                      </div>
+                      <div class="position-relative row form-group">
+                        <label class="col-sm-2 col-form-label"> <strong> type de formation </strong> </label>
+                        <div class="position-relative form-group">
+                          <select class="form-control" formControlName="type_de_formation" name="type_de_formation"
+                            style="width: 200px;">
+                            <option>Intra-Formation</option>
+                            <option>Inter-Formation</option>
+
+                          </select>
+                        </div>
+                        <label class="col-sm-2 col-form-label"> <strong> Nombre de jours </strong> </label>
+                        <div class="position-relative form-group"><input name="nombre_de_jours" placeholder=""
+                            type="text" class="form-control" formControlName="nombre_de_jours">
+                        </div>
+                      </div>
+                      <div class="position-relative row form-group">
+                        <label class="col-sm-2 col-form-label" for="exampleEmail"> <strong> Durée(H) </strong> </label>
+                        <div class="position-relative form-group"><input name="duree" placeholder="" type="number"
+                            class="form-control" formControlName="duree">
+                        </div>
+                        <label for="exampleEmail" class="col-sm-2 col-form-label"> <strong> Coùt unitaire </strong>
+                        </label>
+                        <div class="position-relative form-group"><input name="cout_unitaire" placeholder="" type="text"
+                            class="form-control" formControlName="cout_unitaire">
+                        </div>
+                      </div>
+                      <div class="position-relative row form-group">
+                        <label for="exampleEmail" class="col-sm-2 col-form-label"> <strong> Frais de déplacement
+                          </strong> </label>
+                        <div class="position-relative form-group"><input name="frais_de_deplacement" placeholder=""
+                            type="text" class="form-control" formControlName="frais_de_deplacement">
+                        </div>
+                        <label for="exampleEmail" class="col-sm-2 col-form-label"> <strong> Coùt Totale prévisionnel
+                          </strong> </label>
+                        <div class="position-relative form-group"><input name="cout_Totale_previsionnel" placeholder=""
+                            type="text" class="form-control" formControlName="cout_Totale_previsionnel">
+                        </div>
+                      </div>
+                      <div class="position-relative row form-group">
+                        <label for="exampleEmail" class="col-sm-2 col-form-label"> <strong> Imputation aux mecanismes de
+                            financement </strong> </label>
+                        <div class="position-relative form-group"><input name="imputation" id="exampleEmail"
+                            placeholder="" type="text" class="form-control" formControlName="imputation">
+                        </div>
+                        <label for="exampleEmail" class="col-sm-2 col-form-label"> <strong> Bareme FTP </strong>
+                        </label>
+                        <div class="position-relative form-group"><input name="bareme_TFP" placeholder="" type="text"
+                            class="form-control" formControlName="bareme_TFP">
+                        </div>
+                      </div>
+                      <div class="position-relative row form-group">
+                        <label for="exampleEmail" class="col-sm-2 col-form-label"> <strong> Montant prévisionnel à
+                            récupérer </strong> </label>
+                        <div class="position-relative form-group"><input name="montant_recuperer" placeholder=""
+                            type="text" class="form-control" formControlName="montant_recuperer">
+                        </div>
+
+                        <label for="exampleEmail" class="col-sm-2 col-form-label"> <strong>Nom de formateur </strong>
+                        </label>
+                        <div class="position-relative form-group">
+                          <input name="nom_formateur" placeholder="" type="text"
+                          class="form-control" formControlName="nom_formateur" list="staticUserIds">
+                          <datalist id="staticUserIds">
+                            <option *ngFor="let item of competence.usersTrue "  >
+                              {{item.userName}} {{item.fullName}} </option>
+              
+                          </datalist>
+                         
+                        </div>
+                      </div>
+
+
+
+
+                      <ng-template #content let-c="close" let-d="dismiss">
+                        <div class="main-card mb-3 card">
+                          <div class="card-header">
+                            <div class="card-header-title font-size-lg text-capitalize font-weight-normal"></div>
+                          </div>
+                          <div class="table-responsive">
+                            <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+                              <thead>
+                                <tr>
+                                  <th class="text-center">Username</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let participant of participants">
+                                  <td class="text-center">{{participant.username}} </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+
+                        </div>
+                      </ng-template>
+                      <button class="btn btn-primary" (click)="open(content)">liste de participant</button>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+                    <button type="button" class="btn btn-primary" (click)="envoyer()">Sauvgarder</button>
+                  </div>
+                </ng-template>
+                <button class="btn btn-primary" (click)="openLarge(content)" (click)="populateForm(item)">Éditer
+                  formation</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+  <div class="d-block p-4 text-center card-footer">
+    <button class="btn-pill btn-shadow btn-wide fsize-1 btn btn-dark btn-lg">
+      <span class="mr-2 opacity-7">
+        <i class="fa fa-cog fa-spin"></i>
+      </span>
+      <span class="mr-1">View Complete Report</span>
+    </button>
+  </div>
+</div>

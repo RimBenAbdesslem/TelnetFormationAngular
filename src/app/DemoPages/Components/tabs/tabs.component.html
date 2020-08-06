@@ -1,0 +1,411 @@
+<!--<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>-->
+<html lang="en">
+<style>
+  header {
+    background-color: rgba(208, 224, 212, 0.959);
+    padding: 30px;
+    text-align: center;
+    font-size: 50px;
+    color: blue;
+  }
+</style>
+<header>Fiche d'évaluation à froid</header>
+
+</html>
+<p>
+
+
+</p>
+<p>
+
+
+</p>
+
+<div class="row" class="text-center">
+
+  <div class="col-md-6" class="text-center">
+    <form [formGroup]="evaluation.EvaluationFroidModel" class="mb-4" autocomplete="off"  >
+      <ngb-accordion (panelChange)="beforeChange($event)">
+      <ngb-panel id="preventchange-1">
+      <ng-template ngbPanelTitle>
+
+      <h6 class="mb-3" class="text-center">
+        FORMATION
+      </h6>
+    </ng-template>
+      <div class="divider"></div>
+
+
+
+      <ng-template ngbPanelContent>
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+
+          <div class="position-relative row form-group">
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Théme : </label>
+
+            <div class="position-relative form-group">
+              <input formControlName="Theme" name="Theme" type="text" class="form-control" style="width: 200px;">
+            </div>
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Lieu : </label>
+            <div class="position-relative form-group">
+              <input formControlName="Lieu" name="Lieu" type="text" class="form-control" style="width: 200px;">
+            </div>
+
+          </div>
+          <div class="position-relative row form-group">
+ <!--<div *ngFor="let item of formation.besoins ">-->
+            <label for="examplePassword" class="col-sm-2 col-form-label">Organisme : </label>
+         
+            <div class="position-relative form-group">
+             
+
+
+                <select  style="width: 200px;" class="form-control" formControlName="Organisme" name="Organisme">
+                  <!-- formControlName="type_de_formation" name="type_de_formation"-->
+                  <option  *ngFor="let item of formation.besoins">{{item.organisme_de_formation}}</option>
+                 
+                 
+  
+                </select>
+            </div>
+          
+            <label for="examplePassword" class="col-sm-2 col-form-label">Formateur : </label>
+          
+
+
+            <div class="position-relative form-group">
+             
+
+
+              <select  style="width: 200px;" class="form-control" formControlName="Formateur" name="Formateur" (change)="UserChangeValue($event)">
+                <!-- formControlName="type_de_formation" name="type_de_formation"-->
+                <option *ngFor="let item of notification.usersTrue " name="item.userName" value= {{item.id}} >{{item.userName}} {{item.fullName}}</option>
+               
+               
+
+              </select>
+          </div>
+
+          </div>
+
+
+
+          <div class="position-relative row form-group">
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Date Debut : </label>
+
+            <div class="position-relative form-group">
+              <input formControlName="Date_Debut" name="Date_Debut" type="date" class="form-control"
+                style="width: 200px;">
+            </div>
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Date Fin : </label>
+            <div class="position-relative form-group">
+              <input formControlName="Date_Fin" name="Date_Fin" type="date" class="form-control" style="width: 200px;">
+            </div>
+
+          </div>
+          <div class="position-relative row form-group"><label for="exampleFile"
+              class="col-sm-2 col-form-label"></label>
+
+          </div>
+
+        </div>
+      </div>
+
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+
+
+
+<ngb-accordion (panelChange)="beforeChange($event)">
+  <ngb-panel id="preventchange-1">
+<ng-template ngbPanelTitle>
+
+      <h6 class="mb-3 mt-3">
+        PARTICIPANT
+      </h6>
+    </ng-template>
+      <div class="divider"></div>
+      <ng-template ngbPanelContent>
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+
+          <div class="position-relative row form-group">
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Nom : </label>
+
+            <div class="position-relative form-group">
+
+              <select  style="width: 200px;" class="form-control" formControlName="Nom_Participant" name="Nom_Participant" >
+                <!-- formControlName="type_de_formation" name="type_de_formation"-->
+                <option *ngFor="let item of notification.usersTrue " >{{item.userName}} </option>
+               
+               
+
+              </select>
+
+
+              
+            </div>
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Prénom : </label>
+            <div class="position-relative form-group">
+
+              <select  style="width: 200px;" class="form-control" formControlName="Prenom_Participant" name="Prenom_Participant" >
+                <!-- formControlName="type_de_formation" name="type_de_formation"-->
+                <option *ngFor="let item of notification.usersTrue " >{{item.fullName}}</option>
+               
+               
+
+              </select> 
+           
+            </div>
+
+          </div>
+          <div class="position-relative row form-group">
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Matricule : </label>
+
+            <div class="position-relative form-group">
+              <input formControlName="Matricule" name="Matricule" type="text" class="form-control"
+                style="width: 200px;">
+            </div>
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Fonction : </label>
+            <div class="position-relative form-group">
+              <input formControlName="Fonction" name="Fonction" type="text" class="form-control" style="width: 200px;">
+            </div>
+
+          </div>
+
+
+
+          <div class="position-relative row form-group">
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Direction/Service : </label>
+
+            <div class="position-relative form-group">
+              <input formControlName="Direction" name="Direction" type="text" class="form-control"
+                style="width: 200px;">
+            </div>
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Date d'evaluation : </label>
+            <div class="position-relative form-group">
+              <input formControlName="Date_Evaluation_Froid" name="Date_Evaluation_Froid" type="date" class="form-control" style="width: 200px;">
+            </div>
+
+
+          </div>
+          <div class="position-relative row form-group"><label for="exampleFile"
+              class="col-sm-2 col-form-label"></label>
+
+          </div>
+
+        </div>
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+
+
+      <ngb-accordion (panelChange)="beforeChange($event)">
+        <ngb-panel id="preventchange-1">
+      <ng-template ngbPanelTitle>
+      <h6 class="mb-3 mt-3">
+        EVALUATION Participant
+      </h6>
+    </ng-template>
+      <div class="divider"></div>
+      <ng-template ngbPanelContent>
+      <div class="main-card mb-3 card">
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+
+
+          <div style="text-align: left;">
+            <label for="examplePassword">a. Avez- vous mis en application les connaissances acquises lors de votre
+              formation ? </label>
+
+          </div>
+
+
+
+          <div class="position-relative row form-group">
+            <label class="form-check-label">
+              <input type="checkbox" formControlName="question_A" name="question_A" /> Oui
+
+            </label>
+
+          </div>
+
+          <div class="position-relative row form-group">
+
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Lesquelles ? </label>
+
+            <div class="position-relative form-group">
+              <input formControlName="Lesquelles" name="Lesquelles" type="text" class="form-control"
+                style="width: 200px;">
+            </div>
+
+
+          </div>
+
+          <div class="position-relative row form-group">
+            <label class="form-check-label">
+              <input type="checkbox" formControlName="question_A" name="question_A" /> Non
+
+            </label>
+
+          </div>
+
+          <div class="position-relative row form-group">
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Pourquoi ? </label>
+
+            <label class="form-check-label"> </label>
+            <div class="position-relative form-group">
+              <select class="form-control" formControlName="PourquoiA" name="PourquoiA">
+                <!-- formControlName="type_de_formation" name="type_de_formation"-->
+                <option>Manque de temps</option>
+                <option>Modules non acquis</option>
+                <option>Formation non adaptée </option>
+                <option>Manque de moyens</option>
+
+              </select>
+            </div>
+
+
+
+
+
+          </div>
+          <div class="position-relative row form-group">
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Autres (précisez) </label>
+
+            <div class="position-relative form-group">
+              <input formControlName="Autres1" name="Autres1" type="text" class="form-control" style="width: 200px;">
+            </div>
+
+
+
+          </div>
+          <div class="divider"></div>
+
+          <div style="text-align: left;">
+            <label for="examplePassword">b. La formation vous a-t-elle permis d’améliorer votre efficacité dans votre
+              travail ? </label>
+
+          </div>
+
+
+          <div class="position-relative row form-group">
+            <label class="form-check-label">
+              <input type="checkbox" formControlName="question_B" name="question_B" /> Oui
+
+            </label>
+
+          </div>
+          <div class="position-relative row form-group">
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Comment ? </label>
+
+            <div class="position-relative form-group">
+              <input formControlName="Comment" name="Comment" type="text" class="form-control" style="width: 200px;">
+            </div>
+
+
+
+          </div>
+
+          <div class="position-relative row form-group">
+            <label class="form-check-label">
+              <input type="checkbox" formControlName="question_B" name="question_B" /> Non
+
+            </label>
+
+          </div>
+
+          <div class="position-relative row form-group">
+
+            <label for="examplePassword" class="col-sm-2 col-form-label">Pourqoui ? </label>
+
+            <div class="position-relative form-group">
+              <input formControlName="PourquoiB" name="PourquoiB" type="text" class="form-control"
+                style="width: 200px;">
+            </div>
+
+
+
+          </div>
+
+
+          <div class="divider"></div>
+
+          <div class="position-relative row form-group"><label for="exampleFile"
+              class="col-sm-2 col-form-label"></label>
+
+          </div>
+
+
+          <div style="text-align: left;">
+            <label for="examplePassword">c. Quels compléments seraient nécessaires à la formation suivie ? </label>
+
+          </div>
+          <div class="position-relative row form-group">
+
+
+            <div class="position-relative form-group">
+              <input formControlName="question_C" name="question_C" type="text" class="form-control"
+                style="width: 200px;">
+            </div>
+
+
+
+          </div>
+
+          <div style="text-align: left;">
+            <label for="examplePassword">COMMENTAIRES / OBSERVATIONS / SUGGESTIONS </label>
+
+          </div>
+          <div class="position-relative row form-group">
+
+
+            <div class="position-relative form-group">
+              <input formControlName="Commentaire1" name="Commentaire1" type="text" class="form-control"
+                style="width: 200px;">
+            </div>
+
+
+
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <!-- <button class="btn btn-primary" type="button" (click)="open(content)">Ajouter un participant</button>-->
+
+          <button class="btn btn-primary" type="submit"  (click)="onSubmit()">Next</button></div>
+
+      </div>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+
+
+
+    </form> <!-- hadhi nn-->
+  </div>
+
+</div>

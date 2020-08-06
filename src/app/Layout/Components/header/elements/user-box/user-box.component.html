@@ -1,0 +1,122 @@
+
+
+
+<div class="d-flex">
+
+
+
+  <div class="header-btn-lg pr-0">
+    <div class="widget-content p-0">
+      <div class="widget-content-wrapper">
+        <div class="widget-content-left">
+
+
+
+
+
+
+
+
+
+
+
+
+          <div class="btn-group" ngbDropdown placement="bottom-right">
+          
+            <button type="button" class="btn btn-link p-0 mr-2" ngbDropdownToggle >
+              
+              <span>
+                <div class="icon-wrapper icon-wrapper-alt rounded-circle" >
+                <label><strong  style="color: red;">{{sum}}</strong></label>
+                <i class="fa fa-bell" aria-hidden="true"></i>
+                </div>
+              
+              </span>
+          
+            </button>
+            <div ngbDropdownMenu>
+              <!--ici je doit afficher tout les notification-->
+              <strong style="color: red;">Notifications</strong>
+              <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                <thead>
+                <tr>
+      
+                  <th></th>
+                  <th></th>
+                  
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of formation.besoins; let i =index" >
+                  <td>
+                   
+                     <strong class="rounded-circle" style="color: red;"  >{{i+1}}</strong> 
+                     
+                    </td >
+                    <td  class="text-center" *ngFor="let format of formatsDateTest"> la formation{{item.intitule_Formation}} est terminé le : {{item.date_Fin |date :format}}</td>
+                  
+                  </tr>
+                </tbody>
+               
+              </table>
+           
+            <!-- <h6 class="dropdown-header">Header</h6>
+              <button class="dropdown-item">Actions</button>--> 
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div class="header-btn-lg pr-0">
+    <div class="widget-content p-0">
+      <div class="widget-content-wrapper">
+        <div class="widget-content-left">
+
+
+
+
+
+
+
+
+
+
+
+
+          <div class="btn-group" ngbDropdown placement="bottom-right">
+          
+            <button type="button" class="btn btn-link p-0 mr-2" ngbDropdownToggle >
+              <span>
+                <div class="icon-wrapper icon-wrapper-alt rounded-circle">
+                
+                  <img width="42" src="./assets/images/avatars/10.jpg" alt="3" class="rounded-circle">
+                </div>
+              
+              </span>
+          
+            </button>
+            <div ngbDropdownMenu>
+              <!--ici je doit afficher tout les notification-->
+           
+             
+           
+            <!-- <h6 class="dropdown-header">Header</h6>
+              <button class="dropdown-item">Actions</button>--> 
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item"  (click)="onLogout()">Se déconnecter</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

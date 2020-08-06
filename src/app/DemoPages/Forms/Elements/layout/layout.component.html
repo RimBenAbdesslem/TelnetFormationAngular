@@ -1,0 +1,535 @@
+<!--<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>-->
+<html lang="en">
+<style>
+  header {
+  background-color: rgba(208, 224, 212, 0.959);
+  padding: 30px;
+  text-align: center;
+  font-size: 50px;
+  color: blue;
+}
+
+</style>
+<header>Fiche de séléction des organismes prestataires de formation</header>
+</html>
+<p>
+
+
+</p>
+<p>
+
+
+</p>
+<div class="row" class="text-center" >
+  <div class="col-md-6"  class="text-center">
+    <h6 class="mb-3"  class="text-center">
+    
+    </h6>
+    <div class="divider"></div>
+
+
+  
+              
+<div class="main-card mb-3 card">
+  <div class="card-body"><h5 class="card-title"></h5>
+    <form   class="mb-4" autocomplete="off"  [formGroup]="formation.OrganismeModel"  >
+      <div class="position-relative row form-group">
+
+        <label for="examplePassword" class="col-sm-2 col-form-label">Théme : </label>
+      
+          <div class="position-relative form-group">
+            <input name="city" id="exampleCity" type="text" class="form-control" style="width: 200px;" formControlName="Theme">
+          </div>
+       
+        <label for="examplePassword" class="col-sm-2 col-form-label" >Organisme prestataire : </label>
+        <div class="position-relative form-group">
+          <input name="state" id="exampleState"type="text" class="form-control" style="width: 200px;" formControlName="Organisme_prestataire">
+        </div>
+        
+      </div>
+      <div class="position-relative row form-group">
+     
+
+        <label for="examplePassword" class="col-sm-2 col-form-label">Nom de formateur : </label>
+      
+          <div class="position-relative form-group">
+            <input name="city" id="exampleCity" type="text" class="form-control" style="width: 200px;" formControlName="Nom_Formateur">
+          
+       
+     
+      
+        
+      </div>
+     
+
+        <label for="examplePassword" class="col-sm-2 col-form-label">Périod de réalisation planifiée : </label>
+      
+          <div class="position-relative form-group">
+            <input name="city" id="exampleCity" type="text" class="form-control" style="width: 200px;" formControlName="Period">
+          </div>
+       
+     
+      
+        
+      
+    </div>
+
+   
+  
+      <div class="position-relative row form-group"><label for="exampleFile"
+           class="col-sm-2 col-form-label"></label>
+       
+      </div>
+    </form>
+  </div>
+</div>
+
+   
+
+    
+
+
+<h6 class="mb-3 mt-3">
+  I-Aspects Pédagogiques
+</h6>
+<div class="divider"></div>
+<div class="main-card mb-3 card">
+  <div class="card-body"><h5 class="card-title"></h5>
+    
+      
+ <div style="text-align: left;">
+        <label for="examplePassword" >I-A: Compréhension du context et des objectifs du besoins exprimé:</label>
+       
+    </div>
+   
+      <label class="form-check-label">
+     
+        Bon  <input type="checkbox" value="Bon1" (change)="ValueChange($event)"/>   
+
+        Moyen <input type="checkbox"value="Moyen1" (change)="ValueChange($event)"/> 
+       
+        Insuffisant <input type="checkbox" value="Insuffisant1" (change)="ValueChange($event)"/> 
+       
+       
+      </label>
+     
+     
+      
+  
+     
+   
+    <div class="divider"></div>
+          
+
+
+    <div style="text-align: left;">
+      <label for="examplePassword" >I-B: Adéquation de l'offre pédagogique avec le besoin exprimé:</label>
+     
+  </div>
+ 
+    <label class="form-check-label">
+   
+      Bon  <input type="checkbox" value="Bon2" (change)="ValueChange($event)"/>   
+
+      Moyen <input type="checkbox" value="Moyen2" (change)="ValueChange($event)"/> 
+     
+      Insuffisant <input type="checkbox" value="Insuffisant2" (change)="ValueChange($event)"/> 
+     
+     
+    </label>
+
+
+
+
+<div class="divider"></div>
+
+
+
+<div style="text-align: left;">
+<label for="examplePassword" >I-C: Prise en compte de la situation de travail des participants:</label>
+
+</div>
+
+<label class="form-check-label">
+
+Bon  <input type="checkbox" value="Bon3" (change)="ValueChange($event)"/>   
+
+Moyen <input type="checkbox"value="Moyen3" (change)="ValueChange($event)"/> 
+
+Insuffisant <input type="checkbox" value="Insuffisant3" (change)="ValueChange($event)"/> 
+
+
+</label>
+
+
+
+<div class="divider"></div>
+
+
+<div style="text-align: left;">
+<label for="examplePassword" >I-D: Pertinence des modalités d'accompagnement proposées:</label>
+
+</div>
+
+<label class="form-check-label">
+
+Bon  <input type="checkbox" value="Bon4" (change)="ValueChange($event)"/>   
+
+Moyen <input type="checkbox" value="Moyen4" (change)="ValueChange($event)"/> 
+
+Insuffisant <input type="checkbox" value="Insuffisant4" (change)="ValueChange($event)"/> 
+
+
+</label>
+
+
+
+
+     
+<div class="divider"></div>
+
+
+
+<div style="text-align: left;">
+<label for="examplePassword" >I-E: Pertinences des modes d'evaluation proposés :</label>
+
+</div>
+
+<label class="form-check-label">
+
+Bon  <input type="checkbox" value="Bon5" (change)="ValueChange($event)"/>   
+
+Moyen <input type="checkbox" value="Moyen5" (change)="ValueChange($event)"/> 
+
+Insuffisant <input type="checkbox" value="Insuffisant5" (change)="ValueChange($event)"/> 
+
+
+</label>
+
+
+
+<div class="divider"></div>
+  
+
+
+
+<div style="text-align: left;">
+<label for="examplePassword" >I-F: Expérience pédagogique et CV des intervenants:</label>
+
+</div>
+
+<label class="form-check-label">
+
+Bon  <input type="checkbox" value="Bon6" (change)="ValueChange($event)"/>   
+
+Moyen <input type="checkbox" value="Moyen6" (change)="ValueChange($event)"/> 
+
+Insuffisant <input type="checkbox" value="Insuffisant6" (change)="ValueChange($event)"/> 
+
+
+</label>
+
+  </div>
+</div>
+
+  
+    
+
+    
+    
+  
+
+    
+    <h6 class="mb-3 mt-3">
+      II-Aspects Organisationnels
+    </h6>
+    <div class="divider"></div>
+    <div class="main-card mb-3 card">
+      <div class="card-body"><h5 class="card-title"></h5>
+        
+          
+     <div style="text-align: left;">
+            <label for="examplePassword" >II-A: Diversité des supports/ outis pédagogiques proposés:</label>
+           
+        </div>
+       
+          <label class="form-check-label">
+         
+            Bon  <input type="checkbox" value="Bon7" (change)="ValueChange($event)"/>   
+
+            Moyen <input type="checkbox" value="Moyen7" (change)="ValueChange($event)"/> 
+           
+            Insuffisant <input type="checkbox" value="Insuffisant7" (change)="ValueChange($event)"/> 
+           
+           
+          </label>
+         
+         
+          
+      
+         
+       
+        <div class="divider"></div>
+              
+    
+ 
+        <div style="text-align: left;">
+          <label for="examplePassword" >II-B: Réferences de l'organisme dans des domaines d'intervention similaires:</label>
+         
+      </div>
+     
+        <label class="form-check-label">
+       
+          Bon  <input type="checkbox" value="Bon8" (change)="ValueChange($event)"/>   
+
+          Moyen <input type="checkbox" value="Moyen8" (change)="ValueChange($event)"/> 
+         
+          Insuffisant <input type="checkbox" value="Insuffisant8" (change)="ValueChange($event)"/> 
+         
+         
+        </label>
+  
+  
+   
+  
+  <div class="divider"></div>
+ 
+
+
+  <div style="text-align: left;">
+    <label for="examplePassword" >II-C: Certification ISO du cabinet:</label>
+   
+</div>
+
+  <label class="form-check-label">
+ 
+    Oui  <input type="checkbox" value="Oui1" (change)="ValueChange($event)"/>   
+
+    Non <input type="checkbox" value="Non1" (change)="ValueChange($event)"/> 
+   
+  
+   
+   
+  </label>
+
+ 
+
+<div class="divider"></div>
+
+
+<div style="text-align: left;">
+  <label for="examplePassword" >II-D: Existence d'un réferentiel méthodologique de formation-action:</label>
+ 
+</div>
+
+<label class="form-check-label">
+
+  Oui  <input type="checkbox" value="Oui2" (change)="ValueChange($event)"/>   
+
+  Non <input type="checkbox" value="Non2" (change)="ValueChange($event)"/> 
+
+ 
+ 
+</label>
+
+
+
+
+         
+<div class="divider"></div>
+
+
+
+<div style="text-align: left;">
+  <label for="examplePassword" >II-E: Proposition d'outils d'évaluation / validation des compétences à acquérir :</label>
+ 
+</div>
+
+<label class="form-check-label">
+
+  Oui  <input type="checkbox" value="Oui3" (change)="ValueChange($event)"/>   
+
+  Non <input type="checkbox" value="Non3" (change)="ValueChange($event)"/> 
+ 
+
+ 
+ 
+</label>
+
+
+
+      
+
+
+
+
+
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+    <h6 class="mb-3 mt-3">
+      III-Aspects financiers
+    </h6>
+    <div class="divider"></div>
+    <div class="main-card mb-3 card">
+      <div class="card-body"><h5 class="card-title"></h5>
+        
+          
+     <div style="text-align: left;">
+            <label for="examplePassword" >I-A: Tarif forfaitaire(indépendant du nombre de participants):</label>
+           
+        </div>
+       
+          <label class="form-check-label">
+         
+            Oui  <input type="checkbox" value="Oui4" (change)="ValueChange($event)"/>   
+
+            Non <input type="checkbox" value="Non4" (change)="ValueChange($event)"/> 
+           
+          
+           
+           
+          </label>
+         
+         
+          
+      
+         
+       
+        <div class="divider"></div>
+              
+    
+ 
+        <div style="text-align: left;">
+          <label for="examplePassword" >III-B: Taux de remboursement par la TEP> 60% de l'offre:</label>
+         
+      </div>
+     
+        <label class="form-check-label">
+       
+          Oui  <input type="checkbox" value="Oui5" (change)="ValueChange($event)"/>   
+
+          Non <input type="checkbox" value="Non5" (change)="ValueChange($event)"/> 
+         
+          
+         
+         
+        </label>
+  
+  
+   
+  
+  <div class="divider"></div>
+ 
+
+
+  <div style="text-align: left;">
+    <label for="examplePassword" >III-C: Possibilité de financer l'action dans le cadre de l'art 39:</label>
+   
+</div>
+
+  <label class="form-check-label">
+ 
+    Oui  <input type="checkbox" value="Oui6" (change)="ValueChange($event)"/>   
+
+    Non <input type="checkbox" value="Non6" (change)="ValueChange($event)"/> 
+    
+   
+   
+  </label>
+
+ 
+
+<div class="divider"></div>
+
+
+<div style="text-align: left;">
+  <label for="examplePassword" >III-D: Autres avantages:</label>
+ 
+</div>
+
+<label class="form-check-label">
+
+  Oui  <input type="checkbox"  value="Oui7" (change)="ValueChange($event)"/>   
+
+  Non <input type="checkbox"  value="Non7" (change)="ValueChange($event)"/> 
+ 
+
+ 
+ 
+</label>
+
+
+
+
+         
+
+
+
+
+
+
+
+
+      
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <form > <!--onSubmitParticipant()-->
+    <div class="modal-header">
+      <h4 class="modal-title"></h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <div class="col-md-6">
+
+
+        <!--style="width: 300px"-->
+        
+
+        <div class="card-body" >
+
+         
+
+       <h6 >Totale evaluation égale  à  {{formation.resultat}}/39 </h6>
+
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary"(click)="c('Close click')" >Prestataire non retenu</button>
+      <button type="submit" class="btn btn-primary" (click)="AjouterOrganisme()">Prestataire retenu</button>
+    </div>
+  </form>
+</ng-template>
+
+<div class="modal-footer">
+             
+  <button type="button" class="btn btn-primary" (click)="open(content)" (click)="CalculerTotaleEvaluation()">Total Evaluation</button>
+</div>
+
+      </div>
+    </div>
+
+
+  </div>
+ 
+</div>
+
+
+
+
