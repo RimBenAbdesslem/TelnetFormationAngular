@@ -24,7 +24,6 @@ export class RegularComponent implements OnInit {
     niveau = Number(niveau)
     console.log("niveau :  ",niveau)
 
-
     let level = user.Level.find(x=>x.labelId == label.labelId)
     let metierId = level? level.metierId : null
     console.log("metierId : ",metierId);

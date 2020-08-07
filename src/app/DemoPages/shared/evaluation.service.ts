@@ -61,6 +61,7 @@ import { element } from '@angular/core/src/render3';
       Critere8: ['', Validators.required],
       Critere9: ['', Validators.required],
       Sinon: ['', Validators.required],
+      autre:['', Validators.required],
 
      });
      CompetenceEvalFroidModel = this.Fb.group({
@@ -100,7 +101,7 @@ import { element } from '@angular/core/src/render3';
       Commentaire3: ['', Validators.required],
       check:['', Validators.required],
      });
-     registerEvaluationFroid(SelectedUserValue){
+     registerEvaluationFroid(SelectedUserValue,variable){
       var evaluation={
       Theme:this.EvaluationFroidModel.value.Theme,
       Lieu:this.EvaluationFroidModel.value.Lieu,
@@ -124,7 +125,7 @@ import { element } from '@angular/core/src/render3';
        question_B: this.EvaluationFroidModel.value.question_B,
        Comment: this.EvaluationFroidModel.value.Comment,
        Commentaire1: this.EvaluationFroidModel.value.Commentaire1,
-      
+      //idParticipant:variable
        
       }
       console.log( this.EvaluationFroidModel.value.Date_Fin)
@@ -250,9 +251,10 @@ return(formData)
        Critere8: this.EvaluaFroidModel.value.Critere8,
        Critere9: this.EvaluaFroidModel.value.Critere9,
       Sinon:this.EvaluaFroidModel.value.Sinon, 
+      autre: this.EvaluaFroidModel.value.autre
     }
     console.log(Evaluation.theme)
-    return this.http.post('https://localhost:44385/api/EvaluationFroid/RegisterEvaluationFroid"', evaluation);
+    return this.http.post('https://localhost:44385/api/EvaluationFroid/RegisterEvaluationFroid', evaluation);
     }
   }
 

@@ -144,9 +144,9 @@
 
             <div class="position-relative form-group">
 
-              <select  style="width: 200px;" class="form-control" formControlName="Nom_Participant" name="Nom_Participant" >
+              <select  style="width: 200px;" class="form-control" formControlName="Nom_Participant" name="Nom_Participant" (change)="SelectUser($event)">
                 <!-- formControlName="type_de_formation" name="type_de_formation"-->
-                <option *ngFor="let item of notification.usersTrue " >{{item.userName}} </option>
+                <option *ngFor="let item of notification.usersTrue " value={{item.id}}>{{item.userName}} </option>
                
                
 

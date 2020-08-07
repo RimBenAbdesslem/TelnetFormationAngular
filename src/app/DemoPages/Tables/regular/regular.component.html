@@ -11,8 +11,7 @@
                   User
                 </th>
                 <ng-container *ngFor="let domaine of competence.DomaineList">
-                  <th *ngIf="domaine.labels && domaine.labels.length>0" class="text-center"
-                    [hidden]="!competence.DomaineList.length">
+                  <th *ngIf="domaine.labels && domaine.labels.length>0" class="text-center"  [hidden]="!competence.DomaineList.length">
 
                     {{domaine.nomDomaine}}
 

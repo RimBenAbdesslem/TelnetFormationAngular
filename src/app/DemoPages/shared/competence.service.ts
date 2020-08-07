@@ -73,7 +73,27 @@ export class CompetenceService {
       }
     ) 
   }
+  participant:Users[];
+  getUserParticipant(UserId){
+    this.http.get('https://localhost:44385/api/ApplicationUser/'+UserId).subscribe(
+      res=>{
+        console.log(res);
+        this.participant = res as Users[];
+       console.log("before", this.participant);
 
+       this.usersTrue.map(user => {
+         this.getUserLevelById(user.id)
+         .subscribe(res=>{
+           user.Level = res
+         },err=>{
+           console.log("error :", err)
+         })
+       })
+       console.log("after", this.participant);
+     //  this.users = data.json();
+      }
+    ) 
+  }
 
   UserLabelList: Labels[];
   occ: any[] = []

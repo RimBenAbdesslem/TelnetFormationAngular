@@ -9,7 +9,7 @@
         <div class="col-lg-12">
           <div class="user-title">
             <h2>{{competence.userConnecte.userName}} {{competence.userConnecte.fullName}}</h2>
-            <span class="text-white">Web designer</span>
+            <span class="text-white"> </span>
           </div>
         </div>
         <div>
@@ -28,7 +28,7 @@
         <div class="col-lg-12">
           <div class="user-title">
             <h2>{{competence.userConnecte.userName}} {{competence.userConnecte.fullName}}</h2>
-            <span class="text-white">Web designer</span>
+            <span class="text-white"></span>
           </div>
         </div>
         <div>
@@ -127,9 +127,13 @@
                           <th *ngFor="let label of competence.UserLabelList"
                             [hidden]="domaine.domaineId!=label.domaineId ">
                             <!--    {{competence.List.indexOf(label.labelId)}}-->
-  
-                            <select class="form-control" style="width: 60px;" [ngModel]="label.niveaus"  (ngModelChange)="changeSelect(competence.user,label,$event)" [ngModelOptions]="{standalone: true}" style="border: 0px;">
-                              
+         <label *ngFor="let item of competence.List" >
+           <strong *ngIf="item.labelId==label.labelId">{{item.niveau}}</strong>  </label>
+                         <!--   <select class="form-control" style="width: 60px;" [ngModel]="{{label.niveau}}"  (ngModelChange)="changeSelect(competence.user,label,$event)" [ngModelOptions]="{standalone: true}" style="border: 0px;">
+                              <option *ngFor="let item of competence.List, let i = index"
+                                [selected]="item.labelId==label.labelId">
+                                {{item.niveau}}
+                              </option>
                               <option>
                                 3
                               </option>
@@ -140,7 +144,7 @@
 
 
 
-                            </select>
+                            </select>-->
                           
 
 
@@ -335,87 +339,6 @@
             </ng-template>
           </ngb-tab>
 
-<!--commence d'ici-->
-<ngb-tab>
-  <ng-template ngbTabTitle>
-      <div (click)="populateForm()">Active</div>
-  </ng-template>
-  <ng-template ngbTabContent>
-    <table class="table table-sm table-striped" (click)="populateForm()">
-      <div class="card">
-        <form class="form" role="form" class="mb-4" autocomplete="off">
-          <div class="card-body">
-            <div id="table" class="table-editable">
-              <div class="table-responsive">
-                <table class="table table-bordered table-responsive-md table-striped text-center">
-                  <!-- head -->
-                  <thead>
-                    <tr>
-                      <th>
-                        User
-                      </th>
-                      <ng-container *ngFor="let domaine of competence.DomaineList">
-                        <th *ngIf="domaine.labels && domaine.labels.length>0" class="text-center"
-                          [hidden]="!competence.DomaineList.length">
-      
-                          {{domaine.nomDomaine}}
-      
-                    <tr class="text-center">
-                      <th *ngFor="let label of competence.LabeList" [hidden]="domaine.domaineId!=label.domaineId ">
-                    <tr>
-                      <td> <span class="text-center">
-                          {{label.nomLabel}} </span> </td>
-                    </tr>
-                    </th>
-                    </tr>
-                    </th>
-                    </ng-container>
-                    </tr>
-                  </thead>
-                  <!-- end head -->
-      
-                  <!-- body -->
-                  <tbody>
-                    <tr *ngIf="competence.user">
-                      <th scope="row"> {{competence.user.userName}} {{competence.user.fullName}}
-                      </th>
-                      <ng-container *ngFor="let domaine of competence.DomaineList">
-                        <td *ngIf="domaine.labels && domaine.labels.length>0" class="text-center">
-                    <tr>
-                      <th>
-                    <tr *ngIf="competence.user" class="text-center">
-                      <th *ngFor="let label of competence.LabeList" [hidden]="domaine.domaineId!=label.domaineId ">
-                        <div class="form-control" style="width: 60px;" *ngIf="getUserLabelSum(competence.user,label)>0;else xBloc;">
-                          <select [ngModel]="getUserLabelSum(competence.user,label)" (ngModelChange)="changeSelect(competence.user,label,$event)" [ngModelOptions]="{standalone: true}" style="border: 0px;">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                          </select>
-      
-                        </div>
-                        <ng-template #xBloc>
-                          <div class="form-control" style="width: 60px;">
-                            x
-                          </div>
-                        </ng-template>
-                      </th>
-                    </tr>
-                    </tr>
-                    </td>
-                    </ng-container>
-                  </tbody>
-                  <!-- End body -->
-                </table>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </table>
-  </ng-template>
-</ngb-tab>
-<!--ce termine ici-->
 
 
 

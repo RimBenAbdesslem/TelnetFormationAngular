@@ -110,10 +110,16 @@ export class TabsComponent implements OnInit {
     console.log(item.id)
     this.id= item.id
   }
+  variable:string
+  SelectUser(event){
+    console.log(event.target.value);
+    this.variable=event.target.value;
+  }
   onSubmit(){
 
     console.log(this.SelectedUserValue);
-    this.evaluation.registerEvaluationFroid(this.SelectedUserValue)
+    console.log(this.variable);
+    this.evaluation.registerEvaluationFroid(this.SelectedUserValue,this.variable)
    .subscribe(
       (res: any) => {
        if (res.succeeded) {
