@@ -39,7 +39,7 @@ import {PaginationComponent} from './DemoPages/Components/pagination/pagination.
 import {TooltipsPopoversComponent} from './DemoPages/Components/tooltips-popovers/tooltips-popovers.component';
 
 // Tables
-
+import {ActiviteComponent} from './DemoPages/Tables/activite/activite.component';
 import {TablesMainComponent} from './DemoPages/Tables/tables-main/tables-main.component';
 
 // Widgets
@@ -89,7 +89,7 @@ const routes: Routes = [
       // Tables
 
       {path: 'tables/bootstrap', component: TablesMainComponent, data: {extraParameter: 'tablesMenu'}},
-
+      {path: 'tables/activite', component: ActiviteComponent, data: {extraParameter: 'componentsMenu'}},
       // Widgets
 
       {path: 'widgets/chart-boxes-3', component: ChartBoxes3Component, data: {extraParameter: 'pagesMenu3'}},

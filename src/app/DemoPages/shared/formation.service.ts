@@ -16,7 +16,7 @@ export class FormationService {
     reactiveRadio: new FormControl(true)
   })
   num: number=0;
-  constructor(private fb: FormBuilder,private Fb: FormBuilder,private Part: FormBuilder,private FB: FormBuilder ,private OrgFB: FormBuilder,private http: HttpClient,private router: Router) {
+  constructor(private fb: FormBuilder,private Activ: FormBuilder,private Fb: FormBuilder,private Part: FormBuilder,private FB: FormBuilder ,private OrgFB: FormBuilder,private http: HttpClient,private router: Router) {
 
     this.reactiveForm.controls['reactiveRadio'].valueChanges.subscribe((state: any) => {
       this.num=state;
@@ -110,7 +110,17 @@ ParticipantModel=this.Part.group({
    this.resultat=res;
  }
 
+ ActiviteModel= this.Activ.group({
+  activite:['', Validators.required],
+ });
 
+ ajouteracticite(){
+  console.log(this.ActiviteModel.value.activite)
+  var Activite={
+   NomActivite: this.ActiviteModel.value.activite,
+  }
+  return this.http.post(this.BaseURI + '/Activite/RegisterActivite', Activite);
+}
 
 
 
