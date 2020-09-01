@@ -15,9 +15,11 @@
       </div>
 
    
-      <div class="position-relative row form-group"><label for="exampleText" class="col-sm-2 col-form-label" placeholder="message">Message</label>
-        <div class="col-sm-10"><textarea name="text"  class="form-control" [(ngModel)]="email.formData.Body"
-          formControlName="Body"></textarea></div>
+      <div class="position-relative row form-group"><label for="exampleText" class="col-sm-2 col-form-label" placeholder="Bonjour, afin de participer activement dans la resencement  de besoin en formation à Telnet, nous vous invitons à remplir le formulaire anonyme suivant :http://localhost:4200/elements/need-training">Message</label>
+        <div class="col-sm-10">
+          <textarea name="text"   class="form-control" [(ngModel)]="email.formData.Body"
+          formControlName="Body"></textarea>
+        </div>
       </div>
       <div class="position-relative row form-group"><label for="exampleFile"
            class="col-sm-2 col-form-label"></label>

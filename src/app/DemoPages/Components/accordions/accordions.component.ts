@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NotificationService } from '../../shared/Notification.service';
 import { FormationService } from '../../shared/formation.service';
+import { HttpClient } from '@angular/common/http';
+import { Users } from '../../Models/users.model';
 
 @Component({
   selector: 'app-accordions',
@@ -30,16 +32,22 @@ export class AccordionsComponent implements OnInit {
     }
   };
 
-  constructor(public notification: NotificationService, public evaluation: EvaluationService , private toastr: ToastrService, public formation: FormationService) {
+  constructor(public notification: NotificationService, public evaluation: EvaluationService ,private http: HttpClient, private toastr: ToastrService, public formation: FormationService) {
   }
 
   ngOnInit() {
     this.evaluation.EvaluationChaud.reset();
     this.notification.getAllUsersTrue();
+   // this.notification.getAllUsersTrue();
     this.formation.GetAllBesoinCollecte();
   }
 
-
+  variable:string
+  SelectUser(event){
+    console.log(event.target.value);
+    this.variable=event.target.value;
+    console.log(this.evaluation.EvaluationChaud.value.Nom_Participant);
+  }
 
 
 
@@ -131,23 +139,40 @@ export class AccordionsComponent implements OnInit {
     console.log(this.evaluation.resultats);
     return(this.evaluation.resultats);
   }
+  nameusers:any=[]
+  participant:any = [];
+  getUserParticipant(UserId){
+       this.http.get('https://localhost:44385/api/ApplicationUser/AllUsersTrue').subscribe(
+        res=>{
+          console.log(res);
+          this.participant = res as Users;
+         console.log("before", this.participant.userName)
+         this.participant.map(p=>{
+          if(this.nameusers.indexOf(p.Id) ==-1  && p.Id==UserId ) 
 
- 
+           this.nameusers.push(p.userName);
+         })}
+       )
+
+      }
+  usersTrue:Users
   SubmutEvaluationChaud(){
   
     this.CalculerTotaleEvaluations(); 
   
     this.CalculerTotaleEvaluation(); 
-    
+    this.getUserParticipant(this.variable);
     this.SelectedNumberValue=[] ;
     this.SelectedNumber=[];
     this.res=0;
     this.result=0;
+    
     console.log(this.SelectedNumber);
     console.log(this.SelectedNumberValue);
     console.log(this.evaluation.resultats);
     console.log(this.evaluation.resultat);
-    this.evaluation.registerEvaluationChaud( )
+   // console.log(this.evaluation.participant);
+    this.evaluation.registerEvaluationChaud(this.variable,this.nameusers[0])
     .subscribe(
       (res: any) => {
         if (res.succeeded) {

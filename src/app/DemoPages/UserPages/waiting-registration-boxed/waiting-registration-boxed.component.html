@@ -1,4 +1,89 @@
-<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>
+<div class="app-page-title">
+  <div class="page-title-wrapper">
+   
+    <div class="page-title-actions">
+
+      <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success" (click)=" openCentred(content)">
+        <fa class="mr-2" name="plus"></fa>
+        Ajouter Role
+      </button>
+      <ng-template #content let-c="close" let-d="dismiss">
+        <form  [formGroup]="competence.RoleModel" class="form" role="form" class="mb-4" autocomplete="off" >
+        <div class="modal-header">
+          <h4 class="modal-title"></h4> <!--Demo Basic-->
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+    
+        <div class="card-body">
+          <div class="position-relative row form-group">
+            <div class="form-group row">
+              <label class="col-lg-3 col-form-label form-control-label" ></label>
+              <div class="page-title-actions">
+              <div class="col-lg-9">
+                <input class="form-control" type="text" formControlName="Role" name="Role">
+               
+         
+                
+               
+              </div>
+            </div>
+            <div  class="form-group row">
+            <button type="submit" class="btn btn-primary" (click)="RegisterRole()" >Ajouter</button>
+          </div>
+        </div>
+        </div>
+        </div>
+      </form>
+    
+
+ <!--ici la sous formulaire de role de la boutton edit role-->
+      
+          <div class="main-card mb-3 card">
+            <div class="card-body">
+              <div>
+                <div class="table-responsive">
+                <table>
+ 
+                 <thead>
+                   <tr>
+                     <th class="text-center"><strong>Role</strong> </th>
+                     <th class="text-center"></th>
+                 
+                   </tr>
+                   </thead>
+                   <tbody>
+                     <!--*ngFor="let label of competence.LabeList" class="text-center" [hidden]="domaine.domaineId!=label.domaineId "-->
+                     <tr *ngFor="let role of notification.roles; let i = index;let j = index"><!--*ngFor="let role of notification.role "-->
+                   
+                       <td class="text-center" >{{role.name}} </td>
+                       <td class="text-center">
+                         <!--  <div class="d-block text-center card-footer">--> 
+                          <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" (click)="DeleteRole(role.id)">
+                            <i class="pe-7s-trash btn-icon-wrapper"> </i>
+                          </button>
+                           <!-- </div> -->
+                          </td>
+                       </tr>
+                       </tbody>
+                </table>
+              </div>
+                          
+              </div>
+            </div>
+          </div>
+
+      
+        <div class="modal-footer" class="text-center">
+        
+        <!--  <button type="button" class="btn btn-primary" type="submit"  (click)="c('Close click')"  >Modifier</button>-->
+         <!--(click)="(click)="onSubmit(form,domaine.domaineId)""-->
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
 
 
 <div class="main-card mb-3 card">
@@ -9,7 +94,7 @@
     <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
       <thead>
       <tr>
-        <th class="text-center">Avatar</th>
+        <th class="text-center">Image</th>
         <th class="text-center">Name</th>
         <th class="text-center">Email</th>
         <th class="text-center">Action</th>

@@ -1,4 +1,4 @@
-import {Component, ViewChild, TemplateRef} from '@angular/core';
+import {Component, ViewChild, TemplateRef, Pipe} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormationService } from 'src/app/DemoPages/shared/formation.service';
@@ -14,6 +14,10 @@ const SecondaryBlue = 'var(--primary)';
   selector: 'app-cards',
   templateUrl: './cards.component.html',
   styles: []
+})
+@Pipe({
+  name: 'filterBy',
+  pure: false
 })
 export class CardsComponent {
 
@@ -61,24 +65,30 @@ export class CardsComponent {
 
 
   formatsDateTest: string[] = [
-    'dd/MM/yyyy',
+    
+    'yyyy-MM-dd',
     
     ];
-
+    public isActive: any;
+    ActiviteFilter: any = { date_Fin: '' ,date_Debut: '' };
   DeleteBesoin(id){
+   // this.formationsListing.splice(id, 1);
     if (confirm('Are you sure to delete this record ?')) {
 
+   //   this.formationsListing = this.formationsListing.filter(item => item.id !== id);
 
+
+console.log(this.formationsListing);
       this.formation.deleteFormation(id)
         .subscribe(res => {
-          debugger;
+      //    debugger;
           this.formation.refreshList();
           this.toastr.warning('Formation Deleted successfully', 'Delete Formation');
         },
           err => {
-            debugger;
+        //    debugger;
             console.log(err);
-          })
+         })
     }
     this.formation.refreshList();
   }

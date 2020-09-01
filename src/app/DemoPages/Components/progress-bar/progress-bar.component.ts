@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, HostBinding, Pipe} from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EvaluationService } from '../../shared/evaluation.service';
 import { NgForm, FormBuilder ,Validators,FormControl,FormsModule,FormGroup} from '@angular/forms';
@@ -8,10 +8,15 @@ import { FormationService } from '../../shared/formation.service';
 import { NotificationService } from '../../shared/Notification.service';
 import { Evaluation_Participant } from '../../Models/evaluation_participant.model';
 import { CompetenceService } from '../../shared/competence.service';
+import { DirecteureActiviteCompetenceService } from '../../shared/DirecteureActiviteCompetence.service';
 //import { NgSelectModule } from '@ng-select/ng-select';
 @Component({
   selector: 'app-progress-bar',
   templateUrl: './progress-bar.component.html',
+})
+@Pipe({
+  name: 'filterBy',
+  pure: false
 })
 export class ProgressBarComponent implements OnInit {
 
@@ -21,7 +26,7 @@ export class ProgressBarComponent implements OnInit {
   subheading = 'You can use the progress bars on their own or in combination with other widgets.';
   icon = 'pe-7s-filter icon-gradient bg-grow-early';
 
-  constructor(public notification: NotificationService,public competence: CompetenceService,private fb: FormBuilder,private modalService: NgbModal, public formation: FormationService, public evaluation: EvaluationService , private toastr: ToastrService) {
+  constructor(public notification: NotificationService, public DACompetence: DirecteureActiviteCompetenceService,public competence: CompetenceService,private fb: FormBuilder,private modalService: NgbModal, public formation: FormationService, public evaluation: EvaluationService , private toastr: ToastrService) {
   }
   open(content) {
     this.modalService.open(content).result.then((result) => {
@@ -36,12 +41,20 @@ export class ProgressBarComponent implements OnInit {
       size: 'lg'
     });
   }
+  @HostBinding('class.isActive')
+  get isActiveAsGetter() {
+    return this.isActive;
+  }
+
+  public isActive: any;
+  ActiviteFilter: any = { theme: '' };
  // @Input() ParentData
   //=this.evaluation.envoiyer().value.Theme
   parentFormateur(){
     //console.log(this.evaluation.registerEvaluationFroid().Formateur)
    // this.ParentData =this.evaluation.registerEvaluationFroid().Formateur
   }
+  tabLabActivite:any[];
   ngOnInit() {
    // var payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
    // this.competence.getUserConnecte(payLoad.UserID);
@@ -52,6 +65,26 @@ export class ProgressBarComponent implements OnInit {
     this.evaluation.getEvaluationParticipant();
     this.competence.GetAllLabels();
     this.resetForm();
+       //////////////////////////
+   this.DACompetence.getListeActivite(this.payLoad.UserID);
+   this.DACompetence.getlisteuser(this.payLoad.UserID);
+   this.DACompetence.getAllActivite(this.payLoad.UserID);
+   this.DACompetence.getActiviteMetierUser(this.payLoad.UserID);
+   this.DACompetence.get(this.payLoad.UserID);
+   this.DACompetence.AllActiviteMetier.map(p =>{
+     console.log(this.tabLabActivite.indexOf(p));
+     if(this.tabLabActivite.indexOf(p.userId) ==this.payLoad.UserID  ) 
+     this.tabLabActivite.push(p.activiteId);
+  console.log(this.tabLabActivite)
+   })  
+   for(var i in this.competence.AllActiviteMetier){
+     if(this.competence.AllActiviteMetier[i].userId==this.payLoad.UserID){
+ 
+     }
+   }
+   this.DACompetence.GetDomaineActivite(this.payLoad.UserID);
+   this.DACompetence.GetLabel(this.payLoad.UserID);
+   this.DACompetence.GetAllActiviteMetier();
   }
   public isCollapsed = false;
 list: any=this.evaluation.EvaluationFroidParticipant
@@ -101,6 +134,27 @@ list: any=this.evaluation.EvaluationFroidParticipant
     
 
   }
+  getchoixUserLabelSumActivite(user,domaine,activite)
+  {
+  //   console.log(user.id);
+  //  console.log(activMetId);
+  
+      for(var i in this.DACompetence.listeMetierActivite){
+      
+      if(this.DACompetence.listeMetierActivite[i].activiteId==activite.id && this.DACompetence.listeMetierActivite[i].domaineId== domaine.domaineId && this.DACompetence.listeMetierActivite[i].userId==user.id){
+     // console.log(this.competence.AllActiviteMetier[i].niveau)
+          if (user.Level){
+            let res = user.Level.find(x=>x.labelId == domaine.labelId )
+        console.log(res);
+            return res? res.niveau : 0
+          }else{
+            return 0
+          }
+       
+       
+      }
+       
+      }}
   remove() {
    // this.awaitingPersonList.push(this.personList[id]);
   //  this.personList.splice(id, 1);
@@ -178,12 +232,20 @@ console.log(this.payLoad.UserID);
     console.log(evaluation.idParticipant);
     var payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
     this.competence.getUserParticipant(evaluation.idParticipant);
-    this.competence.GetLabel(evaluation.idParticipant);
-    this.competence.GetDomaineUser(evaluation.idParticipant);
-    this.competence.get(evaluation.idParticipant);
-    this.competence.getUserLevelById(evaluation.idParticipant);
-    console.log(payLoad.UserID);
+    this.DACompetence.getParticipantusersTrue(evaluation.idParticipant);
+    this.DACompetence.getListeActivite(evaluation.idParticipant);
+    this.DACompetence.getlisteuser(evaluation.idParticipant);
+    this.DACompetence.getAllActivite(evaluation.idParticipant);
+    this.DACompetence.getActiviteMetierUser(evaluation.idParticipant);
+    this.DACompetence.get(evaluation.idParticipant);
+    
+   
+    this.DACompetence.GetDomaineActivite(evaluation.idParticipant);
+    this.DACompetence.GetLabel(evaluation.idParticipant);
+    this.DACompetence.GetAllActiviteMetier();
     this.evaluation.registerSuiteEvaluationFroid(evaluation).subscribe()
+    this.evaluation.EvaluaFroidModel.reset();
+    
   }
 
 

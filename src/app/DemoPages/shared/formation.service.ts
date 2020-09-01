@@ -132,8 +132,6 @@ ParticipantModel=this.Part.group({
       Nombre_de_participants: this.formModel.value.Nombre_de_participants,
       Activite: this.formModel.value.Activite,
       Priorite: this.num,
-     
-  
       };
   console.log("our bodyyyyyy",body);
   this.name=body.Intitule_Formation
@@ -268,7 +266,7 @@ postNewParticipant(){
 
 deleteOrganisme(id) {
   console.log(id);
-  return this.http.delete(this.BaseURI + '/Formateur/deleteFormateur'+ id);
+  return this.http.delete(this.BaseURI + '/Formateur/deleteFormateur/'+ id);
 }
 
 
@@ -298,6 +296,7 @@ newgetAllFormation(){
 }
 
 deleteFormation(id){
+ 
   return this.http.delete(this.BaseURI  + '/Formation/'+id)
 }
 
@@ -307,6 +306,19 @@ getAllFormationParticipants(idFormation){
 
 
 //ici on fait les get des besoins qui son réalisé
+
+AllBesoin:Besoin_Collecte[];
+GetAllBesoin(){
+  this.http.get('https://localhost:44385/api/BesoinCollecte/GetBesoin').toPromise().then(
+    res=>{
+      this.AllBesoin = res as Besoin_Collecte[];
+      console.log(this.AllBesoin);
+   //  this.users = data.json();
+   
+ 
+    }
+  )
+}
 JustificationBesoin=[]
 GetAllBesoinCollecte(){
   this.http.get('https://localhost:44385/api/BesoinCollecte/GetBesoin').toPromise().then(

@@ -102,15 +102,67 @@ export class CarouselComponent {
 //puis j'affiche le matrice par domaine
 users = JSON.parse(localStorage.getItem('users')) ;
 payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
+tabLabActivite:any[];
 ngOnInit(){
-  this.competence.getUser(this.payLoad.UserID);
+  this.competence.getListeActivite(this.payLoad.UserID);
+  this.competence.getlisteuser(this.payLoad.UserID);
+  this.competence.getAllActivite(this.payLoad.UserID);
+  this.competence.getActiviteMetierUser(this.payLoad.UserID);
   this.competence.get(this.payLoad.UserID);
+  this.competence.AllActiviteMetier.map(p =>{
+    console.log(this.tabLabActivite.indexOf(p));
+    if(this.tabLabActivite.indexOf(p.userId) ==this.payLoad.UserID  ) 
+    this.tabLabActivite.push(p.activiteId);
+ console.log(this.tabLabActivite)
+  })  
+  for(var i in this.competence.AllActiviteMetier){
+    if(this.competence.AllActiviteMetier[i].userId==this.payLoad.UserID){
+
+    }
+  }
   this.competence.GetDomaineActivite(this.payLoad.UserID);
   this.competence.GetLabel(this.payLoad.UserID);
+  this.competence.GetAllActiviteMetier();
 
 }
+changeSelectActivite(user,label,niveau){
+  console.log("user :  ",user)
+  console.log("label :  ",label)
+  niveau = Number(niveau)
+  console.log("niveau :  ",niveau)
 
+  let level = user.Level.find(x=>x.labelId == label.labelId)
+  let activMetId = level? level.activMetId : null
+  console.log("metierId : ",activMetId);
 
+  this.competence.editLevelActivite(activMetId,niveau)
+  .subscribe(res=>{
+    console.log("res : ",res)
+  })
+  
+
+}
+getchoixUserLabelSumActivite(user,domaine,activite)
+{
+//   console.log(user.id);
+//  console.log(activMetId);
+
+    for(var i in this.competence.listeMetierActivite){
+    
+    if(this.competence.listeMetierActivite[i].activiteId==activite.id && this.competence.listeMetierActivite[i].domaineId== domaine.domaineId && this.competence.listeMetierActivite[i].userId==user.id){
+   // console.log(this.competence.AllActiviteMetier[i].niveau)
+        if (user.Level){
+          let res = user.Level.find(x=>x.labelId == domaine.labelId )
+      console.log(res);
+          return res? res.niveau : 0
+        }else{
+          return 0
+        }
+     
+     
+    }
+     
+    }}
 
 
 

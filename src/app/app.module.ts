@@ -112,6 +112,9 @@ import { FilterPipe } from './filter.pipe';
 import { ParticipantFilterPipe } from './DemoPages/Elements/need-training/participant-filter.pipe';
 import { FilterPipeModule } from 'node_modules/ngx-filter-pipe';
 import { ActiviteComponent } from './DemoPages/Tables/activite/activite.component';
+import { ChoixActiviteComponent } from './DemoPages/Tables/choix-activite/choix-activite.component';
+import { EvaluationComponent } from './DemoPages/Components/evaluation/evaluation.component';
+import { EvaluationDAComponent } from './DemoPages/Components/evaluation-da/evaluation-da.component';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -207,6 +210,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     UsersListesComponent,
     FilterPipe,
     ActiviteComponent,
+    ChoixActiviteComponent,
+    EvaluationComponent,
+    EvaluationDAComponent,
    
   ],
   imports: [

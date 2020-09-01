@@ -10,6 +10,8 @@ import { FormBuilder,Validators } from '@angular/forms';
 import * as jwt_decode from 'jwt-decode';
 import { UserService } from 'src/app/DemoPages/shared/user.service';
 import { Users } from 'src/app/DemoPages/Models/users.model';
+import { ToastrService } from 'ngx-toastr';
+import { EmailService } from 'src/app/DemoPages/shared/email.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -22,7 +24,7 @@ export class SidebarComponent implements OnInit {
   userConnecte : Users;
 
 
-  constructor(public globals: ThemeOptions,public user: UserService,private Fb: FormBuilder, private http: HttpClient,public competence: CompetenceService, private router: Router,private activatedRoute: ActivatedRoute,private modalService: NgbModal) {
+  constructor(public globals: ThemeOptions, private toastr: ToastrService,public email: EmailService,public user: UserService,private Fb: FormBuilder, private http: HttpClient,public competence: CompetenceService, private router: Router,private activatedRoute: ActivatedRoute,private modalService: NgbModal) {
     this.getDecodedToken()
   }
   
@@ -50,6 +52,33 @@ export class SidebarComponent implements OnInit {
       size: 'sm'
     });
   }
+  Envoiyer(){
+    // this.formationsListing.splice(id, 1);
+     if (confirm('Vous pouvez envoyer à tous les directeurs')) {
+ 
+    //   this.formationsListing = this.formationsListing.filter(item => item.id !== id);
+ 
+this.email.SendEmailTous().subscribe(res => {
+  this.toastr.warning('Email à bien été envoyé', ''); 
+})
+    //   this.formation.deleteFormation(id)
+      //   .subscribe(res => {
+      
+      
+        //   this.toastr.warning('Formation Deleted successfully', 'Delete Formation');
+      //   },
+      //     err => {
+        
+        //     console.log(err);
+        //  })
+    // }
+   
+   }}
+  openSmallActivite(content2) {
+    this.modalService.open(content2, {
+      size: 'sm'
+    });
+  }
   sidebarHover() {
     this.globals.sidebarHover = !this.globals.sidebarHover;
   }
@@ -58,8 +87,15 @@ export class SidebarComponent implements OnInit {
     this.userId=event.target.value;
   console.log( this.userId);
 }
-
+activiteId:any
+ValueChangeActivite(event) {
+  this.activiteId=event.target.value;
+console.log( this.activiteId);
+}
 Option = this.Fb.group({
+  All: ['', Validators.required]
+})
+OptionActivite = this.Fb.group({
   All: ['', Validators.required]
 })
   ngOnInit() {
@@ -68,6 +104,10 @@ Option = this.Fb.group({
     console.log(payLoad)
     console.log(payLoad.UserID);
    // this.competence.get(this.payLoad.UserID)
+   this.competence.getAllActivite();
+   this.competence.GetAllActiviteMetier() ;
+   this.competence.GetAllListeActivite();
+   this.competence.GetAllLabelsActivite();
     this.competence.getUserConnecte(payLoad.UserID);
     this.competence.getAllUsersTrue();
 
@@ -129,6 +169,27 @@ Option = this.Fb.group({
       this.competence.UserId=this.userId;
    //   this.http.post('https://localhost:44385/api/Metier/PostGet',metier).subscribe
       this.router.navigate(['/components/pagination']);
+    }
+    
+  }
+  choixActivite(){
+    console.log(this.activeId)
+    console.log(this.OptionActivite.value.All)
+    if(this.OptionActivite.value.All=="All"){
+     
+      this.router.navigate(['/components/tooltips-popovers']);
+    }
+    else{
+    
+      this.competence.GetListeActivite(this.activiteId);
+      this.competence.Get(this.activiteId);
+      this.competence.getAllActiviteUsersTrue(this.activiteId)
+
+      //this.competence.getUserActivite(this.userId);
+      //this.competence.GetDomaineUserActivite(this.userId);
+      this.competence.UserId=this.userId;
+   //   this.http.post('https://localhost:44385/api/Metier/PostGet',metier).subscribe
+      this.router.navigate(['/tables/choix-activite']);
     }
     
   }

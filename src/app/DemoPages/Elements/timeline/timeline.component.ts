@@ -1,22 +1,32 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Pipe, Output, EventEmitter} from '@angular/core';
 import { CompetenceService } from '../../shared/competence.service';
 import { UserService } from '../../shared/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import * as jwt_decode from 'jwt-decode';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Users } from '../../Models/users.model';
+import { DirecteureActiviteCompetenceService } from '../../shared/DirecteureActiviteCompetence.service';
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
   styles: []
 })
+@Pipe({
+  name: 'filterBy',
+  pure: false
+})
 export class TimelineComponent implements OnInit {
 
+
+  public progress: number;
+  public message: string;
+  @Output() public onUploadFinished = new EventEmitter();
+  
   heading = 'Timelines';
   subheading = 'Timelines are used to show lists of notifications, tasks or actions in a beautiful way.';
   icon = 'pe-7s-light icon-gradient bg-malibu-beach';
-  images = [1, 2, 3].map(() => `https://picsum.photos/1700/500?random&t=${Math.random()}`);
+  images = [1, 2, 3].map(() => `http://www.letemps.com.tn/sites/www.letemps.com.tn/files/styles/620px_wide/public/main/articles/eco%206_9.jpg?fbclid=IwAR0JjKovXmnEArKo-DbVo3z0r7Yr5Xa0bUVYHae7jLadW9ZE9MSYt4bHbYw`);
 
   slides = [
     {img: '1'},
@@ -38,7 +48,7 @@ export class TimelineComponent implements OnInit {
     className: 'center',
     centerMode: true,
     infinite: true,
-    centerPadding: '60px',
+    centerPadding: '30px',
     slidesToShow: 3,
     speed: 100,
     dots: true,
@@ -102,7 +112,7 @@ export class TimelineComponent implements OnInit {
     adaptiveHeight: true,
     dots: true,
   };
-  constructor(public competence: CompetenceService , private http: HttpClient,public user: UserService, private toastr: ToastrService) {
+  constructor(public competence: CompetenceService , public DACompetence: DirecteureActiviteCompetenceService,public http: HttpClient,public user: UserService, private toastr: ToastrService) {
   }
   users = JSON.parse(localStorage.getItem('users')) ;
   payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
@@ -134,21 +144,76 @@ resetForm(form?: NgForm) {
 
   }
 }
+public isActive: any;
+  ActiviteFilter: any = { date_Fin: '' ,date_Debut: '' };
+tabLabActivite:any[];
   ngOnInit() {
     console.log(this.payLoad.UserID);
     var payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
     console.log(payLoad)
     console.log(payLoad.UserID);
+    this.DACompetence.getParticipantusersTrue(payLoad.UserID);
    // this.competence.get(this.payLoad.UserID)
     this.competence.getUserConnecte(payLoad.UserID);
+    this.competence.getFormationRealise(this.payLoad.UserID);
+    this.competence. getFormationPlanifie(this.payLoad.UserID);
     this.competence.get(this.payLoad.UserID)
     this.competence.getUser(this.payLoad.UserID);
     this.competence.GetLabel(this.payLoad.UserID);
     this.competence.GetDomaineUser(this.payLoad.UserID);
     this.competence.getUserLevelById(this.payLoad.UserID);
     this.competence.GetAllLabels();
-  }
+    this.competence.getNombreFormation(this.payLoad.UserID)
+   // this.competence.GetListeActivite(this.payLoad.UserID);
+   
+    //////////////////////////
+   this.DACompetence.getListeActivite(this.payLoad.UserID);
+    this.DACompetence.getlisteuser(this.payLoad.UserID);
+    this.DACompetence.getAllActivite(this.payLoad.UserID);
+    this.DACompetence.getActiviteMetierUser(this.payLoad.UserID);
+    this.DACompetence.get(this.payLoad.UserID);
+    this.DACompetence.AllActiviteMetier.map(p =>{
+      console.log(this.tabLabActivite.indexOf(p));
+      if(this.tabLabActivite.indexOf(p.userId) ==this.payLoad.UserID  ) 
+      this.tabLabActivite.push(p.activiteId);
+   console.log(this.tabLabActivite)
+    })  
+    for(var i in this.competence.AllActiviteMetier){
+      if(this.competence.AllActiviteMetier[i].userId==this.payLoad.UserID){
   
+      }
+    }
+    this.DACompetence.GetDomaineActivite(this.payLoad.UserID);
+    this.DACompetence.GetLabel(this.payLoad.UserID);
+    this.DACompetence.GetAllActiviteMetier();
+  
+  }
+ // image:any="C:/fakepath/IMG_20190821_211323.jpg"
+  appliquerPhoto(){
+    console.log("images",this.user.FormImageModel.value.image)
+    //this.image=this.sanitizer.bypassSecurityTrustResourceUrl(this.user.FormImageModel.value.image.thumbPhotoPath); 
+  }
+  getchoixUserLabelSumActivite(user,domaine,activite)
+{
+//   console.log(user.id);
+//  console.log(activMetId);
+
+    for(var i in this.DACompetence.listeMetierActivite){
+    
+    if(this.DACompetence.listeMetierActivite[i].activiteId==activite.id && this.DACompetence.listeMetierActivite[i].domaineId== domaine.domaineId && this.DACompetence.listeMetierActivite[i].userId==user.id){
+   // console.log(this.competence.AllActiviteMetier[i].niveau)
+        if (user.Level){
+          let res = user.Level.find(x=>x.labelId == domaine.labelId )
+  //    console.log(res);
+          return res? res.niveau : 0
+        }else{
+          return 0
+        }
+     
+     
+    }
+     
+    }}
  
    userDetails : any = {}
    userConnecte : Users;
@@ -219,4 +284,29 @@ resetForm(form?: NgForm) {
        }
      )
    }
+   public response: {dbPath: ''};
+   public uploadFinished = (event) => {
+    this.response = event;
+  }
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44385/${serverPath}`;
+  }
+
+   public uploadFile = (files) => {
+    if (files.length === 0) {
+      return;
+    }
+    let fileToUpload = <File>files[0];
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    this.http.post('https://localhost:44385/api/ApplicationUser', formData, {reportProgress: true, observe: 'events'})
+      .subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress)
+          this.progress = Math.round(100 * event.loaded / event.total);
+        else if (event.type === HttpEventType.Response) {
+          this.message = 'Upload success.';
+          this.onUploadFinished.emit(event.body);
+        }
+      });
+  }
 }

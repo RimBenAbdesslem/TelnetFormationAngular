@@ -44,15 +44,25 @@
 
           <div class="position-relative row form-group">
 
-            <label for="examplePassword" class="col-sm-2 col-form-label">Théme : </label>
+            <label for="examplePassword" class="col-sm-2 col-form-label">Thème : </label>
 
             <div class="position-relative form-group">
               <input formControlName="Theme" name="Theme" type="text" class="form-control" style="width: 200px;">
             </div>
 
-            <label for="examplePassword" class="col-sm-2 col-form-label">Lieu : </label>
+            <label for="examplePassword" class="col-sm-2 col-form-label">Formation : </label>
             <div class="position-relative form-group">
-              <input formControlName="Lieu" name="Lieu" type="text" class="form-control" style="width: 200px;">
+              
+              <select  style="width: 200px;" class="form-control" formControlName="Lieu" name="Lieu">
+              <option> </option>
+                <!-- formControlName="type_de_formation" name="type_de_formation"-->
+                <option  *ngFor="let item of formation.AllBesoin"  value= {{item.besoinFormationId}}>{{item.intitule_Formation}}</option>
+               
+               
+
+              </select>
+            
+            <!--  <input  type="text" class="form-control" style="width: 200px;">-->
             </div>
 
           </div>
@@ -221,7 +231,7 @@
         <ngb-panel id="preventchange-1">
       <ng-template ngbPanelTitle>
       <h6 class="mb-3 mt-3">
-        EVALUATION Participant
+        EVALUATION PArticipant
       </h6>
     </ng-template>
       <div class="divider"></div>
@@ -395,7 +405,7 @@
         <div class="modal-footer">
           <!-- <button class="btn btn-primary" type="button" (click)="open(content)">Ajouter un participant</button>-->
 
-          <button class="btn btn-primary" type="submit"  (click)="onSubmit()">Next</button></div>
+          <button class="btn btn-primary" type="submit"  (click)="onSubmit()">Valider</button></div>
 
       </div>
     </ng-template>

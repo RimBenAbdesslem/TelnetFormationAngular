@@ -9,7 +9,7 @@ import { Users } from '../Models/users.model';
 })
 export class UserService {
 
-  constructor(private fb: FormBuilder,private Fb: FormBuilder, private http: HttpClient,private router: Router) { }
+  constructor(private fb: FormBuilder,private Fb: FormBuilder,private Img : FormBuilder,private http: HttpClient,private router: Router) { }
   readonly BaseURI = 'https://localhost:44385/api/';
   formData: Users;
 //  readonly url = 'https://localhost:44337/api/ApplicationUser/AllUsers';
@@ -25,6 +25,10 @@ export class UserService {
       Password: ['', [Validators.required, Validators.minLength(4)]],
       ConfirmPassword: ['', Validators.required]//required cad obligatoire
     }, { validator: this.comparePasswords })
+
+  });
+  FormImageModel= this.Img.group({
+    image: ['', Validators.required],
 
   });
   FormModel = this.Fb.group({
@@ -51,7 +55,8 @@ Valide:string="";
       Email: this.formModel.value.Email,
       FullName: this.formModel.value.FullName,
       Password: this.formModel.value.Passwords.Password,
-      Valide:false
+      Valide:false,
+      ImagePath:"false"
     };
    // return this.router.navigate(['./registration']);
 //ApplicationUser/Register

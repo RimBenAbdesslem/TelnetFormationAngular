@@ -20,6 +20,7 @@
 
 </p>
 <div class="row" class="text-center" >
+  <form [formGroup]="evaluation.EvaluationFournisseur" class="mb-4" autocomplete="off"  >
   <div class="col-md-6"  class="text-center">
 
 
@@ -38,12 +39,12 @@
            <label for="examplePassword" class="col-sm-2 col-form-label">Nom Fournisseur: </label>
          
              <div class="position-relative form-group">
-               <input  type="text" class="form-control" style="width: 200px;">
+               <input formControlName="Nom_Fournisseur" name="Nom_Fournisseur" type="text" class="form-control" style="width: 200px;">
              </div>
           
            <label for="examplePassword" class="col-sm-2 col-form-label" >Catégorie : </label>
            <div class="position-relative form-group">
-             <input  type="text" class="form-control" style="width: 200px;">
+             <input  formControlName="Categorie" name="Categorie" type="text" class="form-control" style="width: 200px;">
            </div>
            
          </div>
@@ -56,12 +57,12 @@
            <label for="examplePassword" class="col-sm-2 col-form-label">Date D'evaluation : </label>
          
              <div class="position-relative form-group">
-               <input type="date" class="form-control" style="width: 200px;">
+               <input formControlName="Date_Evaluation" name="Date_Evaluation" type="date" class="form-control" style="width: 200px;">
              </div>
           
            <label for="examplePassword" class="col-sm-2 col-form-label" >Semestre : </label>
            <div class="position-relative form-group">
-             <input  type="Date" class="form-control" style="width: 200px;">
+             <input formControlName="Semestre" name="Semestre" type="string" class="form-control" style="width: 200px;">
            </div>
            
          </div>
@@ -98,12 +99,12 @@
         <label class="form-check-label">   </label>
         <div class="position-relative form-group">
 
-          <select  class="form-control" style="width: 200px;" > <!-- formControlName="type_de_formation" name="type_de_formation"-->
-                          <option>Très Satisfaisant</option>
-                          <option>Satisfaisant</option>
-                          <option> Acceptable   </option>
-                          <option>Insatisfaisant</option>
-                          <option>Non Applicable</option>
+          <select  class="form-control" style="width: 200px;" formControlName="Conformite" name="Conformite" > <!-- formControlName="type_de_formation" name="type_de_formation"-->
+                          <option [value]=3> Très Satisfaisant</option>
+                          <option [value]=2>Satisfaisant</option>
+                          <option [value]=1> Acceptable   </option>
+                          <option [value]=0>Insatisfaisant</option>
+                          <option [value]=0>Non Applicable</option>
               
                           </select> 
       </div> 
@@ -112,12 +113,13 @@
         <label class="form-check-label">   </label>
         <div class="position-relative form-group" >
 
-          <select  class="form-control"  style="width: 200px;" > <!-- formControlName="type_de_formation" name="type_de_formation"-->
-            <option>Très Satisfaisant</option>
-            <option>Satisfaisant</option>
-            <option> Acceptable   </option>
-            <option>Insatisfaisant</option>
-            <option>Non Applicable</option>
+          <select  class="form-control"  style="width: 200px;" formControlName="Qualite" name="Qualité"> <!-- formControlName="type_de_formation" name="type_de_formation"-->
+        
+            <option [value]=3> Très Satisfaisant</option>
+            <option [value]=2>Satisfaisant</option>
+            <option [value]=1> Acceptable   </option>
+            <option [value]=0>Insatisfaisant</option>
+            <option [value]=0>Non Applicable</option>
               
                           </select> 
       </div> 
@@ -134,12 +136,12 @@
         <label class="form-check-label">   </label>
         <div class="position-relative form-group">
 
-          <select  class="form-control" style="width: 200px;" > <!-- formControlName="type_de_formation" name="type_de_formation"-->
-            <option>Très Satisfaisant</option>
-            <option>Satisfaisant</option>
-            <option> Acceptable   </option>
-            <option>Insatisfaisant</option>
-            <option>Non Applicable</option>
+          <select  class="form-control" style="width: 200px;" formControlName="Certification" name="Certification"> <!-- formControlName="type_de_formation" name="type_de_formation"-->
+            <option [value]=3> Très Satisfaisant</option>
+            <option [value]=2>Satisfaisant</option>
+            <option [value]=1> Acceptable   </option>
+            <option [value]=0>Insatisfaisant</option>
+            <option [value]=0>Non Applicable</option>
               
                           </select> 
       </div> 
@@ -174,12 +176,12 @@
         <label class="form-check-label">   </label>
         <div class="position-relative form-group">
 
-          <select  class="form-control"  > <!-- formControlName="type_de_formation" name="type_de_formation"-->
-            <option>Très Satisfaisant</option>
-            <option>Satisfaisant</option>
-            <option> Acceptable   </option>
-            <option>Insatisfaisant</option>
-            <option>Non Applicable</option>
+          <select  class="form-control" formControlName="Coherence" name="Coherence" > <!-- formControlName="type_de_formation" name="type_de_formation"-->
+            <option [value]=3> Très Satisfaisant</option>
+                          <option [value]=2>Satisfaisant</option>
+                          <option [value]=1> Acceptable   </option>
+                          <option [value]=0>Insatisfaisant</option>
+                          <option [value]=0>Non Applicable</option>
               
                           </select> 
       </div> 
@@ -188,13 +190,12 @@
         <label class="form-check-label">   </label>
         <div class="position-relative form-group">
 
-          <select  class="form-control"  > <!-- formControlName="type_de_formation" name="type_de_formation"-->
-            <option>Très Satisfaisant</option>
-            <option>Satisfaisant</option>
-            <option> Acceptable   </option>
-            <option>Insatisfaisant</option>
-            <option>Non Applicable</option>
-              
+          <select  class="form-control"  formControlName="Conditions" name="Conditions"> <!-- formControlName="type_de_formation" name="type_de_formation"-->
+            <option [value]=3> Très Satisfaisant</option>
+            <option [value]=2>Satisfaisant</option>
+            <option [value]=1> Acceptable   </option>
+            <option [value]=0>Insatisfaisant</option>
+            <option [value]=0>Non Applicable</option>
                           </select> 
       </div> 
         
@@ -210,12 +211,12 @@
         <label class="form-check-label">   </label>
         <div class="position-relative form-group">
 
-          <select  class="form-control"  style="width: 200px;"  > <!-- formControlName="type_de_formation" name="type_de_formation"-->
-            <option>Très Satisfaisant</option>
-            <option>Satisfaisant</option>
-            <option> Acceptable   </option>
-            <option>Insatisfaisant</option>
-            <option>Non Applicable</option>
+          <select  class="form-control"  style="width: 200px;"  formControlName="Politique" name="Politique"> <!-- formControlName="type_de_formation" name="type_de_formation"-->
+            <option [value]=3> Très Satisfaisant</option>
+            <option [value]=2>Satisfaisant</option>
+            <option [value]=1> Acceptable   </option>
+            <option [value]=0>Insatisfaisant</option>
+            <option [value]=0>Non Applicable</option>
               
                           </select> 
       </div> 
@@ -251,12 +252,12 @@
         <label class="form-check-label">   </label>
         <div class="position-relative form-group">
 
-          <select  class="form-control"  > <!-- formControlName="type_de_formation" name="type_de_formation"-->
-            <option>Très Satisfaisant</option>
-            <option>Satisfaisant</option>
-            <option> Acceptable   </option>
-            <option>Insatisfaisant</option>
-            <option>Non Applicable</option>
+          <select  class="form-control"  formControlName="Respect_livraison" name="Respect_livraison"> <!-- formControlName="type_de_formation" name="type_de_formation"-->
+            <option [value]=3> Très Satisfaisant</option>
+                          <option [value]=2>Satisfaisant</option>
+                          <option [value]=1> Acceptable   </option>
+                          <option [value]=0>Insatisfaisant</option>
+                          <option [value]=0>Non Applicable</option>
               
                           </select> 
       </div> 
@@ -265,12 +266,12 @@
         <label class="form-check-label">   </label>
         <div class="position-relative form-group">
 
-          <select  class="form-control"  > <!-- formControlName="type_de_formation" name="type_de_formation"-->
-            <option>Très Satisfaisant</option>
-            <option>Satisfaisant</option>
-            <option> Acceptable   </option>
-            <option>Insatisfaisant</option>
-            <option>Non Applicable</option>
+          <select  class="form-control"  formControlName="Respect_consultation" name="Respect_consultation"> <!-- formControlName="type_de_formation" name="type_de_formation"-->
+            <option [value]=3> Très Satisfaisant</option>
+            <option [value]=2>Satisfaisant</option>
+            <option [value]=1> Acceptable   </option>
+            <option [value]=0>Insatisfaisant</option>
+            <option [value]=0>Non Applicable</option>
               
                           </select> 
       </div> 
@@ -307,12 +308,17 @@
         
 
         <div class="card-body" >
-
-         <label> - Inférieur à 12 : Non satisfait</label>
-         <label> - Entre 12 et 15 : Satisfait</label>
-         <label> - Supérieur à 15 : Très satisfait</label>
+<table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+  <tbody>
+    <tr class="text-center"> - Inférieur à 12 : Non satisfait</tr>
+    <tr class="text-center">- Entre 12 et 15 : Satisfait</tr>
+    <tr class="text-center"> - Supérieur à 15 : Très satisfait</tr>
+  </tbody>
+  
+ 
+</table> 
          <div class="divider"></div>
-       <h6 >Totale evaluation égale  à /39 </h6> <!-- {{formation.resultat}}-->
+       <h6 >Totale evaluation égale  à {{total}} /39 </h6> <!-- {{formation.resultat}}-->
 
 
 
@@ -323,8 +329,8 @@
 
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary"(click)="c('Close click')" >Prestataire non retenu</button>
-      <button type="submit" class="btn btn-primary" >Prestataire retenu</button>
+      <button type="button" class="btn btn-secondary"(click)="c('Close click')" >Fournisseur non retenu</button>
+      <button type="submit" class="btn btn-primary"  (click)="FournisseurRetenu()" >Fournisseur retenu</button>
     </div>
   </form>
 </ng-template>
@@ -335,4 +341,5 @@
   <button type="button" class="btn btn-primary" (click)="open(content)" (click)="CalculerTotaleEvaluation()">Total Evaluation</button>
 </div>
 </div>
+</form>
 </div>

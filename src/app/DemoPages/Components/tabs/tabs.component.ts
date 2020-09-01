@@ -37,6 +37,7 @@ export class TabsComponent implements OnInit {
   ngOnInit() {
     this.formation.GetAllBesoinCollecte();
     this.notification.getAllUsersTrue();
+    this.formation.GetAllBesoin();
   }
 
 

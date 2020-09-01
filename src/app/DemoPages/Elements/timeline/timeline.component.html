@@ -1,16 +1,16 @@
 <ngb-carousel *ngIf="images">
   <ng-template ngbSlide *ngIf="competence.userConnecte">
-    <img [src]="images[0]" width="100%" alt="Random first slide">
+    <img [src]="images[0]" width="100%" style="height: 250px;"alt="Random first slide">
     <div class="carousel-caption">
-      <a class="User-Profile-Image">
-        <img class="img-80 img-radius" src="./assets/images/avatars/10.jpg" alt="user-img">
-      </a>
+      <!--
+        <a class="User-Profile-Image"><img class="img-80 img-radius" src="./assets/images/avatars/10.jpg" alt="user-img">
+         </a>--> 
       <div class="media-body row">
         <div class="col-lg-12">
-          <div class="user-title">
+          <!--<div class="user-title">
             <h2>{{competence.userConnecte.userName}} {{competence.userConnecte.fullName}}</h2>
             <span class="text-white"> </span>
-          </div>
+          </div>-->
         </div>
         <div>
 
@@ -19,17 +19,17 @@
     </div>
   </ng-template>
   <ng-template ngbSlide *ngIf="competence.userConnecte">
-    <img [src]="images[1]" width="100%" alt="Random second slide" *ngIf="images.length > 0">
+    <img [src]="images[1]" width="100%" style="height: 250px;"alt="Random second slide" *ngIf="images.length > 0">
     <div class="carousel-caption">
-      <a class="User-Profile-Image">
-        <img class="img-80 img-radius" src="./assets/images/avatars/10.jpg" alt="user-img">
-      </a>
+         <!--
+        <a class="User-Profile-Image"><img class="img-80 img-radius" src="./assets/images/avatars/10.jpg" alt="user-img">
+         </a>--> 
       <div class="media-body row">
         <div class="col-lg-12">
-          <div class="user-title">
+       <!--<div class="user-title">
             <h2>{{competence.userConnecte.userName}} {{competence.userConnecte.fullName}}</h2>
             <span class="text-white"></span>
-          </div>
+          </div>-->   
         </div>
         <div>
 
@@ -38,17 +38,19 @@
     </div>
   </ng-template>
   <ng-template ngbSlide >
-    <img [src]="images[2]" width="100%" alt="Random third slide">
+    <img [src]="images[2]" width="100%" style="height: 250px;"alt="Random third slide">
     <div class="carousel-caption" *ngIf="competence.userConnecte">
-      <a class="User-Profile-Image">
-        <img class="img-80 img-radius" src="./assets/images/avatars/10.jpg" alt="user-img">
-      </a>
+      
+      <!--
+        <a class="User-Profile-Image"><img class="img-80 img-radius" src="./assets/images/avatars/10.jpg" alt="user-img">
+         </a>--> 
+     
       <div class="media-body row">
         <div class="col-lg-12">
-          <div class="user-title">
+          <!--<div class="user-title">
             <h2>{{competence.userConnecte.userName}} {{competence.userConnecte.fullName}}</h2>
-            <span class="text-white">Web designer</span>
-          </div>
+            <span class="text-white"> </span>
+          </div>-->
         </div>
         <div>
 
@@ -72,96 +74,98 @@
 
 
 
-          <ngb-tab title="Me Competence">
+          <ngb-tab title="Mes compétences">
             <ng-template ngbTabContent>
-   <div class="card-body">
-                <div id="table" class="table-editable">
-                  <div class="table-responsive">
-
-                    <table class="table table-striped table-responsive-md btn-table">
-
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th *ngFor="let domaine of competence.UserDomaineList">
-                            {{domaine.nomDomaine}}
-
-                        <tr class="text-center">
-                          <th *ngFor="let label of competence.UserLabelList" class="text-center"
-                            [hidden]="domaine.domaineId!=label.domaineId ">
-
-                            <span class="text-center">
-                              {{label.nomLabel}} </span>
-
-
-                          </th>
-
-
-
-                        </tr>
-
+       <div class="card-body">
+        <div class="card">
+          <form class="form" role="form" class="mb-4" autocomplete="off">
+            <div class="card-body">
+              <div id="table" class="table-editable">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <!-- head -->
+                    <thead>
+                      <tr>
+                        <th>
+                          User
                         </th>
-
-                        </tr>
-                      </thead>
-
-
-
-
-
-                      <!--item.userName {{item.fullName}}-->
-
-                      <tbody>
-                        <tr *ngIf="competence.user">
-                          <th scope="row"> {{competence.user.userName}} {{competence.user.fullName}}
-
-                          </th>
-
-
-                          <td *ngFor="let domaine of competence.UserDomaineList" class="text-center">
-                        <tr>
-
+                        <ng-container  *ngFor="let activite of DACompetence.ActiviteList" >
                           <th>
-
-                        <tr class="text-center">
-                          <th *ngFor="let label of competence.UserLabelList"
-                            [hidden]="domaine.domaineId!=label.domaineId ">
-                            <!--    {{competence.List.indexOf(label.labelId)}}-->
-         <label *ngFor="let item of competence.List" >
-           <strong *ngIf="item.labelId==label.labelId">{{item.niveau}}</strong>  </label>
-                         <!--   <select class="form-control" style="width: 60px;" [ngModel]="{{label.niveau}}"  (ngModelChange)="changeSelect(competence.user,label,$event)" [ngModelOptions]="{standalone: true}" style="border: 0px;">
-                              <option *ngFor="let item of competence.List, let i = index"
-                                [selected]="item.labelId==label.labelId">
-                                {{item.niveau}}
-                              </option>
-                              <option>
-                                3
-                              </option>
-                              <option>
-                                4
-                              </option>
-
-
-
-
-                            </select>-->
-                          
-
-
+                            {{activite.nomActivite}}
+                   <tr >
+                    <th *ngFor="let domaine of DACompetence.listeActivite"  class="text-center"  [hidden]="activite.id!=domaine.activiteId ">
+        
+                      {{domaine.nomDomaine}} 
+        
+                <tr class="text-center">
+                  <th >
+                <tr>
+                  <td > 
+                    <span class="text-center">
+                      {{domaine.nomLabel}} </span> </td>
+                </tr>
+                </th>
+                </tr>
+                </th>
+                   </tr>
+        
                           </th>
+             
+                      </ng-container>
+                      </tr>
+                    </thead>
+                    <!-- end head -->
+        
+                    <!-- body -->
+                    <tbody>
+                    
+                      <tr >
+                        <th scope="row"  > {{DACompetence.ParticipantusersTrue.userName}} {{DACompetence.ParticipantusersTrue.fullName}}
+                        </th>
+                        <ng-container  *ngFor="let activite of DACompetence.ActiviteList" >
+                          <th>
+                           
+                   <tr >
+                    <th *ngFor="let domaine of DACompetence.listeActivite"  class="text-center"  [hidden]="activite.id!=domaine.activiteId ">
+        
+                     
+        
+                <tr class="text-center">
+                  <th >
+                <tr *ngIf="DACompetence.ParticipantusersTrue"  >
+<!-- debut hadi 5aleha f timeline-->
+                  <td > 
+                    <div *ngIf="getchoixUserLabelSumActivite(DACompetence.ParticipantusersTrue,domaine,activite)>0;else xBloc;" class="form-control" style="width: 60px;" style="width: 60px;" >
+                    <strong  style="border: 0px;" >{{getchoixUserLabelSumActivite(DACompetence.ParticipantusersTrue,domaine,activite)}}</strong>
+        
+                    </div>
+                    <ng-template #xBloc>
+                      <div class="form-control" style="width: 60px;">
+                        x
+                      </div>
+                    </ng-template> 
+                  </td>
+<!-- fin hadi 5aleha f timeline-->
 
-
-
-                        </tr>
-                        </tr>
-                        </td>
-                        </tr>
-                      </tbody>
-
-
-                    </table>
-                  </div>
+                </tr>
+                </th>
+                </tr>
+                </th>
+                   </tr>
+        
+                          </th>
+             
+                      </ng-container>
+                      </tr>
+                    
+                    </tbody>
+                    <!-- End body -->
+                  </table>
                 </div>
+              </div>
+            </div>
+          </form>
+        </div>
               </div>
 
             </ng-template>
@@ -173,7 +177,7 @@
 
           <ngb-tab title="" *ngIf="competence.userConnecte" >
             <ng-template ngbTabTitle>
-              <div (click)="populateForm()">Information Personnel</div>
+              <div (click)="populateForm()">Informations personnelles</div>
           </ng-template>
             <ng-template ngbTabContent >
               <div class="m-t-15" (click)="populateForm()">
@@ -195,12 +199,13 @@
                                       <i class="icofont icofont-user"></i>
                                     </div>
                                     <div class="form-group form-primary"><!--user.formData.userName-->
+                                      <label class="float-label">Nom</label>
                                       <input type="text" [(ngModel)]="user.formData.userName" class="form-control"
                                       placeholder="userName"  formControlName="UserName" class="form-control" required=""
                                         value={{competence.user.userName}}>
                                       
                                       <span class="form-bar"></span>
-                                      <label class="float-label">Nom</label>
+                                     
 
                                     </div>
                                   </div>
@@ -239,11 +244,12 @@
                                       <i class="icofont icofont-mobile-phone"></i>
                                     </div>
                                     <div class="form-group form-primary">
+                                      <label class="float-label">Prenon</label>
                                       <input type="text"  formControlName="FullName"
                                         [(ngModel)]="user.formData.fullName" class="form-control" required=""
                                         value={{competence.user.fullName}}>
                                       <span class="form-bar"></span>
-                                      <label class="float-label">Prenon</label>
+                                    
                                     </div>
                                   </div>
 
@@ -253,11 +259,12 @@
                                       <i class="icofont icofont-social-twitter"></i>
                                     </div>
                                     <div class="form-group form-primary">
+                                      <label class="float-label">Email </label>
                                       <input type="text" [(ngModel)]="user.formData.email" class="form-control"
                                       placeholder="Email"  formControlName="Email" class="form-control" required=""  value={{competence.user.email}}>
                                       <label class="text-danger" *ngIf="user.FormModel.get('Email').touched && user.FormModel.get('Email').errors?.email">Invalid email address.</label>
                                       <span class="form-bar"></span>
-                                      <label class="float-label">Email </label>
+                                   
                                     </div>
                                   </div>
 
@@ -308,36 +315,272 @@
             </ng-template>
           </ngb-tab>
          
-          <ngb-tab title="changer photo de profile">
+          <ngb-tab title="Modifier la photo de profil">
             <ng-template ngbTabContent>
               <div class="m-t-15">
-                <div class="card">
+              
 
                   <div class="card-body">
+                    <form [formGroup]="user.FormImageModel" class="form"  class="mb-4" autocomplete="off">
+                    <li class="media">
+                      <div class="position-relative form-group">
+                        <label for="exampleFile"></label>
+                        <input name="file"  id="exampleFile" name="image" formControlName="image"  type="file" class="form-control-file">
+<button (click)="appliquerPhoto()">Appliquer</button>
+        </div>
+          </li>
+        </form>
                     <ul class="media-list">
+                                   <!-- Nested media object -->
+                    
                       <li class="media">
                         <div class="media-left" style="width: 50px; height: 50px;">
 
-                          <img class="media-object img-radius comment-img" src="./assets/images/avatars/10.jpg"
-                            alt="Generic placeholder image">
+                          <img [src]="createImgPath(BeautyPlus_20190409144429154_save.png)" alt="profile picture" style="width:60px; height:60px;">
 
                         </div>
 
                       </li>
-                      <!-- Nested media object -->
-                      <div class="position-relative form-group"><label for="exampleFile"></label><input name="file"
-                        id="exampleFile"
-                        type="file"
-                        class="form-control-file">
-
-</div>
+                      
                     </ul>
 
                   </div>
-                </div>
+               
+<!--tejrab-->
+<div class="row" style="margin-bottom:15px;">
+  <div class="col-md-3" (onUploadFinished)="uploadFinished($event)"> 
+    <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
+    <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button>
+  </div>
+  <div class="col-md-4">
+    <span class="upload" *ngIf="progress > 0">
+      {{progress}}%
+    </span>
+    <span class="upload" *ngIf="message">
+      {{message}}
+    </span>
+  </div>
+</div>
+
+
+
+<!--fin tejrab-->
+
+
+
+
+
+
+
+
+
               </div>
             </ng-template>
           </ngb-tab>
+
+
+
+
+
+
+<!--new table -->
+
+
+      <!-- Editable table -->
+      <ngb-tab title=" Mes réalisations">
+        <ng-template ngbTabContent>
+        <div class="card-body">
+          <div class="mb-3 card">
+          <div class="col-sm-12 col-lg-6">
+            <div class="row">
+              <!--<div class="col-lg-6">
+                <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-success border-success">
+                  <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content pt-3 pl-3 pb-1">
+                      <div class="widget-chart-flex">
+                        <div class="widget-numbers">
+                          <div class="widget-chart-flex">
+                            <div class="fsize-4">
+                              <small class="opacity-5">Total de formation en cour </small>
+                              <span> {{competence.NombreFormation.nombre_Formations_planifies}}</span></div>
+                          </div>
+                        </div>
+                      </div>
+                      <h6 class="widget-subheading mb-0 opacity-5"></h6>
+                    </div>
+                  </div>
+                </div>
+              </div>-->
+             <!-- <div class="col-lg-6">
+                <div class="card mb-3 widget-chart widget-chart2 text-left card-btm-border card-shadow-primary border-primary">
+                  <div class="widget-chat-wrapper-outer">
+                    <div class="widget-chart-content pt-3 pl-3 pb-1">
+                      <div class="widget-chart-flex">
+                        <div class="widget-numbers">
+                          <div class="widget-chart-flex">
+                            <div class="fsize-4">
+                              <small class="opacity-5">Total de formation réalisé</small>
+                              <span>{{competence.NombreFormation.nombre_Formations_realises}}</span></div>
+                          </div>
+                        </div>
+                      </div>
+                      <h6 class="widget-subheading mb-0 opacity-5">Sales Income</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>-->
+              </div>
+              </div>
+         
+          
+
+
+<!--deusieme version-->
+<div class="col-md-12 col-lg-4">
+  <ul class="list-group list-group-flush">
+    <li class="bg-transparent list-group-item">
+      <div class="widget-content p-0">
+        <div class="widget-content-outer">
+          <div class="widget-content-wrapper">
+            <div class="widget-content-left">
+              <div class="widget-heading">Total de formation en cour</div>
+              <div class="widget-subheading">à l'années actuelle</div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-success">{{competence.NombreFormation.nombre_Formations_planifies}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+    <li class="bg-transparent list-group-item">
+      <div class="widget-content p-0">
+        <div class="widget-content-outer">
+          <div class="widget-content-wrapper">
+            <div class="widget-content-left">
+              <div class="widget-heading">Total de formation réalisées</div>
+              <div class="widget-subheading">à l'années actuelle</div>
+            </div>
+            <div class="widget-content-right">
+              <div class="widget-numbers text-primary">{{competence.NombreFormation.nombre_Formations_realises}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+
+<!--affichage de formation en cour-->
+
+<div class="card main-card mb-3">
+  <div class="card-header">
+    <div class="app-header__content" [class]="' header-shadow ' ">
+      <div class="app-header-left">
+        <div class="search-wrapper" [class.active]="isActive">
+          <div class="input-holder">
+            <input type="text" placeholder="Tapez pour rechercher" class="search-input"
+              [ngModelOptions]="{standalone: true}" id="filter-string" [(ngModel)]="ActiviteFilter.date_Fin|| ActiviteFilter.date_Debut "
+              [value]="ActiviteFilter.date_Fin || ActiviteFilter.date_Debut" >
+            <button class="search-icon" (click)="isActive = true"><span></span></button>
+          </div>
+          <button class="close" (click)="isActive = false"></button>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <h1 style="color: brown;"> Formation réalisées</h1> 
+   
+    <tr>
+      <th scope="col">Intitulé formation</th>
+      <th scope="col">Date Debut</th>
+      <th scope="col">Date Fin</th>
+      <th scope="col">Activité</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of competence.FormationRealise |filterBy:ActiviteFilter; let i=index ">
+     
+      <td>
+        {{i + 1}}  #   {{ item.intitule_Formation }}
+      </td>
+      <td> {{ item.date_Debut }}</td>
+      <td>  {{ item.date_Fin }} </td>
+      <td>  {{ item.activite }} </td>
+    </tr>
+    </tbody>
+    <thead>
+      <h1 style="color: brown;"> Formation planifiées</h1> 
+     
+      <tr>
+        <th scope="col">Intitule_formation</th>
+        <th scope="col">Date Debut</th>
+        <th scope="col">Date Fin</th>
+        <th scope="col">Activité</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of competence.NombrePlanifie|filterBy:ActiviteFilter; let i=index">
+       
+        <td>
+         
+          {{i + 1}} #{{ item.intitule_Formation }}
+        </td>
+        <td>{{ item.date_Debut }}</td>
+        <td>  {{ item.date_Fin }} </td>
+        <td>  {{ item.activite }} </td>
+      </tr>
+      </tbody>
+  </table>
+</div>
+<!--fin affichage de formation en cour-->
+</div>
+</div >
+</ng-template >
+</ngb-tab >
+<!-- Editable table -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--fin new table-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -361,3 +604,95 @@
     </div>
   </div>
 </div>
+
+
+
+<!--
+          <div class="card">
+            <form class="form" role="form" class="mb-4" autocomplete="off">
+              <div class="card-body">
+                <div id="table" class="table-editable">
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-responsive-md table-striped text-center">
+                   
+                      <thead>
+                        <tr>
+                          <th>
+                            User
+                          </th>
+                          <ng-container  *ngFor="let activite of DACompetence.ActiviteList" >
+                            <th>
+                              {{activite.nomActivite}}
+                     <tr >
+                      <th *ngFor="let domaine of DACompetence.listeActivite"  class="text-center"  [hidden]="activite.id!=domaine.activiteId ">
+          
+                        {{domaine.nomDomaine}} 
+          
+                  <tr class="text-center">
+                    <th >
+                  <tr>
+                    <td > 
+                      <span class="text-center">
+                        {{domaine.nomLabel}} </span> </td>
+                  </tr>
+                  </th>
+                  </tr>
+                  </th>
+                     </tr>
+          
+                            </th>
+               
+                        </ng-container>
+                        </tr>
+                      </thead>
+                   
+                      <tbody>
+                      
+                        <tr >
+                          <th scope="row"  > {{DACompetence.ParticipantusersTrue.userName}} {{DACompetence.ParticipantusersTrue.fullName}}
+                          </th>
+                          <ng-container  *ngFor="let activite of DACompetence.ActiviteList" >
+                            <th>
+                             
+                     <tr >
+                      <th *ngFor="let domaine of DACompetence.listeActivite"  class="text-center"  [hidden]="activite.id!=domaine.activiteId ">
+          
+                       
+          
+                  <tr class="text-center">
+                    <th >
+                  <tr *ngIf="DACompetence.ParticipantusersTrue"  >
+
+                    <td > 
+                      <div *ngIf="getchoixUserLabelSumActivite(DACompetence.ParticipantusersTrue,domaine,activite)>0;else xBloc;" class="form-control" style="width: 60px;" style="width: 60px;" >
+                      <strong  style="border: 0px;" >{{getchoixUserLabelSumActivite(DACompetence.ParticipantusersTrue,domaine,activite)}}</strong>
+          
+                      </div>
+                      <ng-template #xBloc>
+                        <div class="form-control" style="width: 60px;">
+                          x
+                        </div>
+                      </ng-template> 
+                    </td>
+
+
+                  </tr>
+                  </th>
+                  </tr>
+                  </th>
+                     </tr>
+          
+                            </th>
+               
+                        </ng-container>
+                        </tr>
+                      
+                      </tbody>
+                     
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>-->
+

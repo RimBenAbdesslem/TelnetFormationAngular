@@ -1,17 +1,37 @@
-
-
 <div class="app-page-title">
   <div class="page-title-wrapper">
+    <div class="page-title-heading">
+    <div >
+      <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success" (click)=" OpenLarge(content1)" >
+        <fa class="mr-2" name="plus" ></fa>
+        Activité
+      </button> 
+    </div>
+    </div>
+    <div class="page-title-actions">
+     
+    
+      <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success" (click)=" openLarge(content)" >
+        <fa class="mr-2" name="plus" ></fa>
+        Domaine
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="page-title-wrapper">
   <div class="page-title-actions">
-  
-    <button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success" (click)=" openSmall(content1)" >
+  <!--<button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success" (click)=" openLarge(content)" >
       <fa class="mr-2" name="plus" ></fa>
-      Activité
-    </button>
+      Domaine
+    </button>-->
+    
   
     <div class="modal-body">
-    <ng-template #content1 let-c="close" let-d="dismiss">
-     
+    <ng-template #content let-c="close" let-d="dismiss">
+      <form  [formGroup]="competence.DomaineModel" class="form" role="form" class="mb-4" autocomplete="off" >
         <div class="modal-header">
           <h4 class="modal-title"></h4>
           <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -21,25 +41,183 @@
     
   
         <div class="card-body">
-          <form [formGroup]="formation.ActiviteModel"  role="form" class="mb-4" autocomplete="off" >
+          <div class="position-relative row form-group">
             <div class="form-group row">
-              <label class="col-lg-3 col-form-label form-control-label" >Activité</label>
+              <label class="col-lg-3 col-form-label form-control-label" >Domaine</label>
               <div class="col-lg-9">
-                <div class="form-group ">
-                <input class="form-control" type="text" formControlName="activite" name="activite">
+                <input class="form-control" type="text" formControlName="NomDomaine" name="NomDomaine">
+               
+         
+                
+               
               </div>
             </div>
-            </div>
+            <div  class="form-group row">
+            <button type="submit" class="btn btn-primary" (click)="RegisterDomaine()" >Ajouter</button>
+          </div>
+        </div>
+        </div>
+    
+    
+       
+      </form>
+
+
+
+      <div class="main-card mb-3 card">
+ 
+        <div class="table-responsive">
+          <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+            <thead>
+            <tr>
             
-          </form>
-        </div>
-    
-    
-        <div class="modal-footer">
+            
+              <th ><strong style="color: blue;">Domaine</strong></th>
+              <th ><strong style="color: blue;"></strong></th>
+             
+           
+            </tr>
+            </thead>
+            <tbody>
+            <tr  *ngFor="let domaine of competence.DomaineList">
+            
+              
+              <td  >{{domaine.nomDomaine}}</td>
+              <td >
+                
+                <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" (click)="onDelete(domaine.DomaineId)">
+                  <i class="pe-7s-trash btn-icon-wrapper"> </i>
+                </button>
          
-          <button type="submit" class="btn btn-primary" (click)="AjouterActivite()" >Ajouter</button>
+            </td>
+          
+              <td >
+               <!-- <button type="button" class="btn btn-primary btn-sm">Details</button> -->
+      
+      
+               <div role="group" class="btn-group-sm btn-group">
+                <!-- <button type="button" class="btn-shadow btn btn-primary">Edit role</button>-->
+                <div class="card-body" class="text-center">
+                 <div role="group" class="btn-group-sm btn-group">
+                 <span *ngIf="closeResult" class="kt-section__sub">
+                   <pre>{{closeResult}}</pre>
+                 </span>
+                 <div class="divider"></div>
+                 <form  [formGroup]="competence.FormModel" class="mb-4" autocomplete="off" > <!-- (submit)="onSubmit(form)"-->
+               <!-- <input type="hidden" name="id" [value]="notification.formData.id">-->  
+                 <ng-template #content let-c="close" let-d="dismiss">
+                   <div class="modal-header">
+                     <h4 class="modal-title"></h4> <!--Demo Basic-->
+                     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                       <span aria-hidden="true">&times;</span>
+                     </button>
+                   </div>
+               
+                   <div class="modal-body">
+      
+            <!--ici la sous formulaire de role de la boutton edit role-->
+                 
+                     <div class="main-card mb-3 card">
+                       <div class="card-body">
+                         <div>
+                           <div class="table-responsive">
+                           <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+                           <thead>
+                             <tr>
+                               <th class="text-center"></th>
+                               <th class="text-center"></th>
+                               <th class="text-center"></th>
+                           
+                             </tr>
+                             </thead>
+      
+                            <tbody>
+                             <tr  > 
+                             
+                               <td class="text-center" style="width: 80px;">
+                               <!--<strong>Domaine</strong>-->
+                               </td>
+                               <div class="form-group ">
+                               <td class="text-center" > 
+                       <!-- [(ngModel)]="{{domaine.nomDomaine}}" name="userName"      -->
+                       <!--     <input    class="form-control" [(ngModel)]="competence.formData.NomDomaine"
+                                placeholder="" formControlName="NomDomaine" name="NomDomaine" >-->
+                               </td>
+                             
+                              </div>
+                               
+                             </tr>
+                            </tbody>
+                            <thead>
+                              <tr>
+                                <th class="text-center"><strong>Sous Domaine</strong> </th>
+                                <th class="text-center"></th>
+                            
+                              </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let label of competence.LabeList" class="text-center" [hidden]="domaine.domaineId!=label.domaineId " ><!--*ngFor="let role of notification.role "-->
+                              
+                                  <td class="text-center" > {{label.nomLabel}} </td>
+                                  <td class="text-center">
+                                    <!--  <div class="d-block text-center card-footer">--> 
+                                         <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" > <!--(click)="DeleteRole(role,item.id)"-->
+                                           <i class="pe-7s-trash btn-icon-wrapper"> </i>
+                                         </button>
+                                      <!-- </div> -->
+                                     </td>
+                                  </tr>
+                                  </tbody>
+                           </table>
+                         </div>
+                        
+                         
+                        
+                         
+                            
+                          
+                           
+                          
+                           
+                         </div>
+                       </div>
+                     </div>
+      
+                   </div>
+                   <div class="modal-footer" class="text-center">
+                   
+                   <!--  <button type="button" class="btn btn-primary" type="submit"  (click)="c('Close click')"  >Modifier</button>-->
+                    <!--(click)="(click)="onSubmit(form,domaine.domaineId)""-->
+                   </div>
+                 </ng-template>
+       
+                </form>
+       
+                 <td class="text-center">
+                 <div role="group" class="btn-group-sm btn-group">
+                 <button class="btn btn-primary" (click)="openLarge(content)" (click)="populateForm(domaine)" >Detail</button> <!--(click)="populateForm(item)"-->
+               </div>
+                 </td>
+                 </div>
+             </div>
+               
+               
+             
+             
+      
+               
+               </div>
+      
+      
+              </td>
+            </tr>
+           
+            </tbody>
+          </table>
         </div>
-     
+       
+      </div>
+
     </ng-template>
   </div>
   
@@ -50,8 +228,292 @@
     
   </div>
   </div>
-  </div>
+  <!--fin Domaine-->
+  <!--debut activite-->
+  
+    <!--<button type="button" class="btn-shadow d-inline-flex align-items-center btn btn-success" (click)=" OpenLarge(content1)" >
+    <fa class="mr-2" name="plus" ></fa>
+    Activité
+  </button>-->
+  
 
+  <div class="modal-body">
+  <ng-template #content1 let-c="close" let-d="dismiss">
+    <form [formGroup]="formation.ActiviteModel"  role="form" class="mb-4" autocomplete="off" >
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="card-body">
+        <div class="position-relative row form-group">
+         
+    
+          <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label" >Activité</label>
+            <div class="col-lg-9">
+              <div class="form-group ">
+              <input class="form-control" type="text" formControlName="activite" name="activite">
+            </div>
+          </div>
+          </div>
+          <div  class="form-group row">
+       
+            <button type="submit" class="btn btn-primary" (click)="AjouterActivite()" style="height: 40px;">Ajouter</button>
+          </div>
+       
+      
+  </div>
+  </div>
+</form>
+     
+   
+<!-- Editable table -->
+
+
+
+<div class="main-card mb-3 card">
+
+<div class="table-responsive">
+  <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+    <thead>
+    <tr>
+    
+    
+      <th ><strong style="color: blue;">Activite</strong></th>
+      <th ><strong style="color: blue;"></strong></th>
+     
+   
+    </tr>
+    </thead>
+    <tbody>
+    <tr  *ngFor="let activite of competence.ActiviteList">
+    
+      
+      <td  >{{activite.nomActivite}}</td>
+      <td >
+        
+        <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" (click)="onDeleteActivite(activite.id)">
+          <i class="pe-7s-trash btn-icon-wrapper"> </i>
+        </button>
+ 
+    </td>
+  
+      <td >
+       <!-- <button type="button" class="btn btn-primary btn-sm">Details</button> -->
+
+
+       <div role="group" class="btn-group-sm btn-group">
+        <!-- <button type="button" class="btn-shadow btn btn-primary">Edit role</button>-->
+        <div class="card-body" class="text-center">
+         <div role="group" class="btn-group-sm btn-group">
+         <span *ngIf="closeResult" class="kt-section__sub">
+           <pre>{{closeResult}}</pre>
+         </span>
+         <div class="divider"></div>
+         <form  [formGroup]="competence.FormModelActivite" class="mb-4" autocomplete="off" > <!-- (submit)="onSubmit(form)"-->
+       <!-- <input type="hidden" name="id" [value]="notification.formData.id">-->  
+         <ng-template #content let-c="close" let-d="dismiss">
+           <div class="modal-header">
+             <h4 class="modal-title"></h4> <!--Demo Basic-->
+             <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+       
+           <div class="modal-body">
+
+    <!--ici la sous formulaire de role de la boutton edit role-->
+         
+             <div class="main-card mb-3 card">
+               <div class="card-body">
+                 <div>
+                   <div class="table-responsive">
+                   <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
+                   <thead>
+                     <tr>
+                       <th class="text-center"></th>
+                       <th class="text-center"></th>
+                       <th class="text-center"></th>
+                   
+                     </tr>
+                     </thead>
+
+                    <tbody>
+                     <tr  > 
+                     
+                       <td class="text-center" style="width: 80px;">
+                       <strong>Activité</strong>
+                       </td>
+                       <div class="form-group ">
+                       <td class="text-center" > 
+               <!-- [(ngModel)]="{{domaine.nomDomaine}}" name="userName"      -->
+                    <input    class="form-control" [(ngModel)]="competence.formDataActivite.nomActivite"
+                        placeholder="" formControlName="nomActivite" name="nomActivite" >
+                       </td>
+                     
+                      </div>
+                       
+                     </tr>
+                    </tbody>
+                  
+                    <thead>
+                      <tr>
+                        <th class="text-center">Domaine
+                        </th>
+                  
+                    
+                      </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let domaine of competence.ListeActivite; let i = index" class="text-center" ><!--*ngFor="let role of notification.role "-->
+                      
+                          <td class="text-center" > <strong style="color: blue;"> {{competence.tabLabActivite[i]}} </strong> 
+                            
+                         
+                                <tr *ngFor="let label of competence.ListeActivite"   class="text-center"><!--*ngFor="let role of notification.role "-->
+                              
+                                  <td class="text-center"[hidden]="competence.tabLabActivite[i]!=label.nomDomaine">  {{label.nomLabel}} 
+                                    <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" (click)="DeletelabelActivite(label.listActivId)"> <!--(click)="DeleteRole(role,item.id)"-->
+                                      <i class="pe-7s-trash btn-icon-wrapper"> </i>
+                                    </button>
+                                  </td>
+                                  <td class="text-center" [hidden]="domaine.nomDomaine!=label.nomDomaine" *ngIf="!competence.tabLabActivite.length">
+                                    <!--  <div class="d-block text-center card-footer">--> 
+                                         <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" (click)="DeletelabelActivite(label.listActivId)"> <!--(click)="DeleteRole(role,item.id)"-->
+                                           <i class="pe-7s-trash btn-icon-wrapper"> </i>
+                                         </button>
+                                      <!-- </div> -->
+                                     </td>
+                                  </tr>
+
+
+                           </td>
+                          <!--<td class="text-center">
+                             <div class="d-block text-center card-footer">
+                              <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" > (click)="DeleteRole(role,item.id)"
+                                <i class="pe-7s-trash btn-icon-wrapper"> </i>
+                              </button>
+                            </div> 
+                          </td>-->
+                          
+                          </tr>
+                         
+                             
+                          </tbody>
+                      
+                   </table>
+                 </div>
+                
+                 
+                
+                 
+                    
+                  
+                   
+                  
+                   
+                 </div>
+               </div>
+             </div>
+
+           </div>
+           <div class="modal-footer" class="text-center">
+           
+             <button type="button" class="btn btn-primary" type="submit"  (click)="c('Close click')" (click)="onSubmit(form,activite.id)" >Modifier</button><!--(click)="onSubmit(form,item.id)"-->
+           </div>
+         </ng-template>
+
+        </form>
+
+         <td class="text-center">
+         <div role="group" class="btn-group-sm btn-group">
+         <button class="btn btn-primary" (click)="openLarge(content)" (click)="populateForm(activite)" >Detail</button> <!--(click)="populateForm(item)"-->
+       </div>
+         </td>
+         </div>
+     </div>
+       
+       
+     
+     
+
+       
+       </div>
+
+
+      </td>
+    </tr>
+   
+    </tbody>
+  </table>
+</div>
+
+</div>
+  </ng-template>
+</div>
+
+
+  <!--fin activité-->
+  
+
+<!-- Editable table -->
+<div class="card">
+  <form  [formGroup]="competence.CompetenceModel" class="form" role="form" class="mb-4" autocomplete="off" >
+  <div class="card-body">
+    <div id="table" class="table-editable">
+      <span class="table-add float-right mb-3 mr-2">
+       <!-- <a class="text-success" (click)="add()">
+          <i class="fa fa-plus-circle" style="font-size:48px;color:blue"></i>
+        </a>-->
+      </span>
+      <table class="table table-bordered table-responsive-md table-striped text-center" >
+        <tr>
+          <th class="text-center">Domaine</th>
+          <th class="text-center">Sous Domaine</th>
+          <th class="text-center">Niveau</th>
+         
+
+        </tr>
+        
+        <tr *ngFor="let person of CompUserList; let id = index" >
+          <td>
+            <div class="position-relative form-group">
+
+
+              <select class="form-control" formControlName="domaineId"  
+              name="domaineId" style="width: 200px;"  (change)="ValueChange($event)">
+              <option >
+                select</option>
+              <option *ngFor="let domaine of competence.DomaineList" [value]="domaine.domaineId"  >
+               {{domaine.nomDomaine}}</option>
+             
+            </select>
+            </div>
+          </td>
+          <td>
+            <div class="position-relative form-group">
+              <input  type="text" class="form-control" style="width: 200px;" formControlName="NomLabel" name="NomLabel">
+            </div>
+          </td>
+         
+        
+          <td>
+            <span class="table-remove">
+              <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0" (click)="RegisterCompetence()">Ajouter</button>
+            </span>
+          </td>
+        
+        </tr>
+   
+      </table>
+    </div>
+  </div>
+  </form>
+</div>
+<!-- Editable table Competence-->
 
 <!-- Editable table -->
 <div class="card">
@@ -59,15 +521,15 @@
   <div class="card-body">
     <div id="table" class="table-editable">
       <span class="table-add float-right mb-3 mr-2">
-        <a class="text-success" (click)="add()">
+        <!--<a class="text-success" (click)="add()">
           <i class="fa fa-plus-circle" style="font-size:48px;color:blue"></i>
-        </a>
+        </a>-->
       </span>
       <table class="table table-bordered table-responsive-md table-striped text-center" >
         <tr>
           <th class="text-center">Activité</th>
           <th class="text-center">Domaine</th>
-          <th class="text-center">Sou-domaine</th>
+          <th class="text-center">Sous-domaine</th>
           <th></th>
 
         </tr>
@@ -173,9 +635,9 @@
   <div class="card-body">
     <div id="table" class="table-editable">
       <span class="table-add float-right mb-3 mr-2">
-        <a class="text-success" (click)="add()">
+       <!-- <a class="text-success" (click)="add()">
           <i class="fa fa-plus-circle" style="font-size:48px;color:blue"></i>
-        </a>
+        </a>-->
       </span>
       <table class="table table-bordered table-responsive-md table-striped text-center" >
         <tr>
@@ -290,22 +752,20 @@
       <tr>
       
       
-        <th ><strong style="color: blue;">Activite</strong></th>
-        <th ><strong style="color: blue;"></strong></th>
+        <th ><strong style="color: blue;">Nom</strong></th>
+        <th ><strong style="color: blue;"> Prénon</strong></th>
        
      
       </tr>
       </thead>
       <tbody>
-      <tr  *ngFor="let activite of competence.ActiviteList">
+      <tr  *ngFor="let user of competence.Allusers">
       
         
-        <td  >{{activite.nomActivite}}</td>
+        <td  >{{user.userName}} </td>
         <td >
           
-          <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" (click)="onDeleteActivite(activite.id)">
-            <i class="pe-7s-trash btn-icon-wrapper"> </i>
-          </button>
+          {{user.fullName}}
    
       </td>
     
@@ -342,64 +802,32 @@
                      <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
                      <thead>
                        <tr>
+                         <th class="text-center">Activité</th>
+                         <th class="text-center">Domaine</th>
+                         <th class="text-center">Sous Domaine</th>
                          <th class="text-center"></th>
-                         <th class="text-center"></th>
-                         <th class="text-center"></th>
-                     
                        </tr>
                        </thead>
 
-                      <tbody>
-                       <tr  > 
-                       
-                         <td class="text-center" style="width: 80px;">
-                         <strong>Activité</strong>
-                         </td>
-                         <div class="form-group ">
-                         <td class="text-center" > 
-                 <!-- [(ngModel)]="{{domaine.nomDomaine}}" name="userName"      -->
-                      <input    class="form-control" [(ngModel)]="competence.formDataActivite.nomActivite"
-                          placeholder="" formControlName="nomActivite" name="nomActivite" >
-                         </td>
-                       
-                        </div>
-                         
-                       </tr>
-                      </tbody>
-                      <thead>
-                        <tr>
-                          <th class="text-center">
-                          </th>
-                       
-                      
-                        </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let domaine of competence.tabLabActivite; let i = index" class="text-center"><!--*ngFor="let role of notification.role "-->
+                     
+                   
+                        <tbody *ngIf="user">
+                          <tr *ngFor="let domaine of competence.AllActiviteMetier; let i = index" class="text-center" ><!--*ngFor="let role of notification.role "-->
                         
-                            <td class="text-center" > <strong style="color: blue;">{{i +1}}- Domaine : </strong> {{domaine.nomDomaine}} 
+                            <td class="text-center"  *ngIf="GetUserActivite(user,domaine)>0" >     
+                              {{domaine.nomActivite}}
 
-                              <thead>
-                                <tr>
-                                  <th class="text-center">  </th>
-                                  <th class="text-center"></th>
-                              
-                                </tr>
-                                </thead>
-                               
-                                  <tr *ngFor="let label of competence.tabLabActivite" class="text-center"><!--*ngFor="let role of notification.role "-->
-                                
-                                    <td class="text-center"[hidden]="domaine.domaineId!=label.domaineId">  {{label.nomLabel}} </td>
-                                    <td class="text-center" [hidden]="domaine.domaineId!=label.domaineId">
-                                      <!--  <div class="d-block text-center card-footer">--> 
-                                           <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" (click)="DeletelabelActivite(label.listActivId)"> <!--(click)="DeleteRole(role,item.id)"-->
-                                             <i class="pe-7s-trash btn-icon-wrapper"> </i>
-                                           </button>
-                                        <!-- </div> -->
-                                       </td>
-                                    </tr>
-
-
+                             </td>
+                             <td class="text-center" *ngIf="GetUserActivite(user,domaine)>0">  
+                              {{domaine.nomDomaine}} 
+                            </td>
+                            <td class="text-center" *ngIf="GetUserActivite(user,domaine)>0">  
+                              {{domaine.nomLabel}} 
+                            </td>
+                            <td class="text-center" *ngIf="GetUserActivite(user,domaine)>0">   
+                              <button class="mr-2 btn-icon btn-icon-only btn btn-outline-danger" (click)="DeleteUserActivite(domaine.activMetId)" > <!--(click)="DeleteRole(role,item.id)"-->
+                                <i class="pe-7s-trash btn-icon-wrapper"> </i>
+                              </button>
                             </td>
                             <!--<td class="text-center">
                                <div class="d-block text-center card-footer">
@@ -413,33 +841,26 @@
                            
                                
                             </tbody>
+                        
                      </table>
                    </div>
-                  
-                   
-                  
-                   
-                      
-                    
-                     
-                    
-                     
+
                    </div>
                  </div>
                </div>
 
              </div>
-             <div class="modal-footer" class="text-center">
+           <!--<div class="modal-footer" class="text-center">
              
-               <button type="button" class="btn btn-primary" type="submit"  (click)="c('Close click')" (click)="onSubmit(form,activite.id)" >Modifier</button><!--(click)="onSubmit(form,item.id)"-->
-             </div>
+               <button type="button" class="btn btn-primary" type="submit"  (click)="c('Close click')" (click)="onSubmit(form,activite.id)" >Modifier</button>(click)="onSubmit(form,item.id)"
+             </div>-->  
            </ng-template>
  
           </form>
  
            <td class="text-center">
            <div role="group" class="btn-group-sm btn-group">
-           <button class="btn btn-primary" (click)="openLarge(content)" (click)="populateForm(activite)" >Detail</button> <!--(click)="populateForm(item)"-->
+           <button class="btn btn-primary" (click)="openLarge(content)" >Detail</button> <!--(click)="populateForm(item)"  (click)="populateFormUser(domaine)" -->
          </div>
            </td>
            </div>

@@ -185,7 +185,7 @@ export class ChartBoxes3Component implements OnInit {
     return matches;
   };
 
-  
+
 
   changeValue(id: number, property: string, event: any) {
     this.editField = event.target.textContent;

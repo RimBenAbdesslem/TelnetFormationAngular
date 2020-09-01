@@ -5,25 +5,28 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Evaluation_Participant } from '../Models/evaluation_participant.model';
 import { element } from '@angular/core/src/render3';
+import { Users } from '../Models/users.model';
 
 @Injectable({
     providedIn: 'root'
   })
   export class EvaluationService {
-    constructor(private fb: FormBuilder,private For : FormBuilder, private F: FormBuilder,private FB: FormBuilder,private Fb: FormBuilder,private http: HttpClient,private router: Router){}
+    constructor(private fb: FormBuilder,private For : FormBuilder,private Fo : FormBuilder, private F: FormBuilder,private FB: FormBuilder,private Fb: FormBuilder,private http: HttpClient,private router: Router){}
 
     readonly BaseURI = 'https://localhost:44385/api';
     resultat : any=0;
     resultats : any=0;
     EvaluationData: Evaluation_Participant;
     EvaluationFroidParticipant:Evaluation_Participant[];
+    EvaluationChaudDirecteur:any
     envoyer(res){
       this.resultat=res;
     }
     envoyers(result){
       this.resultats=result;
     }
-    
+ 
+   
     EvaluationFroidModel = this.fb.group({
       Theme: ['', Validators.required],
       Lieu: ['', Validators.required],
@@ -72,7 +75,20 @@ import { element } from '@angular/core/src/render3';
       Critere10:['', Validators.required],
  
      });
-
+     EvaluationFournisseur = this.Fo.group({
+      Nom_Fournisseur: ['', Validators.required],
+      Categorie: ['', Validators.required],
+      Qualite: ['', Validators.required],
+      Conformite: ['', Validators.required],
+      Date_Evaluation:['', Validators.required],
+      Semestre:['', Validators.required],
+      Certification : ['', Validators.required],
+      Coherence: ['', Validators.required],
+      Conditions :['', Validators.required],
+      Politique:['', Validators.required],
+      Respect_livraison:['', Validators.required],
+      Respect_consultation:['', Validators.required], 
+     });
 
      EvaluationChaud = this.FB.group({
       Theme: ['', Validators.required],
@@ -100,8 +116,10 @@ import { element } from '@angular/core/src/render3';
       Commentaire2: ['', Validators.required],
       Commentaire3: ['', Validators.required],
       check:['', Validators.required],
+      check1:['', Validators.required],
      });
      registerEvaluationFroid(SelectedUserValue,variable){
+       console.log(this.EvaluationFroidModel.value.Lieu)
       var evaluation={
       Theme:this.EvaluationFroidModel.value.Theme,
       Lieu:this.EvaluationFroidModel.value.Lieu,
@@ -124,6 +142,8 @@ import { element } from '@angular/core/src/render3';
        question_C:this.EvaluationFroidModel.value.question_C,
        question_B: this.EvaluationFroidModel.value.question_B,
        Comment: this.EvaluationFroidModel.value.Comment,
+       IdDirecteur:this.EvaluationFroidModel.value.Formateur,
+       IdParticipant:this.EvaluationFroidModel.value.Nom_Participant,
        Commentaire1: this.EvaluationFroidModel.value.Commentaire1,
       //idParticipant:variable
        
@@ -133,7 +153,7 @@ import { element } from '@angular/core/src/render3';
     //  return(evaluation) EvaluationFroidParticipant
     var id=SelectedUserValue[1]
     console.log(SelectedUserValue[0])
-     return this.http.post('https://localhost:44385/api/EvaluationFroidParticipant/RegisterEvaluationFroidParticipant/'+ SelectedUserValue[0], evaluation);
+     return this.http.post('https://localhost:44385/api/EvaluationFroidParticipant/RegisterEvaluationFroidParticipant', evaluation);
       
      }
      registerCompetenceEvaluationFroid(){
@@ -147,10 +167,23 @@ import { element } from '@angular/core/src/render3';
       return this.http.post('https://localhost:44385/api/EvaluationFroid/RegisterComtepenceEvaluation', evaluation);
 
      }
+     AddEvaluationFournisseur(total){
+      var evaluation={
+        Nom_Fournisseur:this.EvaluationFournisseur.value.Nom_Fournisseur,
+        Semestre:this.EvaluationFournisseur.value.Semestre,
+        Categorie:this.EvaluationFournisseur.value.Categorie,
+        Conformite:"NULL",
+        Date_Evaluation:this.EvaluationFournisseur.value.Date_Evaluation,
+        Totale_evaluation: total,
+     
+       }
+      return this.http.post('https://localhost:44385/api/EvaluationFournisseur/RegisterEvaluationFournisseur', evaluation);
+     }
+     usersTrue: string;
 
-
-     registerEvaluationChaud(){
-      
+     registerEvaluationChaud(variable,username){
+     
+       console.log(username)
       var evaluation={
        Theme:this.EvaluationChaud.value.Theme,
        Lieu:this.EvaluationChaud.value.Lieu,
@@ -159,7 +192,7 @@ import { element } from '@angular/core/src/render3';
        Date_Evaluation_Froid:this.EvaluationChaud.value.Date_Evaluation_Froid,
        Date_Debut: this.EvaluationChaud.value.Date_Debut,
        Date_Fin: this.EvaluationChaud.value.Date_Fin,
-       Nom_Participant: this.EvaluationChaud.value.Nom_Participant,
+       Nom_Participant: username,
        Prenom_Participant: this.EvaluationChaud.value.Prenom_Participant,
        Matricule: this.EvaluationChaud.value.Matricule,
        Fonction: this.EvaluationChaud.value.Fonction,
@@ -172,9 +205,11 @@ import { element } from '@angular/core/src/render3';
        Commentaire2: this.EvaluationChaud.value.PourquoiB,
        Commentaire3: this.EvaluationChaud.value.PourquoiB,
        Score_Evaluation:this.resultat,
+       idParticipant:variable,
+       idDirecteur:this.EvaluationChaud.value.Formateur,
        Score_Satisfaction:this.resultats ,
       }
-      console.log(this.resultat);
+      console.log(username);
       console.log(this.resultats);
  // this.progress.EvalFormateur(evaluation);
  //return (evaluation)
@@ -216,7 +251,33 @@ return(formData)
         }
       )
     }
-
+    EvaluationFroid:Evaluation_Participant[];
+    getEvaluationFroid(){
+      this.http.get('https://localhost:44385/api/EvaluationChaud/GetEvaluationFroid/'+this.payLoad.UserID).toPromise().then(
+        res=>{
+          this.EvaluationFroid = res as Evaluation_Participant[];
+          console.log(this.EvaluationFroid);
+        }
+      )
+    }
+    EvaluationChaudParticipant:Evaluation_Participant[];
+    getEvaluationChaudParticipant(){
+      this.http.get('https://localhost:44385/api/EvaluationChaud/GetEvaluationChaud/'+this.payLoad.UserID).toPromise().then(
+        res=>{
+          this.EvaluationChaudParticipant = res as Evaluation_Participant[];
+          console.log(this.EvaluationChaudParticipant);
+        }
+      )
+    }
+    
+    getEvaluationChaudDirecteur(){
+      this.http.get('https://localhost:44385/api/EvaluationChaud/GetEvaluationDirec/'+this.payLoad.UserID).toPromise().then(
+        res=>{
+          this.EvaluationChaudDirecteur = res 
+          console.log("Evaluation chad pour directeur",this.EvaluationChaudDirecteur);
+        }
+      )
+    }
     registerSuiteEvaluationFroid(Evaluation){
     var evaluation={
       Theme:Evaluation.theme,
@@ -253,7 +314,7 @@ return(formData)
       Sinon:this.EvaluaFroidModel.value.Sinon, 
       autre: this.EvaluaFroidModel.value.autre
     }
-    console.log(Evaluation.theme)
+    console.log( this.EvaluaFroidModel.value.Critere9)
     return this.http.post('https://localhost:44385/api/EvaluationFroid/RegisterEvaluationFroid', evaluation);
     }
   }

@@ -81,7 +81,7 @@ export class ActiviteComponent implements OnInit {
   ngOnInit() {
     this.competence.getAllActivite();
     this.competence.getAllUsersTrue();
-
+   this.competence.getActiviteAllUsers();
     this.competence.GetAllDomaine();
     this.competence.GetAllLabels();
    // this.resetForm();
@@ -91,10 +91,60 @@ export class ActiviteComponent implements OnInit {
     this.userId=event.target.value;
   console.log( this.userId);
 }
+DomaineId:number
+ValueChange(event){
+  this.DomaineId=event.target.value;
+  console.log( this.DomaineId);
+}
+SelectedValue: any = [];
+RegisterCompetence(){
+  console.log(this.SelectedValue);
+  this.competence.registerCompetence(this.DomaineId)
+  .subscribe(
+    
+    (res: any) => {
+      if (res.succeeded) {
+       this.toastr.info('Nouveau Compétence!','Bien ajouté.');
+        this.toastr.success('Nouveau Compétence!','Bien ajouté.');
+
+      } 
+    },
+  
+  );
+  this.competence.refreshList();
+}
+
+RegisterDomaine(){
+  console.log();
+  this.competence.registerDomaine().subscribe(
+    (res: any) => {
+      if (res.succeeded) {
+        this.toastr.success('Nouveau Domaine!','Bien ajouté.');
+      } 
+    },
+   
+  );
+  this.competence.DomaineModel.reset();
+}
   domaineId:number
   ValueChangeDomaine(event){
     this.domaineId=event.target.value;
     console.log( this.domaineId);
+  }
+  onDelete(id){
+    if (confirm('Voulez-vous vraiment supprimer cet enregistrement ?')) {
+      this.competence.deleteDomaine(id)
+        .subscribe(res => {
+          debugger;
+          this.competence.refreshList();
+          this.toastr.warning('Succé', 'Domaine supprimé avec succé');
+        },
+          err => {
+            debugger;
+            console.log(err);
+          })
+    }
+
   }
   activiteId:number
   ValueChangeActivite(event){
@@ -124,8 +174,18 @@ export class ActiviteComponent implements OnInit {
     });
   }
 
+  openSmalle(content2) {
+    this.modalService.open(content2, {
+      size: 'sm'
+    });
+  }
   openLarge(content) {
     this.modalService.open(content, {
+      size: 'lg'
+    });
+  }
+  OpenLarge(content1) {
+    this.modalService.open(content1, {
       size: 'lg'
     });
   }
@@ -169,11 +229,29 @@ export class ActiviteComponent implements OnInit {
         this.competence.refreshListeActivite();
   }
   populateForm(activite: any) {
+    this.competence.tabLabActivite=[];
     this.competence.GetListeActivite(activite.id);
     this.competence.formDataActivite = Object.assign({}, activite);
   //  this.competence.getUserRole(item.id);
     console.log(activite.id);
     console.log(activite.nomActivite);
+  }
+  populateFormUser(domaine){
+    this.competence.tabLabActivite=[];
+    this.competence.GetListeActivite(domaine.activiteId);
+    this.competence.formDataActivite = Object.assign({}, domaine);
+  //  this.competence.getUserRole(item.id);
+    console.log(domaine.id);
+    console.log(domaine.nomActivite);
+  }
+  DeleteUserActivite(activMetId){
+    this.competence.deleteUserActivite(activMetId).subscribe(
+      (res: any) => {
+            
+              this.toastr.success('Activite supprimer avec succés','');
+           
+          },
+        );
   }
   DeletelabelActivite(listActivId){
     this.competence.deletelabelActivite(listActivId).subscribe(
@@ -183,6 +261,88 @@ export class ActiviteComponent implements OnInit {
            
           },
         );
-        this.competence.refreshActivite(listActivId);
+      //  this.competence.refreshActivite(listActivId);
   }
+  getUserLabelSumActivite(user,domaine){
+    //  console.log(user.id);
+      for(var i in this.competence.AllActiviteMetier){
+      
+      if(this.competence.AllActiviteMetier[i].activiteId==domaine.activiteId && this.competence.AllActiviteMetier[i].domaineId== domaine.domaineId && this.competence.AllActiviteMetier[i].userId==user.id){
+     // console.log(this.competence.AllActiviteMetier[i].niveau)
+          if (user.Level){
+            let res = user.Level.find(x=>x.labelId == domaine.labelId )
+      //  console.log(res);
+            return res? res.activMetId : 0
+          }else{
+            return 0
+          }
+       
+       
+      }
+       
+      }
+      
+    }
+
+    GetUserActivite(user,domaine){
+      //  console.log(user.id);
+        for(var i in this.competence.AllActiviteMetier){
+        
+        if(this.competence.AllActiviteMetier[i].activiteId==domaine.activiteId  && this.competence.AllActiviteMetier[i].userId==user.id){
+       // console.log(this.competence.AllActiviteMetier[i].niveau)
+            if (user.Level){
+              let res = user.Level.find(x=>x.userId == domaine.userId  )
+        //  console.log(res);
+              return res? res.activMetId : 0
+            }else{
+              return 0
+            }
+         
+         
+        }
+         
+        }
+        
+      }
+      getUserLabelSumActivite2(user,domaine){
+        //  console.log(user.id);
+          for(var i in this.competence.AllActiviteMetier){
+          
+          if(this.competence.AllActiviteMetier[i].activiteId==domaine.id  && this.competence.AllActiviteMetier[i].userId==user.id){
+         // console.log(this.competence.AllActiviteMetier[i].niveau)
+              if (user.Level){
+                let res = user.Level.find(x=>x.activiteId == domaine.id )
+          //  console.log(res);
+                return res? res.nomDomaine : "holla"
+              }else{
+                return ""
+              }
+           
+           
+          }
+           
+          }
+          
+        }
+        getUserLabelSumActivite3(user,domaine){
+          //  console.log(user.id);
+            for(var i in this.competence.AllActiviteMetier){
+            
+            if(this.competence.AllActiviteMetier[i].activiteId==domaine.id && this.competence.AllActiviteMetier[i].userId==user.id){
+           // console.log(this.competence.AllActiviteMetier[i].niveau)
+                if (user.Level){
+                  let res = user.Level.find(x=>x.activiteId == domaine.id )
+            //  console.log(res);
+                  return res? res.nomLabel : "holla"
+                }else{
+                  return ""
+                }
+             
+             
+            }
+             
+            
+          }
+            
+          }
 }

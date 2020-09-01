@@ -10,16 +10,25 @@ export class EmailService {
   constructor(private http: HttpClient,private fb: FormBuilder) { }
   formData: Email;
   readonly rootURL = 'https://localhost:44385/api';
-
+ 
   formModel = this.fb.group({
   Subject:[''],
-  Body: [''],
+  Body: [' '],
   To: ['', Validators.email],
  });
 
 SendEmail() {
       
   return this.http.post(this.rootURL + '/Email/SendEmail', this.formData);
+}
+SendEmailTous() {
+  var object={
+    To:'rim@gmail.com',
+    Subject:'ggg',
+    Body:'gggg'
+  }
+   
+  return this.http.post(this.rootURL + '/Email/SendEmailTous', object);
 }
 
 }

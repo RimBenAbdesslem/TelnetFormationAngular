@@ -1,383 +1,400 @@
 <!--table de formation a evaluer-->
+<div class="app-header__content" [class]="' header-shadow ' ">
+  <div class="app-header-left">
+    <div class="search-wrapper" [class.active]="isActive">
+      <div class="input-holder">
+        <input type="text" placeholder="Tapez pour rechercher" class="search-input"
+          [ngModelOptions]="{standalone: true}" id="filter-string" [(ngModel)]="ActiviteFilter.theme"
+          [value]="ActiviteFilter.theme">
+        <button class="search-icon" (click)="isActive = true"><span></span></button>
+      </div>
+      <button class="close" (click)="isActive = false"></button>
+    </div>
+  </div>
 
+</div>
 <div class="main-card mb-3 card">
-  <form [formGroup]="evaluation.EvaluaFroidModel" class="mb-4" autocomplete="off" >
-  <div class="table-responsive">
+  <form [formGroup]="evaluation.EvaluaFroidModel" class="mb-4" autocomplete="off">
+    <div class="table-responsive">
 
-    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
-      <thead>
-        <tr>
+      <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+        <thead>
+          <tr>
 
 
-          <th><strong style="color: blue;">Théme</strong></th>
-          <th><strong style="color: blue;"></strong></th>
+            <th><strong style="color: blue;">Thème</strong></th>
+            <th><strong style="color: blue;"> Participant</strong></th>
+            <th><strong style="color: blue;"></strong></th>
 
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let evaluation of evaluation.EvaluationFroidParticipant| filterBy: ActiviteFilter">
 
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let evaluation of evaluation.EvaluationFroidParticipant">
 
+            <td>{{evaluation.theme}}</td>
+            <td>
+              {{evaluation.nom_Participant}}  {{evaluation.prenom_Participant}}
 
-          <td>{{evaluation.theme}}</td>
-          <td>
 
+            </td>
+            <td></td>
+            <td>
+              <!-- <button type="button" class="btn btn-primary btn-sm">Details</button> -->
 
 
-          </td>
+              <div role="group" class="btn-group-sm btn-group">
+                <!-- <button type="button" class="btn-shadow btn btn-primary">Edit role</button>-->
+                <div class="card-body" class="text-center">
+                  <div role="group" class="btn-group-sm btn-group">
+                    <span *ngIf="closeResult" class="kt-section__sub">
+                      <pre>{{closeResult}}</pre>
+                    </span>
+                    <div class="divider"></div>
+                    <!-- [formGroup]="competence.FormModel" class="mb-4" autocomplete="off" (submit)="onSubmit(form)"-->
+                    <!-- <input type="hidden" name="id" [value]="notification.formData.id">-->
+                    <ng-template #content let-c="close" let-d="dismiss">
+                      <div class="modal-header">
+                        <h4 class="modal-title"></h4>
+                        <!--Demo Basic-->
+                        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
 
-          <td>
-            <!-- <button type="button" class="btn btn-primary btn-sm">Details</button> -->
+                      <div class="modal-body">
 
+                        <!--ici la sous formulaire de role de la boutton edit role-->
 
-            <div role="group" class="btn-group-sm btn-group">
-              <!-- <button type="button" class="btn-shadow btn btn-primary">Edit role</button>-->
-              <div class="card-body" class="text-center">
-                <div role="group" class="btn-group-sm btn-group">
-                  <span *ngIf="closeResult" class="kt-section__sub">
-                    <pre>{{closeResult}}</pre>
-                  </span>
-                  <div class="divider"></div>
-                  <!-- [formGroup]="competence.FormModel" class="mb-4" autocomplete="off" (submit)="onSubmit(form)"-->
-                  <!-- <input type="hidden" name="id" [value]="notification.formData.id">-->
-                  <ng-template #content let-c="close" let-d="dismiss">
-                    <div class="modal-header">
-                      <h4 class="modal-title"></h4>
-                      <!--Demo Basic-->
-                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
+                        <div class="main-card mb-3 card">
+                          <div class="card-body">
+                            <div>
+                              <div class="table-responsive">
 
-                    <div class="modal-body">
 
-                      <!--ici la sous formulaire de role de la boutton edit role-->
+                                <!--la formulaire a rempli-->
+                                <div class="row" class="text-center">
 
-                      <div class="main-card mb-3 card">
-                        <div class="card-body">
-                          <div>
-                            <div class="table-responsive">
+                                  <div class="col-md-6" class="text-center">
 
+                                    <ngb-accordion (panelChange)="beforeChange($event)">
+                                      <ngb-panel id="preventchange-1">
+                                        <ng-template ngbPanelTitle>
 
-                              <!--la formulaire a rempli-->
-                              <div class="row" class="text-center">
+                                          <h6 class="mb-3" class="text-center">
+                                            FORMATION
+                                          </h6>
+                                        </ng-template>
+                                        <div class="divider"></div>
 
-                                <div class="col-md-6" class="text-center">
 
-                                  <ngb-accordion (panelChange)="beforeChange($event)">
-                                    <ngb-panel id="preventchange-1">
-                                      <ng-template ngbPanelTitle>
 
-                                        <h6 class="mb-3" class="text-center">
-                                          FORMATION
-                                        </h6>
-                                      </ng-template>
-                                      <div class="divider"></div>
+                                        <ng-template ngbPanelContent>
 
-
-
-                                      <ng-template ngbPanelContent>
-
-                                        <div class="card-body">
-                                          <h5 class="card-title"></h5>
-
-
-                                          <table
-                                            class="align-middle text-truncate mb-0 table table-borderless table-hover">
-
-
-
-                                            <thead>
-                                              <tr>
-                                                <th class="text-center"><strong>Théme</strong> </th>
-                                                <th class="text-center"><strong>Lieu</strong> </th>
-                                                <th class="text-center"><strong>Organisme</strong> </th>
-                                                <th class="text-center"><strong>Formateur</strong> </th>
-                                                <th class="text-center"><strong>Date debut</strong> </th>
-                                                <th class="text-center"><strong>Date fin</strong> </th>
-
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr>
-                                                <!--*ngFor="let role of notification.role "-->
-
-                                                <td class="text-center"> {{evaluation.theme}} </td>
-                                                <td class="text-center"> {{evaluation.lieu}} </td>
-                                                <td class="text-center"> {{evaluation.organisme}} </td>
-                                                <td class="text-center"> {{evaluation.formateur}} </td>
-                                                <td class="text-center"> {{evaluation.date_Debut}} </td>
-                                                <td class="text-center"> {{evaluation.date_Fin}} </td>
-                                              </tr>
-                                            </tbody>
-                                          </table>
-
-
-
-
-
-
-
-                                        </div>
-
-
-                                      </ng-template>
-                                    </ngb-panel>
-                                  </ngb-accordion>
-
-
-
-
-                                  <ngb-accordion (panelChange)="beforeChange($event)">
-                                    <ngb-panel id="preventchange-1">
-                                      <ng-template ngbPanelTitle>
-
-                                        <h6 class="mb-3 mt-3">
-                                          PARTICIPANT
-                                        </h6>
-                                      </ng-template>
-                                      <div class="divider"></div>
-                                      <ng-template ngbPanelContent>
-
-                                        <div class="card-body">
-                                          <h5 class="card-title"></h5>
-
-
-                                          <table
-                                            class="align-middle text-truncate mb-0 table table-borderless table-hover">
-
-
-
-                                            <thead>
-                                              <tr>
-                                                <th class="text-center"><strong>Nom</strong> </th>
-                                                <th class="text-center"><strong>Prénom</strong> </th>
-                                                <th class="text-center"><strong>Matricule</strong> </th>
-                                                <th class="text-center"><strong>Direction</strong> </th>
-                                                <th class="text-center"><strong>Date d'evaluation</strong> </th>
-
-                                              </tr>
-                                            </thead>
-                                            <tbody>
-                                              <tr>
-                                                <!--*ngFor="let role of notification.role "-->
-
-                                                <td class="text-center"> {{evaluation.nom_Participant}} </td>
-                                                <td class="text-center"> {{evaluation.prenom_Participant}} </td>
-                                                <td class="text-center"> {{evaluation.matricule}} </td>
-                                                <td class="text-center"> {{evaluation.direction}} </td>
-                                                <td class="text-center"> {{evaluation.date_Evaluation_Froid}} </td>
-
-                                              </tr>
-                                            </tbody>
-                                          </table>
-
-
-
-                                        </div>
-
-
-
-
-
-
-                                      </ng-template>
-                                    </ngb-panel>
-                                  </ngb-accordion>
-
-
-
-                                  <ngb-accordion (panelChange)="beforeChange($event)">
-                                    <ngb-panel id="preventchange-1">
-                                      <ng-template ngbPanelTitle>
-                                        <h6 class="mb-3 mt-3">
-                                          EVALUATION Participant
-                                        </h6>
-                                      </ng-template>
-                                      <div class="divider"></div>
-                                      <ng-template ngbPanelContent>
-                                        <div class="main-card mb-3 card">
                                           <div class="card-body">
                                             <h5 class="card-title"></h5>
-                                            <label for="examplePassword">a. Avez- vous mis en application les
-                                              connaissances acquises lors de votre
-                                              formation ? </label>
-                                            <ng-container *ngIf="evaluation.question_A != oui ; then oui; else non">
-
-                                            </ng-container>
-                                            <ng-template #oui>
-                                              <div style="text-align: left;">
-                                                <strong style="color:blue;">{{evaluation.question_A}}</strong>
-
-                                              </div>
-
-                                              <div class="position-relative row form-group">
 
 
-                                                <label for="examplePassword" class="col-sm-2 col-form-label">Lesquelles
-                                                  ? </label>
-
-                                                <div class="position-relative form-group">
-                                                  <strong> {{evaluation.lesquelles}}</strong>
-                                                </div>
+                                            <table
+                                              class="align-middle text-truncate mb-0 table table-borderless table-hover">
 
 
-                                              </div>
-                                            </ng-template>
 
-                                            <!---->
-                                            <ng-template #non>
-                                              <div class="position-relative row form-group">
-                                                <label class="form-check-label">
-                                                  <strong style="color:blue;">{{evaluation.question_A}}</strong>
+                                              <thead>
+                                                <tr>
+                                                  <th class="text-center"><strong>Théme</strong> </th>
+                                              <!--<th class="text-center"><strong>Lieu</strong> </th>-->    
+                                                  <th class="text-center"><strong>Organisme</strong> </th>
+                                                  <th class="text-center"><strong>Formateur</strong> </th>
+                                                  <th class="text-center"><strong>Date debut</strong> </th>
+                                                  <th class="text-center"><strong>Date fin</strong> </th>
 
-                                                </label>
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                  <!--*ngFor="let role of notification.role "-->
 
-                                              </div>
-
-                                              <div class="position-relative row form-group">
-
-                                                <label for="examplePassword" class="col-sm-2 col-form-label">Pourquoi ?
-                                                </label>
-                                                <strong style="color:blue;">{{evaluation.pourquoiA}}</strong>
+                                                  <td class="text-center"> {{evaluation.theme}} </td>
+                                               <!--   <td class="text-center"> {{evaluation.lieu}} </td>-->
+                                                  <td class="text-center"> {{evaluation.organisme}} </td>
+                                                  <td class="text-center"> {{evaluation.formateur}} </td>
+                                                  <td class="text-center"> {{evaluation.date_Debut}} </td>
+                                                  <td class="text-center"> {{evaluation.date_Fin}} </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
 
 
 
 
 
-
-
-                                              </div>
-                                            </ng-template>
-                                            <div class="position-relative row form-group">
-
-                                              <label for="examplePassword" class="col-sm-2 col-form-label">Autres :
-                                                <strong>{{evaluation.autres1}}</strong>
-                                              </label>
-                                            </div>
-                                            <div class="divider"></div>
-
-                                            <div style="text-align: left;">
-                                              <label for="examplePassword">b. La formation vous a-t-elle permis
-                                                d’améliorer votre efficacité dans votre
-                                                travail ? </label>
-
-                                            </div>
-                                            <ng-container *ngIf="evaluation.question_A != oui ; then ouiB; else nonB">
-
-                                            </ng-container>
-                                            <ng-template #ouiB>
-                                              <div class="position-relative row form-group">
-                                                <label class="form-check-label">
-                                                  <strong style="color:blue;">{{evaluation.question_B}}</strong>
-
-                                                </label>
-
-                                              </div>
-                                              <div class="position-relative row form-group">
-
-                                                <label for="examplePassword" class="col-sm-2 col-form-label">Comment ?
-                                                </label>
-
-                                                <div class="position-relative form-group">
-                                                  <strong style="color:blue;">{{evaluation.comment}}</strong>
-                                                </div>
-
-
-
-                                              </div>
-
-                                            </ng-template>
-                                            <ng-template #nonB>
-
-                                              <div class="position-relative row form-group">
-                                                <label class="form-check-label">
-                                                  <strong style="color:blue;">{{evaluation.question_B}}</strong>
-
-
-                                                </label>
-
-                                              </div>
-
-                                              <div class="position-relative row form-group">
-
-                                                <label for="examplePassword" class="col-sm-2 col-form-label">Pourqoui ?
-                                                </label>
-
-                                                <div class="position-relative form-group">
-                                                  <strong style="color:blue;">{{evaluation.PourquoiB}}</strong>
-
-                                                </div>
-
-
-
-                                              </div>
-                                            </ng-template>
-
-
-
-                                            <div class="divider"></div>
-
-                                            <div class="position-relative row form-group"><label for="exampleFile"
-                                                class="col-sm-2 col-form-label"></label>
-
-                                            </div>
-
-
-                                            <div style="text-align: left;">
-                                              <label for="examplePassword">c. Quels compléments seraient nécessaires à
-                                                la formation suivie ? </label>
-
-                                            </div>
-                                            <div class="position-relative row form-group">
-
-
-                                              <div class="position-relative form-group">
-                                                <strong style="color:blue;">{{evaluation.question_C}}</strong>
-                                              </div>
-
-
-
-                                            </div>
-
-                                            <div style="text-align: left;">
-                                              <label for="examplePassword">COMMENTAIRES / OBSERVATIONS / SUGGESTIONS
-                                              </label>
-
-                                            </div>
-                                            <div class="position-relative row form-group">
-
-
-                                              <div class="position-relative form-group">
-                                                <strong style="color:blue;">{{evaluation.commentaire1}} {{evaluation.idParticipant}}</strong>
-                                              </div>
-
-
-
-                                            </div>
 
 
                                           </div>
-                                        </div>
-                                      </ng-template>
-                                    </ngb-panel>
-                                  </ngb-accordion>
+
+
+                                        </ng-template>
+                                      </ngb-panel>
+                                    </ngb-accordion>
 
 
 
-                                  <ngb-accordion (panelChange)="beforeChange($event)">
 
-                                    <ngb-panel id="preventchange-1">
-                                      <ng-template ngbPanelTitle>
-                                        <h6 class="mb-3 mt-3">
-                                          Evaluation Hiérarchie
-                                        </h6>
-                                      </ng-template>
-                                      <div class="divider"></div>
-                                      <ng-template ngbPanelContent>
+                                    <ngb-accordion (panelChange)="beforeChange($event)">
+                                      <ngb-panel id="preventchange-1">
+                                        <ng-template ngbPanelTitle>
 
-                                        <div class="col-md-6" class="text-center">
-                                         
+                                          <h6 class="mb-3 mt-3">
+                                            PARTICIPANT
+                                          </h6>
+                                        </ng-template>
+                                        <div class="divider"></div>
+                                        <ng-template ngbPanelContent>
+
+                                          <div class="card-body">
+                                            <h5 class="card-title"></h5>
+
+
+                                            <table
+                                              class="align-middle text-truncate mb-0 table table-borderless table-hover">
+
+
+
+                                              <thead>
+                                                <tr>
+                                                  <th class="text-center"><strong>Nom</strong> </th>
+                                                  <th class="text-center"><strong>Prénom</strong> </th>
+                                                  <th class="text-center"><strong>Matricule</strong> </th>
+                                                  <th class="text-center"><strong>Direction</strong> </th>
+                                                  <th class="text-center"><strong>Date d'evaluation</strong> </th>
+
+                                                </tr>
+                                              </thead>
+                                              <tbody>
+                                                <tr>
+                                                  <!--*ngFor="let role of notification.role "-->
+
+                                                  <td class="text-center"> {{evaluation.nom_Participant}} </td>
+                                                  <td class="text-center"> {{evaluation.prenom_Participant}} </td>
+                                                  <td class="text-center"> {{evaluation.matricule}} </td>
+                                                  <td class="text-center"> {{evaluation.direction}} </td>
+                                                  <td class="text-center"> {{evaluation.date_Evaluation_Froid}} </td>
+
+                                                </tr>
+                                              </tbody>
+                                            </table>
+
+
+
+                                          </div>
+
+
+
+
+
+
+                                        </ng-template>
+                                      </ngb-panel>
+                                    </ngb-accordion>
+
+
+
+                                    <ngb-accordion (panelChange)="beforeChange($event)">
+                                      <ngb-panel id="preventchange-1">
+                                        <ng-template ngbPanelTitle>
+                                          <h6 class="mb-3 mt-3">
+                                            EVALUATION Participant
+                                          </h6>
+                                        </ng-template>
+                                        <div class="divider"></div>
+                                        <ng-template ngbPanelContent>
+                                          <div class="main-card mb-3 card">
+                                            <div class="card-body">
+                                              <h5 class="card-title"></h5>
+                                              <label for="examplePassword">a. Avez- vous mis en application les
+                                                connaissances acquises lors de votre
+                                                formation ? </label>
+                                              <ng-container *ngIf="evaluation.question_A != oui ; then oui; else non">
+
+                                              </ng-container>
+                                              <ng-template #oui>
+                                                <div style="text-align: left;">
+                                                  <strong style="color:blue;">{{evaluation.question_A}}</strong>
+
+                                                </div>
+
+                                                <div class="position-relative row form-group">
+
+
+                                                  <label for="examplePassword"
+                                                    class="col-sm-2 col-form-label">Lesquelles
+                                                    ? </label>
+
+                                                  <div class="position-relative form-group">
+                                                    <strong> {{evaluation.lesquelles}}</strong>
+                                                  </div>
+
+
+                                                </div>
+                                              </ng-template>
+
+                                              <!---->
+                                              <ng-template #non>
+                                                <div class="position-relative row form-group">
+                                                  <label class="form-check-label">
+                                                    <strong style="color:blue;">{{evaluation.question_A}}</strong>
+
+                                                  </label>
+
+                                                </div>
+
+                                                <div class="position-relative row form-group">
+
+                                                  <label for="examplePassword" class="col-sm-2 col-form-label">Pourquoi
+                                                    ?
+                                                  </label>
+                                                  <strong style="color:blue;">{{evaluation.pourquoiA}}</strong>
+
+
+
+
+
+
+
+                                                </div>
+                                              </ng-template>
+                                              <div class="position-relative row form-group">
+
+                                                <label for="examplePassword" class="col-sm-2 col-form-label">Autres :
+                                                  <strong>{{evaluation.autres1}}</strong>
+                                                </label>
+                                              </div>
+                                              <div class="divider"></div>
+
+                                              <div style="text-align: left;">
+                                                <label for="examplePassword">b. La formation vous a-t-elle permis
+                                                  d’améliorer votre efficacité dans votre
+                                                  travail ? </label>
+
+                                              </div>
+                                              <ng-container *ngIf="evaluation.question_A != oui ; then ouiB; else nonB">
+
+                                              </ng-container>
+                                              <ng-template #ouiB>
+                                                <div class="position-relative row form-group">
+                                                  <label class="form-check-label">
+                                                    <strong style="color:blue;">{{evaluation.question_B}}</strong>
+
+                                                  </label>
+
+                                                </div>
+                                                <div class="position-relative row form-group">
+
+                                                  <label for="examplePassword" class="col-sm-2 col-form-label">Comment ?
+                                                  </label>
+
+                                                  <div class="position-relative form-group">
+                                                    <strong style="color:blue;">{{evaluation.comment}}</strong>
+                                                  </div>
+
+
+
+                                                </div>
+
+                                              </ng-template>
+                                              <ng-template #nonB>
+
+                                                <div class="position-relative row form-group">
+                                                  <label class="form-check-label">
+                                                    <strong style="color:blue;">{{evaluation.question_B}}</strong>
+
+
+                                                  </label>
+
+                                                </div>
+
+                                                <div class="position-relative row form-group">
+
+                                                  <label for="examplePassword" class="col-sm-2 col-form-label">Pourqoui
+                                                    ?
+                                                  </label>
+
+                                                  <div class="position-relative form-group">
+                                                    <strong style="color:blue;">{{evaluation.PourquoiB}}</strong>
+
+                                                  </div>
+
+
+
+                                                </div>
+                                              </ng-template>
+
+
+
+                                              <div class="divider"></div>
+
+                                              <div class="position-relative row form-group"><label for="exampleFile"
+                                                  class="col-sm-2 col-form-label"></label>
+
+                                              </div>
+
+
+                                              <div style="text-align: left;">
+                                                <label for="examplePassword">c. Quels compléments seraient nécessaires à
+                                                  la formation suivie ? </label>
+
+                                              </div>
+                                              <div class="position-relative row form-group">
+
+
+                                                <div class="position-relative form-group">
+                                                  <strong style="color:blue;">{{evaluation.question_C}}</strong>
+                                                </div>
+
+
+
+                                              </div>
+
+                                              <div style="text-align: left;">
+                                                <label for="examplePassword">COMMENTAIRES / OBSERVATIONS / SUGGESTIONS
+                                                </label>
+
+                                              </div>
+                                              <div class="position-relative row form-group">
+
+
+                                                <div class="position-relative form-group">
+                                                  <strong style="color:blue;">{{evaluation.commentaire1}}
+                                                    {{evaluation.idParticipant}}</strong>
+                                                </div>
+
+
+
+                                              </div>
+
+
+                                            </div>
+                                          </div>
+                                        </ng-template>
+                                      </ngb-panel>
+                                    </ngb-accordion>
+
+
+
+                                    <ngb-accordion (panelChange)="beforeChange($event)">
+
+                                      <ngb-panel id="preventchange-1">
+                                        <ng-template ngbPanelTitle>
+                                          <h6 class="mb-3 mt-3">
+                                            Evaluation Hiérarchie
+                                          </h6>
+                                        </ng-template>
+                                        <div class="divider"></div>
+                                        <ng-template ngbPanelContent>
+
+                                          <div class="col-md-6" class="text-center">
+
                                             <h5 class="card-title"></h5>
                                             <table>
                                               <tr>
@@ -632,7 +649,8 @@
 
 
                                             <div class="position-relative form-group">
-                                              <input type="text" class="form-control" formControlName="autre" name="autre" style="width: 200px;">
+                                              <input type="text" class="form-control" formControlName="autre"
+                                                name="autre" style="width: 200px;">
                                             </div>
 
 
@@ -668,7 +686,7 @@
 
 
 
-<!--modifier competence d'un utilisateur-->
+                                              <!--modifier competence d'un utilisateur-->
                                               <div class="card-body">
 
 
@@ -678,141 +696,130 @@
 
                                                 <div class="position-relative form-group">
                                                   <!-- Editable table -->
+                                                  <div class="card-body">
                                                   <div class="card">
-                                                    <div class="card-body">
-                                                      
-                                                      <div id="table" class="table-editable">
-                                                        <div class="table-responsive">
-                                      
-                                                          <table class="table table-striped table-responsive-md btn-table">
-                                      
-                                                            <thead>
-                                                              <tr>
-                                                                <th></th>
-                                                                <th *ngFor="let domaine of competence.UserDomaineList">
-                                                                  {{domaine.nomDomaine}}
-                                      
-                                                              <tr class="text-center">
-                                                                <th *ngFor="let label of competence.UserLabelList" class="text-center"
-                                                                  [hidden]="domaine.domaineId!=label.domaineId ">
-                                      
-                                                                  <span class="text-center">
-                                                                    {{label.nomLabel}} </span>
-                                      
-                                      
-                                                                </th>
-                                      
-                                      
-                                      
-                                                              </tr>
-                                      
-                                                              </th>
-                                      
-                                                              </tr>
-                                                            </thead>
-                                      
-                                      
-                                      
-                                      
-                                      
-                                                            <!--item.userName {{item.fullName}}-->
-                                      
-                                                            <tbody>
-                                                              <tr *ngIf="competence.participant">
-                                                                <th scope="row"> {{competence.participant.userName}} {{competence.participant.fullName}}
-                                      
-                                                                </th>
-                                      
-                                      
-                                                                <td *ngFor="let domaine of competence.UserLabelList " class="text-center">
-                                                              <tr>
-                                      
-                                                                <th>
-                                                                  <tr *ngIf="competence.participant" class="text-center">
-                                                                    <th *ngFor="let label of competence.List" [hidden]="domaine.labelId!=label.labelId ">
-                                                                      <div class="form-control" style="width: 60px;" >
-                                                                        <select [ngModel]="label.niveau" (ngModelChange)="changeSelect(competence.participant,label,$event)" [ngModelOptions]="{standalone: true}" style="border: 0px;">
-                                                                          <option value="1">1</option>
-                                                                          <option value="2">2</option>
-                                                                          <option value="3">3</option>
-                                                                          <option value="4">4</option>
-                                                                        </select>
-                                                    
-                                                                      </div>
-                                                                      <ng-template #xBloc>
-                                                                        <div class="form-control" style="width: 60px;">
-                                                                          x
-                                                                        </div>
-                                                                      </ng-template>
+                                                    <form class="form" role="form" class="mb-4" autocomplete="off">
+                                                      <div class="card-body">
+                                                        <div id="table" class="table-editable">
+                                                          <div class="table-responsive">
+                                                            <table class="table table-bordered table-responsive-md table-striped text-center">
+                                                              <!-- head -->
+                                                              <thead>
+                                                                <tr>
+                                                                  <th>
+                                                                    User
+                                                                  </th>
+                                                                  <ng-container  *ngFor="let activite of DACompetence.ActiviteList" >
+                                                                    <th>
+                                                                      {{activite.nomActivite}}
+                                                             <tr >
+                                                              <th *ngFor="let domaine of DACompetence.listeActivite"  class="text-center"  [hidden]="activite.id!=domaine.activiteId ">
+                                                  
+                                                                {{domaine.nomDomaine}} 
+                                                  
+                                                          <tr class="text-center">
+                                                            <th >
+                                                          <tr>
+                                                            <td > 
+                                                              <span class="text-center">
+                                                                {{domaine.nomLabel}} </span> </td>
+                                                          </tr>
+                                                          </th>
+                                                          </tr>
+                                                          </th>
+                                                             </tr>
+                                                  
                                                                     </th>
-                                                                  </tr>
-
-
-
-
-
-
-
-<!--
-                                                              <tr class="text-center">
-                                                                <th *ngFor="let label of competence.UserLabelList" [hidden]="domaine.domaineId!=label.domaineId ">
-                                                                {{competence.List.indexOf(label.labelId)}}
-                                                                  <input type="text" list="staticUserIds"   class="form-control"
-                                                                  style="width: 60px;" />
-                                                                  
-                                                                    <datalist id="staticUserIds">
-                                                                    <option *ngFor="let item of competence.List" value="item.niveau" aria-placeholder="item.niveau">
-                                                                      {{item.niveau}}
-                                                                    </option>
-                                                                  </datalist>
- 
-                                                                </th>
-                                                              </tr>-->
-
-
-
-
-
-
-
-
-                                                              </th>
-                                                              </tr>
-                                                              </td>
-                                                              </tr>
-                                                            </tbody>
-                                      
-                                      
-                                                          </table>
+                                                       
+                                                                </ng-container>
+                                                                </tr>
+                                                              </thead>
+                                                              <!-- end head -->
+                                                  
+                                                              <!-- body -->
+                                                              <tbody>
+                                                              
+                                                                <tr >
+                                                                  <th scope="row"  > {{DACompetence.ParticipantusersTrue.userName}} {{DACompetence.ParticipantusersTrue.fullName}}
+                                                                  </th>
+                                                                  <ng-container  *ngFor="let activite of DACompetence.ActiviteList" >
+                                                                    <th>
+                                                                     
+                                                             <tr >
+                                                              <th *ngFor="let domaine of DACompetence.listeActivite"  class="text-center"  [hidden]="activite.id!=domaine.activiteId ">
+                                                  
+                                                               
+                                                  
+                                                          <tr class="text-center">
+                                                            <th >
+                                                          <tr *ngIf="DACompetence.ParticipantusersTrue"  >
+                                        
+                                        
+                                        <!-- debut hadhi 5aleha f progress bar-->
+                                        
+                                                            <td > 
+                                                              <div *ngIf="getchoixUserLabelSumActivite(DACompetence.ParticipantusersTrue,domaine,activite)>0;else xBloc;" class="form-control" style="width: 60px;" style="width: 60px;" >
+                                                                <select  [ngModel]="getchoixUserLabelSumActivite(DACompetence.ParticipantusersTrue,domaine,activite)" (ngModelChange)="changeSelectActivite(DACompetence.ParticipantusersTrue,domaine,$event)" [ngModelOptions]="{standalone: true}" style="border: 0px;" >
+                                                                
+                                                                  <option value="1">1</option>
+                                                                  <option value="2">2</option>
+                                                                  <option value="3">3</option>
+                                                                  <option value="4">4</option>
+                                                                </select>
+                                                  
+                                                              </div>
+                                                              <ng-template #xBloc>
+                                                                <div class="form-control" style="width: 60px;">
+                                                                  x
+                                                                </div>
+                                                              </ng-template> 
+                                                            </td>
+                                                            <!-- fin hadhi 5aleha f progress bar-->
+                                                          </tr>
+                                                          </th>
+                                                          </tr>
+                                                          </th>
+                                                             </tr>
+                                                  
+                                                                    </th>
+                                                       
+                                                                </ng-container>
+                                                                </tr>
+                                                              
+                                                              </tbody>
+                                                              <!-- End body -->
+                                                            </table>
+                                                          </div>
                                                         </div>
                                                       </div>
-                                                    </div>
+                                                    </form>
                                                   </div>
-                                                  <!-- Editable table -->
                                                 </div>
+<!-- Editable table -->
+</div>
 
 
 
-                                              </div>
+</div>
 
 
 
 
 
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                  (click)="c('Close click')">Fermer</button>
-                                                <button type="submit" class="btn btn-primary">Ajouter</button>
-                                              </div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="c('Close click')">Fermer</button>
+  <button type="submit" class="btn btn-primary">Ajouter</button>
+</div>
 
-                                              <!--hadhi nn-->
-                                            </ng-template>
+<!--hadhi nn-->
+</ng-template>
 
 
-                                            <div class="modal-footer">
-                                              <!-- <button class="btn btn-primary" type="button" (click)="open(content)">Ajouter un participant</button>-->
+<div class="modal-footer">
+  <!-- <button class="btn btn-primary" type="button" (click)="open(content)">Ajouter un participant</button>-->
 
-                                              <button class="btn btn-primary" type="submit" (click)=" openLarge(content)" (click)="Register(evaluation)" >Valider</button></div>
+  <button class="btn btn-primary" type="submit" (click)=" openLarge(content)"
+    (click)="Register(evaluation)">Valider</button></div>
 
 
 
@@ -842,20 +849,19 @@
 
 
 
-                                         
-                                        </div>
 
-                                      </ng-template>
-                                    </ngb-panel>
+</div>
 
-                                  </ngb-accordion>
+</ng-template>
+</ngb-panel>
 
+</ngb-accordion>
 
-                                </div>
 
-                              </div>
-                              <!--houni toufa formulaire d'evaluation-->
+</div>
 
+</div>
+<!--houni toufa formulaire d'evaluation-->
 
 
 
@@ -871,8 +877,8 @@
 
 
 
-                            </div>
 
+</div>
 
 
 
@@ -881,29 +887,29 @@
 
 
 
-                          </div>
-                        </div>
-                      </div>
 
-                    </div>
-                    <div class="modal-footer" class="text-center">
+</div>
+</div>
+</div>
 
-                      <button type="button" class="btn btn-primary" type="submit"
-                        (click)="c('Close click')">Modifier</button>
-                      <!--(click)="onSubmit(form,item.id)"   (click)="onSubmit(form,domaine.domaineId)"-->
-                    </div>
-                  </ng-template>
+</div>
+<div class="modal-footer" class="text-center">
 
+  <button type="button" class="btn btn-primary" type="submit" (click)="c('Close click')">Modifier</button>
+  <!--(click)="onSubmit(form,item.id)"   (click)="onSubmit(form,domaine.domaineId)"-->
+</div>
+</ng-template>
 
 
-          <td class="text-center">
-            <div role="group" class="btn-group-sm btn-group">
-              <button class="btn btn-primary" (click)="openLarge(content)">Detail</button>
-              <!--  (click)="populateForm(domaine)" (click)="populateForm(item)"-->
-            </div>
-          </td>
 
+<td class="text-center">
+  <div role="group" class="btn-group-sm btn-group">
+    <button class="btn btn-primary" (click)="openLarge(content)">Detail</button>
+    <!--  (click)="populateForm(domaine)" (click)="populateForm(item)"-->
   </div>
+</td>
+
+</div>
 </div>
 
 

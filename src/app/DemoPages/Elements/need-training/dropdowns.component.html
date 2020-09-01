@@ -85,7 +85,7 @@
           </datalist>
         </div>
 
-        <label for="examplePassword" class="col-sm-2 col-form-label">Intitulé formation:</label>
+        <label for="examplePassword" class="col-sm-2 col-form-label">Intitulé de la formation:</label>
 
         <div class="position-relative form-group">
           <input name="Intitule_Formation" style="width: 200px;" type="text" class="form-control"
@@ -258,7 +258,7 @@
 
 
 
-                <div *ngFor="let participant of participants ">
+                <div *ngFor="let participant of participants | filterBy: userFilter">
                   <div class="form-group required">
                     <div class="position-relative form-check form-check-inline">
                       <label class="form-check-label">
@@ -266,7 +266,7 @@
                         <input type="checkbox" value="{{participant.id}}"
                           (change)="ParticipantChange(participant)">
 
-                        {{participant.userName}} </label>
+                        {{participant.userName}} {{participant.fullName}} </label>
                     </div>
                   </div>
                 </div>
@@ -285,7 +285,7 @@
     </form>
         <div class="modal-footer">
           <button class="btn btn-primary" type="submit" (click)="onSubmit()">Valider</button>
-          <button class="btn btn-warning" (click)="resetAll()">Reset</button>
+    <!--<button class="btn btn-warning" (click)="resetAll()">Reset</button>-->      
           <button class="btn btn-secondary" type="submit" (click)="open(content)">Affecté un participant</button>
         </div>
 

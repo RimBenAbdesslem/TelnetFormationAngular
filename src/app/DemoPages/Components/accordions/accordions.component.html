@@ -71,7 +71,7 @@
           <!-- <input formControlName="Organisme" name="Organisme" type="text" class="form-control" style="width: 200px;">--> 
           </div>
        
-        <label for="examplePassword" class="col-sm-2 col-form-label" >Formateur : </label>
+        <label for="examplePassword" class="col-sm-2 col-form-label" >Directeur activité : </label>
     <!--    <div class="position-relative form-group">
           <input formControlName="Formateur" name="Formateur" type="text" class="form-control" style="width: 200px;">
         </div>-->
@@ -82,7 +82,7 @@
 
           <select  style="width: 200px;" class="form-control" formControlName="Formateur" name="Formateur">
             <!-- formControlName="type_de_formation" name="type_de_formation"-->
-            <option *ngFor="let item of notification.usersTrue ">{{item.userName}} {{item.fullName}}</option>
+            <option *ngFor="let item of notification.usersTrue " [value]="item.id">{{item.userName}} {{item.fullName}}</option>
            
            
 
@@ -143,12 +143,29 @@
             <label for="examplePassword" class="col-sm-2 col-form-label">Nom :  </label>
           
               <div class="position-relative form-group">
-                <input formControlName="Nom_Participant" name="Nom_Participant" type="text" class="form-control" style="width: 200px;">
+               <!--  <input formControlName="Nom_Participant" name="Nom_Participant" type="text" class="form-control" style="width: 200px;">-->
+                <select  style="width: 200px;" class="form-control" formControlName="Nom_Participant" name="Nom_Participant" (change)="SelectUser($event)">
+                  <!-- formControlName="type_de_formation" name="type_de_formation"-->
+                  <option *ngFor="let item of notification.usersTrue " value={{item.id}}>{{item.userName}} </option>
+                 
+                 
+  
+                </select>
               </div>
+
+             
            
             <label for="examplePassword" class="col-sm-2 col-form-label" >Prénom : </label>
             <div class="position-relative form-group">
-              <input formControlName="Prenom_Participant" name="Prenom_Participant" type="text" class="form-control" style="width: 200px;">
+      <!--  <input formControlName="Prenom_Participant" name="Prenom_Participant" type="text" class="form-control" style="width: 200px;">-->      
+              <select  style="width: 200px;" class="form-control" formControlName="Prenom_Participant" name="Prenom_Participant" >
+                <!-- formControlName="type_de_formation" name="type_de_formation"-->
+                <option *ngFor="let item of notification.usersTrue " >{{item.fullName}} </option>
+               
+               
+
+              </select>
+          
             </div>
             
           </div>
@@ -198,172 +215,7 @@
 </ngb-panel>
 </ngb-accordion>
 
-
-    <ngb-accordion (panelChange)="beforeChange($event)">
-      <ngb-panel id="preventchange-1">
-      <ng-template ngbPanelTitle>
-    <h6 class="mb-3 mt-3">
-      EVALUATION Participant
-    </h6>
-  </ng-template>
-    <div class="divider"></div>
-    <ng-template ngbPanelContent>
-    <div class="main-card mb-3 card">
-      <div class="card-body"><h5 class="card-title"></h5>
-        
-          
-     <div style="text-align: left;">
-            <label for="examplePassword" >a.	Avez- vous mis en application les connaissances acquises lors de votre formation ?  </label>
-           
-        </div>
-       
-
-        
-        <div class="position-relative row form-group">
-          <label class="form-check-label">
-            <input type="checkbox" formControlName="QuestionA" name="QuestionA"/> Oui 
-            
-           </label>
-         
-        </div>
-        
-          <div class="position-relative row form-group">
-          
-            
-             <label for="examplePassword" class="col-sm-2 col-form-label">Lesquelles ? </label>
-          
-             <div class="position-relative form-group">
-               <input formControlName="Lesquelles" name="Lesquelles" type="text" class="form-control" style="width: 200px;">
-             </div>
-           
-            
-          </div>
-
-          <div class="position-relative row form-group">
-            <label class="form-check-label">
-              <input type="checkbox" formControlName="QuestionA" name="QuestionA"/> Non 
-              
-             </label>
-           
-          </div>
-          
-           <div class="position-relative row form-group">
-            
-             <label for="examplePassword" class="col-sm-2 col-form-label">Pourquoi ? </label>
-           
-             <label class="form-check-label">   </label>
-              <div class="position-relative form-group">
-
-                <select  class="form-control"  formControlName="PourqouiA" name="PourqouiA"> <!-- formControlName="type_de_formation" name="type_de_formation"-->
-                                <option>Manque de temps</option>
-                                <option>Modules non acquis</option>
-                                <option>Formation non adaptée   </option>
-                                <option>Manque de moyens</option>
-                    
-                                </select>
-           <!--   <input type="checkbox"/> Manque de temps  
-
-              <input type="checkbox"/> Modules non acquis 
-              
-              <input type="checkbox"/> Formation non adaptée   
-              <input type="checkbox"/> Manque de moyens -->  
-            </div> 
-           </div>
-           <div class="divider"></div>
-
-           <div style="text-align: left;">
-            <label for="examplePassword" >b.	La formation vous a-t-elle permis d’améliorer votre efficacité dans votre travail ?  </label>
-           
-        </div>
-       
-       
-        <div class="position-relative row form-group">
-          <label class="form-check-label">
-            <input type="checkbox"  formControlName="QuestionB" name="QuestionB"/> Oui 
-            
-           </label>
-         
-        </div>
-          <div class="position-relative row form-group">
-           
-            <label for="examplePassword" class="col-sm-2 col-form-label">Comment ? </label>
-          
-              <div class="position-relative form-group">
-                <input  formControlName="Comment" name="Comment" type="text" class="form-control" style="width: 200px;">
-              </div>
-           
-           
-            
-          </div>
-         
-          <div class="position-relative row form-group">
-            <label class="form-check-label">
-              <input type="checkbox"  formControlName="QuestionB" name="QuestionB" /> Non
-              
-             </label>
-           
-          </div>
-
-           <div class="position-relative row form-group">
-           
-             <label for="examplePassword" class="col-sm-2 col-form-label">Pourqoui ? </label>
-           
-               <div class="position-relative form-group">
-                 <input  formControlName="PourquoiB" name="PourquoiB" type="text" class="form-control" style="width: 200px;">
-               </div>
-            
-            
-             
-           </div> 
-
-        
-    
-           <div class="divider"></div>
-          <div class="position-relative row form-group"><label for="exampleFile"
-               class="col-sm-2 col-form-label"></label>
-           
-          </div>
-    
-
-          <div style="text-align: left;">
-            <label for="examplePassword" >c.	Quels compléments seraient nécessaires à la formation suivie ?   </label>
-           
-        </div>
-        <div class="position-relative row form-group">
-           
-       
-            <div class="position-relative form-group">
-              <input  formControlName="QuestionC" name="QuestionC" type="text" class="form-control" style="width: 200px;">
-            </div>
-         
-         
-          
-        </div> 
-
-        <div style="text-align: left;">
-          <label for="examplePassword" >COMMENTAIRES / OBSERVATIONS / SUGGESTIONS   </label>
-         
-      </div>
-      <div class="position-relative row form-group">
-         
-     
-          <div class="position-relative form-group">
-            <input formControlName="Commentaire1" name="Commentaire1" type="text" class="form-control" style="width: 200px;">
-          </div>
-       
-       
-        
-      </div> 
-
-
-      </div>
-    </div>
-
-
-  </ng-template>
-</ngb-panel>
-</ngb-accordion>
-
+ 
     <ngb-accordion (panelChange)="beforeChange($event)">
       <ngb-panel id="preventchange-1">
       <ng-template ngbPanelTitle>
@@ -571,10 +423,10 @@
       <div class="position-relative row form-group">
         <label for="exampleSelect" style="color:blue;">La formation a-t-elle répondu à vos attentes initiales ?  : </label>
         <label class="form-check-label">
-          1 <input type="checkbox" formControlName="check" name="check"  value="num37" (change)="NumberChangeValue($event)"/> 
-          2 <input type="checkbox"  formControlName="check" name="check" value="num38" (change)="NumberChangeValue($event)"/>
-          3 <input type="checkbox"  formControlName="check" name="check" value="num39" (change)="NumberChangeValue($event)"/>
-          4  <input type="checkbox" formControlName="check" name="check"  value="num40" (change)="NumberChangeValue($event)"/> 
+          1 <input type="checkbox" formControlName="check1" name="check1"  value="num37" (change)="NumberChangeValue($event)"/> 
+          2 <input type="checkbox"  formControlName="check1" name="check1" value="num38" (change)="NumberChangeValue($event)"/>
+          3 <input type="checkbox"  formControlName="check1" name="check1" value="num39" (change)="NumberChangeValue($event)"/>
+          4  <input type="checkbox" formControlName="check1" name="check1"  value="num40" (change)="NumberChangeValue($event)"/> 
           
          </label></div>
 
@@ -583,10 +435,10 @@
           <div class="position-relative form-group">
            
             <label class="form-check-label">
-              1 <input type="checkbox" formControlName="check" name="check"  value="num41" (change)="NumberChangeValue($event)"/> 
-          2 <input type="checkbox" formControlName="check" name="check"  value="num42" (change)="NumberChangeValue($event)"/>
-          3 <input type="checkbox" formControlName="check" name="check"  value="num43" (change)="NumberChangeValue($event)"/>
-          4  <input type="checkbox" formControlName="check" name="check"  value="num44" (change)="NumberChangeValue($event)"/> 
+              1 <input type="checkbox" formControlName="check1" name="check1"  value="num41" (change)="NumberChangeValue($event)"/> 
+          2 <input type="checkbox" formControlName="check1" name="check1"  value="num42" (change)="NumberChangeValue($event)"/>
+          3 <input type="checkbox" formControlName="check1" name="check1"  value="num43" (change)="NumberChangeValue($event)"/>
+          4  <input type="checkbox" formControlName="check1" name="check1"  value="num44" (change)="NumberChangeValue($event)"/> 
               
              </label>
              
@@ -599,10 +451,10 @@
           <div class="position-relative form-group">
            
             <label class="form-check-label">
-              1 <input type="checkbox" formControlName="check" name="check"  value="num45" (change)="NumberChangeValue($event)"/> 
-              2 <input type="checkbox" formControlName="check" name="check"  value="num46" (change)="NumberChangeValue($event)"/>
-              3 <input type="checkbox" formControlName="check" name="check"  value="num47" (change)="NumberChangeValue($event)"/>
-              4  <input type="checkbox" formControlName="check" name="check"  value="num48" (change)="NumberChangeValue($event)"/> 
+              1 <input type="checkbox" formControlName="check1" name="check1"  value="num45" (change)="NumberChangeValue($event)"/> 
+              2 <input type="checkbox" formControlName="check1" name="check1"  value="num46" (change)="NumberChangeValue($event)"/>
+              3 <input type="checkbox" formControlName="check1" name="check1"  value="num47" (change)="NumberChangeValue($event)"/>
+              4  <input type="checkbox" formControlName="check1" name="check1"  value="num48" (change)="NumberChangeValue($event)"/> 
               
              </label>
              
@@ -616,10 +468,10 @@
           <div class="position-relative form-group">
            
             <label class="form-check-label">
-              1 <input type="checkbox"  formControlName="check" name="check"  value="num49" (change)="NumberChangeValue($event)"/> 
-          2 <input type="checkbox" formControlName="check" name="check"  value="num50" (change)="NumberChangeValue($event)"/>
-          3 <input type="checkbox" formControlName="check" name="check"  value="num51" (change)="NumberChangeValue($event)"/>
-          4  <input type="checkbox"  formControlName="check" name="check"  value="num52" (change)="NumberChangeValue($event)"/> 
+              1 <input type="checkbox"  formControlName="check1" name="check1"  value="num49" (change)="NumberChangeValue($event)"/> 
+          2 <input type="checkbox" formControlName="check1" name="check1"  value="num50" (change)="NumberChangeValue($event)"/>
+          3 <input type="checkbox" formControlName="check1" name="check1"  value="num51" (change)="NumberChangeValue($event)"/>
+          4  <input type="checkbox"  formControlName="check1" name="check1"  value="num52" (change)="NumberChangeValue($event)"/> 
               
              </label>
              
@@ -632,10 +484,10 @@
           <div class="position-relative form-group">
            
             <label class="form-check-label">
-              1 <input type="checkbox"  formControlName="check" name="check"  value="num53" (change)="NumberChangeValue($event)"/> 
-              2 <input type="checkbox" formControlName="check" name="check"  value="num54" (change)="NumberChangeValue($event)"/>
-              3 <input type="checkbox" formControlName="check" name="check"  value="num55" (change)="NumberChangeValue($event)"/>
-              4  <input type="checkbox" formControlName="check" name="check"  value="num56" (change)="NumberChangeValue($event)"/> 
+              1 <input type="checkbox"  formControlName="check1" name="check1"  value="num53" (change)="NumberChangeValue($event)"/> 
+              2 <input type="checkbox" formControlName="check1" name="check1"  value="num54" (change)="NumberChangeValue($event)"/>
+              3 <input type="checkbox" formControlName="check1" name="check1"  value="num55" (change)="NumberChangeValue($event)"/>
+              4  <input type="checkbox" formControlName="check1" name="check1"  value="num56" (change)="NumberChangeValue($event)"/> 
               
              </label>
              
@@ -648,10 +500,10 @@
           <div class="position-relative form-group">
            
             <label class="form-check-label">
-              1 <input type="checkbox" formControlName="check" name="check"   value="num57" (change)="NumberChangeValue($event)"/> 
-              2 <input type="checkbox"  formControlName="check" name="check"  value="num58" (change)="NumberChangeValue($event)"/>
-              3 <input type="checkbox" formControlName="check" name="check"  value="num59" (change)="NumberChangeValue($event)"/>
-              4  <input type="checkbox" formControlName="check" name="check"  value="num60" (change)="NumberChangeValue($event)"/> 
+              1 <input type="checkbox" formControlName="check1" name="check1"   value="num57" (change)="NumberChangeValue($event)"/> 
+              2 <input type="checkbox"  formControlName="check1" name="check1"  value="num58" (change)="NumberChangeValue($event)"/>
+              3 <input type="checkbox" formControlName="check1" name="check1"  value="num59" (change)="NumberChangeValue($event)"/>
+              4  <input type="checkbox" formControlName="check1" name="check1"  value="num60" (change)="NumberChangeValue($event)"/> 
               
              </label>
              
@@ -664,10 +516,10 @@
           <div class="position-relative form-group">
            
             <label class="form-check-label">
-              1 <input type="checkbox" formControlName="check" name="check"   value="num61" (change)="NumberChangeValue($event)"/> 
-          2 <input type="checkbox" formControlName="check" name="check"   value="num62" (change)="NumberChangeValue($event)"/>
-          3 <input type="checkbox" formControlName="check" name="check"  value="num63" (change)="NumberChangeValue($event)"/>
-          4  <input type="checkbox" formControlName="check" name="check"  value="num64" (change)="NumberChangeValue($event)"/> 
+              1 <input type="checkbox" formControlName="check1" name="check1"   value="num61" (change)="NumberChangeValue($event)"/> 
+          2 <input type="checkbox" formControlName="check1" name="check1"   value="num62" (change)="NumberChangeValue($event)"/>
+          3 <input type="checkbox" formControlName="check1" name="check1"  value="num63" (change)="NumberChangeValue($event)"/>
+          4  <input type="checkbox" formControlName="check1" name="check1"  value="num64" (change)="NumberChangeValue($event)"/> 
               
              </label>
              
@@ -679,10 +531,10 @@
           <div class="position-relative form-group">
            
             <label class="form-check-label">
-              1 <input type="checkbox" formControlName="check" name="check"   value="num65" (change)="NumberChangeValue($event)"/> 
-              2 <input type="checkbox" formControlName="check" name="check"  value="num66" (change)="NumberChangeValue($event)"/>
-              3 <input type="checkbox" formControlName="check" name="check"  value="num67" (change)="NumberChangeValue($event)"/>
-              4  <input type="checkbox" formControlName="check" name="check"  value="num68" (change)="NumberChangeValue($event)"/> 
+              1 <input type="checkbox" formControlName="check1" name="check1"   value="num65" (change)="NumberChangeValue($event)"/> 
+              2 <input type="checkbox" formControlName="check1" name="check1"  value="num66" (change)="NumberChangeValue($event)"/>
+              3 <input type="checkbox" formControlName="check1" name="check1"  value="num67" (change)="NumberChangeValue($event)"/>
+              4  <input type="checkbox" formControlName="check1" name="check1"  value="num68" (change)="NumberChangeValue($event)"/> 
               
              </label>
              
@@ -695,10 +547,10 @@
           <div class="position-relative form-group">
            
             <label class="form-check-label">
-              1 <input type="checkbox" formControlName="check" name="check"   value="num69" (change)="NumberChangeValue($event)"/> 
-          2 <input type="checkbox"  formControlName="check" name="check"  value="num70" (change)="NumberChangeValue($event)"/>
-          3 <input type="checkbox" formControlName="check" name="check"   value="num71" (change)="NumberChangeValue($event)"/>
-          4  <input type="checkbox" formControlName="check" name="check"  value="num72" (change)="NumberChangeValue($event)"/>  
+              1 <input type="checkbox" formControlName="check1" name="check1"   value="num69" (change)="NumberChangeValue($event)"/> 
+          2 <input type="checkbox"  formControlName="check1" name="check1"  value="num70" (change)="NumberChangeValue($event)"/>
+          3 <input type="checkbox" formControlName="check1" name="check1"   value="num71" (change)="NumberChangeValue($event)"/>
+          4  <input type="checkbox" formControlName="check1" name="check1"  value="num72" (change)="NumberChangeValue($event)"/>  
               
              </label>
              
@@ -747,3 +599,156 @@
 
 
 
+<!--   <ngb-accordion (panelChange)="beforeChange($event)">
+      <ngb-panel id="preventchange-1">
+      <ng-template ngbPanelTitle>
+    <h6 class="mb-3 mt-3">
+      EVALUATION PARTICIPANT
+    </h6>
+  </ng-template>
+    <div class="divider"></div>
+    <ng-template ngbPanelContent>
+    <div class="main-card mb-3 card">
+      <div class="card-body"><h5 class="card-title"></h5>
+        
+          
+     <div style="text-align: left;">
+            <label for="examplePassword" >a.	Avez- vous mis en application les connaissances acquises lors de votre formation ?  </label>
+           
+        </div>
+       
+
+        
+        <div class="position-relative row form-group">
+          <label class="form-check-label">
+            <input type="checkbox" formControlName="QuestionA" name="QuestionA"/> Oui 
+            
+           </label>
+         
+        </div>
+        
+          <div class="position-relative row form-group">
+          
+            
+             <label for="examplePassword" class="col-sm-2 col-form-label">Lesquelles ? </label>
+          
+             <div class="position-relative form-group">
+               <input formControlName="Lesquelles" name="Lesquelles" type="text" class="form-control" style="width: 200px;">
+             </div>
+           
+            
+          </div>
+
+          <div class="position-relative row form-group">
+            <label class="form-check-label">
+              <input type="checkbox" formControlName="QuestionA" name="QuestionA"/> Non 
+              
+             </label>
+           
+          </div>
+          
+         
+                  <option>Manque de temps</option>
+                  <option>Modules non acquis</option>
+                  <option>Formation non adaptée   </option>
+                  <option>Manque de moyens</option>
+      
+                  </select>
+
+</div> 
+</div>
+<div class="divider"></div>
+
+<div style="text-align: left;">
+<label for="examplePassword" >b.	La formation vous a-t-elle permis d’améliorer votre efficacité dans votre travail ?  </label>
+
+</div>
+
+
+<div class="position-relative row form-group">
+<label class="form-check-label">
+<input type="checkbox"  formControlName="QuestionB" name="QuestionB"/> Oui 
+
+</label>
+
+</div>
+<div class="position-relative row form-group">
+
+<label for="examplePassword" class="col-sm-2 col-form-label">Comment ? </label>
+
+<div class="position-relative form-group">
+  <input  formControlName="Comment" name="Comment" type="text" class="form-control" style="width: 200px;">
+</div>
+
+
+
+</div>
+
+<div class="position-relative row form-group">
+<label class="form-check-label">
+<input type="checkbox"  formControlName="QuestionB" name="QuestionB" /> Non
+
+</label>
+
+</div>
+
+<div class="position-relative row form-group">
+
+<label for="examplePassword" class="col-sm-2 col-form-label">Pourqoui ? </label>
+
+ <div class="position-relative form-group">
+   <input  formControlName="PourquoiB" name="PourquoiB" type="text" class="form-control" style="width: 200px;">
+ </div>
+
+
+
+</div> 
+
+
+
+<div class="divider"></div>
+<div class="position-relative row form-group"><label for="exampleFile"
+ class="col-sm-2 col-form-label"></label>
+
+</div>
+
+
+<div style="text-align: left;">
+<label for="examplePassword" >c.	Quels compléments seraient nécessaires à la formation suivie ?   </label>
+
+</div>
+<div class="position-relative row form-group">
+
+
+<div class="position-relative form-group">
+<input  formControlName="QuestionC" name="QuestionC" type="text" class="form-control" style="width: 200px;">
+</div>
+
+
+
+</div> 
+
+<div style="text-align: left;">
+<label for="examplePassword" >COMMENTAIRES / OBSERVATIONS / SUGGESTIONS   </label>
+
+</div>
+<div class="position-relative row form-group">
+
+
+<div class="position-relative form-group">
+<input formControlName="Commentaire1" name="Commentaire1" type="text" class="form-control" style="width: 200px;">
+</div>
+
+
+
+</div> 
+
+
+</div>
+</div>
+
+
+</ng-template>
+</ngb-panel>
+</ngb-accordion>
+-->

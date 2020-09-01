@@ -1,7 +1,15 @@
 <!--<app-page-title [heading]="heading" [subheading]="subheading" [icon]="icon"></app-page-title>-->
 
 <div class="main-card mb-3 card">
- 
+  <div class="search-wrapper" [class.active]="isActive">
+    <div class="input-holder">
+      <input type="text" placeholder="Tapez pour rechercher" class="search-input"
+        [ngModelOptions]="{standalone: true}" id="filter-string" [(ngModel)]="ActiviteFilter.date_Fin|| ActiviteFilter.date_Debut "
+        [value]="ActiviteFilter.date_Fin || ActiviteFilter.date_Debut ">
+      <button class="search-icon" (click)="isActive = true"><span></span></button>
+    </div>
+    <button class="close" (click)="isActive = false"></button>
+  </div>
   <form class="mb-4" autocomplete="off">
     <div class="table-responsive">
       <table class="align-middle text-truncate mb-0 table table-borderless table-hover">
@@ -10,8 +18,8 @@
 
             <th class="text-center">Intitulé formation</th>
             <th class="text-center">Activité</th>
-            <th class="text-center">Nombre de participants</th>
-            <th class="text-center">Priorité</th>
+            <th class="text-center"> Date debut </th>
+            <th class="text-center"> Date Fin</th>
             <th class="text-center">Justification du besoin</th>
             <th class="text-center">Organisme de formation</th>
             <th class="text-center"></th>
@@ -20,13 +28,15 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let item of formationsListing">
+          <tr *ngFor="let item of formationsListing |filterBy:ActiviteFilter">
             <!--*ngFor="let item of formation.BesFormation "-->
 
             <td class="text-center">{{item.intitule_Formation}}</td>
             <td class="text-center">{{item.activite}}</td>
-            <td class="text-center">{{item.nombre_de_participants}}</td>
-            <td class="text-center">{{item.priorite}}</td>
+           <!--<td class="text-center">{{item.nombre_de_participants}}</td>--> 
+           <td class="text-center" *ngFor="let format of formatsDateTest">{{item.date_Debut}}</td>
+         <!--<td class="text-center">{{item.priorite}}</td>--> 
+           <td class="text-center" *ngFor="let format of formatsDateTest">{{item.date_Fin}}</td>
             <td class="text-center">{{item.justification_du_besoin}}</td>
             <td class="text-center"> {{item.organisme_de_formation}}</td>
             <td class="text-center">
@@ -62,8 +72,8 @@
                           <tr>
 
                             
-                            <th class="text-center">Date debut </th>
-                            <th class="text-center">Date debut </th>
+                            <th class="text-center">Nombre de participants </th>
+                            <th class="text-center">Priorité </th>
                             <th class="text-center">type de formation</th>
                             <th class="text-center">Nombre de jours</th>
                             <th class="text-center">Durée(H)</th>
@@ -83,8 +93,8 @@
                           <tr *ngFor="let format of formatsDateTest" >
                             <!--*ngFor="let item of formation.BesFormation "-->
 
-                            <td class="text-center">{{item.date_Debut  | date: format}}</td>
-                            <td class="text-center">{{item.date_Fin | date: format}}</td>
+                            <td class="text-center">{{item.nombre_de_participants}}</td>
+                            <td class="text-center">{{item.priorite}}</td>
                             <td class="text-center">{{item.type_de_formation}}</td>
                             <td class="text-center">{{item.nombre_de_jours}}</td>
                             <td class="text-center">{{item.duree}}</td>

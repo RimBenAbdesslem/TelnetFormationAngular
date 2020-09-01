@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import { Users } from '../../Models/users.model';
 import { Role } from '../../Models/role.model';
+import { CompetenceService } from '../../shared/competence.service';
 @Component({
   selector: 'app-waiting-registration-boxed',
   templateUrl: './waiting-registration-boxed.component.html',
@@ -183,14 +184,26 @@ export class WaitingRegistrationBoxedComponent implements OnInit {
     maintainAspectRatio: false
   };
 
-  constructor(public notification: NotificationService,private modalService: NgbModal , private toastr: ToastrService) { }
+  constructor(public notification: NotificationService,public competence: CompetenceService,private modalService: NgbModal , private toastr: ToastrService) { }
    
   SelectedRole:any=[];
   ngOnInit(): void{
     this.notification.getAllUsersFalse();
+    this.notification.getAllRoles();
     this.resetForm();
   }
-  
+  DeleteRole(id){
+    this.competence.deleteRole(id).subscribe(
+      res => {
+      
+        this.toastr.info('role bien supprimé','');
+    //    this.competence.refreshList();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
   resetForm(form?: NgForm) {
    if (form != null)
       form.form.reset();
@@ -201,7 +214,18 @@ export class WaitingRegistrationBoxedComponent implements OnInit {
     }
   }
  
-  
+  RegisterRole(){
+    this.competence.registerRole().subscribe(
+      res => {
+      
+        this.toastr.info('role bien ajouté','');
+        this.competence.refreshList();
+      },
+      err => {
+        console.log(err);
+      }
+    );
+  }
   
 
   RoleChange(event){

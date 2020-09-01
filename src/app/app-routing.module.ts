@@ -31,6 +31,8 @@ import {IconsComponent} from './DemoPages/Elements/need_collected_year/icons.com
 //import { WaitingRegistrationBoxedComponent} from './DemoPages/Components/waiting-registration-boxed/waiting-registration-boxed.component';
 import {AccordionsComponent} from './DemoPages/Components/accordions/accordions.component';
 import {TabsComponent} from './DemoPages/Components/tabs/tabs.component';
+import {EvaluationComponent} from './DemoPages/Components/evaluation/evaluation.component';
+import {EvaluationDAComponent} from './DemoPages/Components/evaluation-da/evaluation-da.component';
 import {CarouselComponent} from './DemoPages/Components/carousel/carousel.component';
 import {ModalsComponent} from './DemoPages/Components/modals/modals.component';
 import {UsersListesComponent} from './DemoPages/Components/users-listes/users-listes.component';
@@ -41,7 +43,7 @@ import {TooltipsPopoversComponent} from './DemoPages/Components/tooltips-popover
 // Tables
 import {ActiviteComponent} from './DemoPages/Tables/activite/activite.component';
 import {TablesMainComponent} from './DemoPages/Tables/tables-main/tables-main.component';
-
+import {ChoixActiviteComponent}from './DemoPages/Tables/choix-activite/choix-activite.component';
 // Widgets
 
 import {ChartBoxes3Component} from './DemoPages/Widgets/chart-boxes3/chart-boxes3.component';
@@ -76,7 +78,8 @@ const routes: Routes = [
       {path: 'elements/timeline', component: TimelineComponent, data: {extraParameter: 'elementsMenu'}},
 
       // Components
-
+      {path: 'components/evaluation', component: EvaluationComponent, data: {extraParameter: 'componentsMenu'}},
+      {path: 'components/evaluation-da', component: EvaluationDAComponent, data: {extraParameter: 'componentsMenu'}},
       {path: 'components/tabs', component: TabsComponent, data: {extraParameter: 'componentsMenu'}},
       {path: 'components/accordions', component: AccordionsComponent, data: {extraParameter: 'componentsMenu'}},
       {path: 'components/modals', component: ModalsComponent, data: {extraParameter: 'componentsMenu'}},
@@ -90,6 +93,7 @@ const routes: Routes = [
 
       {path: 'tables/bootstrap', component: TablesMainComponent, data: {extraParameter: 'tablesMenu'}},
       {path: 'tables/activite', component: ActiviteComponent, data: {extraParameter: 'componentsMenu'}},
+      {path: 'tables/choix-activite', component: ChoixActiviteComponent, data: {extraParameter: 'componentsMenu'}},
       // Widgets
 
       {path: 'widgets/chart-boxes-3', component: ChartBoxes3Component, data: {extraParameter: 'pagesMenu3'}},

@@ -1,5 +1,4 @@
 
-
 <!--nouveau-->
 
 <div class="card">
@@ -14,11 +13,11 @@
                 <th>
                   User
                 </th>
-                <ng-container  *ngFor="let activite of competence.ActiviteList" >
+                <ng-container >
                   <th>
-                    {{activite.nomActivite}}
+                    {{competence.nomActivite}}
            <tr >
-            <th *ngFor="let domaine of competence.listeActivite"  class="text-center"  [hidden]="activite.id!=domaine.activiteId ">
+            <th *ngFor="let domaine of competence.ListeActivite"  class="text-center"  >
 
               {{domaine.nomDomaine}} 
 
@@ -43,15 +42,15 @@
 
             <!-- body -->
             <tbody>
-            
-              <tr *ngFor="let user of competence.listeuser ">
+              <ng-container  >
+              <tr *ngFor="let user of competence.AllActiviteusersTrue">
                 <th scope="row"  > {{user.userName}} {{user.fullName}}
                 </th>
-                <ng-container  *ngFor="let activite of competence.ActiviteList" >
+                <ng-container  >
                   <th>
                    
            <tr >
-            <th *ngFor="let domaine of competence.listeActivite"  class="text-center"  [hidden]="activite.id!=domaine.activiteId ">
+            <th *ngFor="let domaine of competence.ListeActivite"  class="text-center"  >
 
              
 
@@ -59,8 +58,8 @@
           <th >
         <tr *ngIf="user"  >
           <td > 
-            <div *ngIf="getchoixUserLabelSumActivite(user,domaine,activite)>0;else xBloc;" class="form-control" style="width: 60px;" style="width: 60px;" >
-              <select  [ngModel]="getchoixUserLabelSumActivite(user,domaine,activite)" (ngModelChange)="changeSelectActivite(user,domaine,$event)" [ngModelOptions]="{standalone: true}" style="border: 0px;" >
+            <div *ngIf="getchoixUserLabelSumActivite(user,domaine)>0;else xBloc;" class="form-control" style="width: 60px;" style="width: 60px;" >
+              <select  [ngModel]="getchoixUserLabelSumActivite(user,domaine)" (ngModelChange)="changeSelectActivite(user,domaine,$event)" [ngModelOptions]="{standalone: true}" style="border: 0px;" >
               
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -85,7 +84,7 @@
      
               </ng-container>
               </tr>
-            
+            </ng-container >
             </tbody>
             <!-- End body -->
           </table>
@@ -94,5 +93,3 @@
     </div>
   </form>
 </div>
-
-<!--//////////////////-->

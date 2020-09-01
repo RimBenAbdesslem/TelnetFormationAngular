@@ -76,7 +76,7 @@
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-rocket"></i>
                     <span class="vsm-title">
-                      Tableaux de bord</span>
+                      Tableau de bord</span>
                     <i class="vsm-arrow"></i>
                   </button>
                 </ng-template>
@@ -85,7 +85,7 @@
                     <div class="vsm-list">
                       <div class="vsm-item"><a routerLink="" routerLinkActive="active-item"
                           [routerLinkActiveOptions]="{exact: true}" class="vsm-link"><span
-                            class="vsm-title">Analytique</span></a>
+                            class="vsm-title">Visualisation des données</span></a>
                       </div>
                     </div>
                   </div>
@@ -102,10 +102,10 @@
                 <ng-template ngbPanelContent>
                   <div class="vsm-dropdown">
                     <div class="vsm-list">
-                      <div class="vsm-item">
+                     <!--<div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/pages/login-boxed" class="vsm-link"><span
                             class="vsm-title">S'identifier </span></a>
-                      </div>
+                      </div>--> 
                       <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/pages/register-boxed" class="vsm-link"><span
                             class="vsm-title">
@@ -116,7 +116,7 @@
                       <div class="vsm-item">
                         <a routerLink="" routerLinkActive="active-item" [routerLinkActiveOptions]="{exact: true}"
                           routerLink="/pages/waiting-registration-boxed" class="vsm-link"><span
-                            class="vsm-title">utilisateurs en attente d'inscription</span></a>
+                            class="vsm-title">Demande d'inscription </span></a>
                       </div>
 
                       <div class="vsm-item">
@@ -162,8 +162,10 @@
                   <div class="vsm-dropdown">
                     <div class="vsm-list">
                       <div class="vsm-item">
-                        <a routerLinkActive="active-item" routerLink="/elements/Send-Email" class="vsm-link"> <span
+                        <a (click)="Envoiyer()"routerLinkActive="active-item" routerLink="/elements/Send-Email" class="vsm-link"> <span
                             class="vsm-title">Envoyer Email</span></a>
+
+                            
                         <!--le component s'appelle standard.component.ts-->
                       </div>
                       <div class="vsm-item">
@@ -173,7 +175,7 @@
                       </div>
                       <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/elements/Training-need-collected-in-year"
-                          class="vsm-link"><span class="vsm-title"> Besoins annuels </span></a>
+                          class="vsm-link"><span class="vsm-title">Plan de Besoins annuels </span></a>
                         <!--le component s'appelle icons.component.ts-->
                       </div>
                       <div class="vsm-item">
@@ -221,7 +223,14 @@
                         <a routerLinkActive="active-item" routerLink="/components/progress-bar" class="vsm-link"> <span
                             class="vsm-title">évaluation à froid (chef)</span></a>
                       </div>
-
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/components/evaluation" class="vsm-link"> <span
+                            class="vsm-title">Consulter évaluation(Par) </span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/components/evaluation-da" class="vsm-link"> <span
+                            class="vsm-title">Consulter évaluation à chaud (chef)</span></a>
+                      </div>
                       <!--<div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/components/pagination" class="vsm-link"> <span
                           class="vsm-title">Pagination</span></a>
@@ -234,7 +243,7 @@
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon pe-7s-helm"></i>
-                    <span class="vsm-title">Organisation</span>
+                    <span class="vsm-title">Organisme</span>
                     <!--Form Elements -->
                     <i class="vsm-arrow"></i>
                   </button>
@@ -266,12 +275,12 @@
 
                       <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/forms/controls" class="vsm-link"><span
-                            class="vsm-title">liste des organisations</span></a>
+                            class="vsm-title">liste d'organismes</span></a>
                         <!--Controls-->
                       </div>
                       <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/forms/layouts" class="vsm-link"><span
-                            class="vsm-title">Selectionner un organisme</span></a>
+                            class="vsm-title">Choisir un organisme</span></a>
                         <!--Layouts-->
                       </div>
                       <div class="vsm-item">
@@ -334,9 +343,9 @@
                       <div class="vsm-item">
 
                         <!--men houni tebde content de recherche soit par utili ou All-->
-
-                        <a (click)=" openSmall(content1)" routerLinkActive="active-item" routerLink="/tables/bootstrap"
-                          class="vsm-link"> <span class="vsm-title">Matrice de Compétence</span></a>
+<!--<a (click)=" openSmall(content1)" routerLinkActive="active-item" routerLink="/tables/bootstrap"
+                          class="vsm-link"> <span class="vsm-title">Matrice de Compétence</span></a>-->
+                        
                        
                           <ng-template #content1 let-c="close" let-d="dismiss">
                             <form>
@@ -380,17 +389,57 @@
                         
                       </div>
                       <div class="vsm-item">
-                        <a routerLinkActive="active-item" routerLink="/tables/activite" class="vsm-link"> <span
-                          class="vsm-title">Liste d'activité</span></a>
+                        <a  routerLinkActive="active-item" routerLink="/tables/activite" class="vsm-link"> <span
+                          class="vsm-title">Liste de compétences</span></a>
                       </div>
-                      <div class="vsm-item">
+                      <!--<div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/widgets/chart-boxes-3" class="vsm-link">
                           <span class="vsm-title">Liste de compétences</span></a>
-                      </div>
+                      </div>-->
+                      
 
                  <div class="vsm-item">
-                        <a routerLinkActive="active-item" routerLink="/components/tooltips-popovers" class="vsm-link">
-                          <span class="vsm-title">Matrice Activite </span></a>
+                        <a (click)=" openSmallActivite(content2)" routerLinkActive="active-item" routerLink="/components/tooltips-popovers" class="vsm-link">
+                          <span class="vsm-title">Matrice de Compétence </span></a>
+                          <ng-template #content2 let-c="close" let-d="dismiss">
+                            <form>
+                              <div class="modal-header">
+                                <h4 class="modal-title"></h4>
+                                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="card-body">
+                                <form [formGroup]="OptionActivite" class="form" role="form" class="mb-4" autocomplete="off">
+                                  <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Choix</label>
+                                    <div class="col-lg-9">
+                                      <select class="form-control" formControlName="All" name="All"
+                                        style="width: 100px;" (change)="ValueChangeActivite($event)">
+                                        <option>
+                                          select</option>
+                                        <option>
+                                         All
+                                        </option>
+
+                                        <option *ngFor="let activite of competence.ActiviteList" [value]="activite.id">
+                                          {{activite.nomActivite}}</option>
+
+                                      </select>
+                                    </div>
+                                  </div>
+
+                                </form>
+                              </div>
+
+
+                              <div class="modal-footer">
+
+                                <button type="submit" class="btn btn-primary" (click)="choixActivite()"
+                                  (click)="c('Close click')">Rechercher</button>
+                              </div>
+                            </form>
+                          </ng-template>
                       </div>  
 
                       <div class="vsm-item">
@@ -401,15 +450,21 @@
                     </div>
                   </div>
                 </ng-template>
-
+              <!--  <div class="vsm-item">
+                  <a routerLink="/tables/choix-activite" routerLinkActive="active-item" class="vsm-link">
+                    <i class="vsm-icon pe-7s-graph2"></i>
+                    <span class="vsm-title">McDa</span>
+                  </a>
+                </div>-->
               </ngb-panel>
             </ngb-accordion>
-            <div class="vsm-header" style="color: #5581fa;">Charts</div>
+
+  <!--  <div class="vsm-header" style="color: #5581fa;">Charts</div>-->       <div class="vsm-header" style="color: #5581fa;"><!--Charts--></div>
             <div class="vsm-item">
-              <a routerLink="/charts/chartjs" routerLinkActive="active-item" class="vsm-link">
+             <!-- <a routerLink="/charts/chartjs" routerLinkActive="active-item" class="vsm-link">
                 <i class="vsm-icon pe-7s-graph2"></i>
                 <span class="vsm-title">ChartJS</span>
-              </a>
+              </a>-->
             </div>
           </div>
         </div>

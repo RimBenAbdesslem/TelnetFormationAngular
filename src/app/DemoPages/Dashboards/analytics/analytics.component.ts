@@ -18,10 +18,11 @@ export class AnalyticsComponent implements OnInit {
   private chart: am4charts.XYChart
   data: Formateur[]
 
-  constructor(private zone: NgZone, private http: HttpClient) {
+  constructor(private zone: NgZone, private http: HttpClient,public competence: CompetenceService) {
     this.TauxForma()
 
   }
+  
   top = []
   //Top 5 Formateures 
   getTopFormateures() {
@@ -32,23 +33,23 @@ export class AnalyticsComponent implements OnInit {
 
         let chart = am4core.create('line-chart', am4charts.XYChart)
         let title = chart.titles.create()
-        title.text = 'Top 5 Formateures Selon leur Scores '
+        title.text = 'Top 5 Organismes  '//Selon leur Scores
         chart.paddingRight = 20
 
         console.log(' ********* data: ', data)
         chart.data = data
         let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis())
-        categoryAxis.title.text = 'nom_Formateur'
-        categoryAxis.dataFields.category = 'nom_Formateur'
+        categoryAxis.title.text = 'nom_Organisme'
+        categoryAxis.dataFields.category = 'organisme_prestataire'
 
         let valueAxisY = chart.yAxes.push(new am4charts.ValueAxis())
         valueAxisY.title.text = 'Score'
         valueAxisY.renderer.minWidth = 20
 
-        let seriesNames = ['organisme_prestataire', 'period', 'score']
+        let seriesNames = ['organisme_prestataire', '', 'score']
         for (let i = 0; i < 3; i++) {
           let series = chart.series.push(new am4charts.LineSeries())
-          series.dataFields.categoryX = 'nom_Formateur'
+          series.dataFields.categoryX = 'organisme_prestataire'
           series.dataFields.valueY = seriesNames[i]
           series.name = seriesNames[i]
 
@@ -89,21 +90,21 @@ export class AnalyticsComponent implements OnInit {
   }
 
   Piechart2() {
-    // Create chart instance
+    // Create chart instancescore
     this.http.get('https://localhost:44385/api/Formateur/top')
     .subscribe((res: any) => {
       console.log('TOP 5 organisme_prestataires ', res)
 
       let obj = {}
       res.map(x=>{
-        if (!obj[x.organisme_prestataire.toLowerCase()]) {
-          obj[x.organisme_prestataire.toLowerCase()] = x.score
+        if (!obj[x.theme.toLowerCase()]) {
+          obj[x.theme.toLowerCase()] = x.score
         }else{
-          obj[x.organisme_prestataire.toLowerCase()] = obj[x.organisme_prestataire.toLowerCase()].score + x.score
+          obj[x.theme.toLowerCase()] = obj[x.theme.toLowerCase()].score + x.score
         }
       })
 
-      let data = Object.entries(obj).map((e) => ({ organisme_prestataire : e[0],score: e[1] }));
+      let data = Object.entries(obj).map((e) => ({ theme : e[0],score: e[1] }));
     //  console.clear()
       console.log("data : ",data);
       
@@ -120,7 +121,7 @@ export class AnalyticsComponent implements OnInit {
     // Add and configure Series
     var pieSeries = chart2.series.push(new am4charts.PieSeries())
     pieSeries.dataFields.value = 'score'
-    pieSeries.dataFields.category = 'organisme_prestataire'
+    pieSeries.dataFields.category = 'theme'
     pieSeries.slices.template.propertyFields.fill = 'color'
 
     chart2.legend = new am4charts.Legend()
@@ -137,7 +138,7 @@ export class AnalyticsComponent implements OnInit {
 
       var chart3 = am4core.create('chartdiv', am4charts.PieChart3D)
       let title = chart3.titles.create()
-      title.text = 'Taux de Formations réalisees par rapport planifiée'
+      title.text = 'Taux de formations réalisees par rapport aux formations planifiées'
        chart3.paddingRight = 20
       chart3.paddingBottom=10
       chart3.marginBottom=10
@@ -166,6 +167,19 @@ export class AnalyticsComponent implements OnInit {
   }
  
  array:any[];
+ TauxEfficaciteAnnuelle:any=[];
+ getTauxEfficaciteAnnuelle(){
+  this.http.get('https://localhost:44385/api/BesoinFormation/TauxDeParticipation').toPromise().then(
+    res=>{
+      this.TauxEfficaciteAnnuelle = res;
+      console.log(this.TauxEfficaciteAnnuelle);
+   //  this.users = data.json();
+  
+    }
+
+  )
+
+}
   TauxForma(){
     this.http.get('https://localhost:44385/api/Participant/taux_Participants')
     .subscribe((res:any)=>{
@@ -185,7 +199,7 @@ export class AnalyticsComponent implements OnInit {
       
       let lineChartData = occurence.map((x:any)=>({titre : x.titre, value : x.taux}))
 
-      this.lineGraphChart(lineChartData)
+    this.lineGraphChart(lineChartData)
 
       console.log("obj : ",occurence)
       console.log("res taux",res )
@@ -198,10 +212,10 @@ export class AnalyticsComponent implements OnInit {
     let chart = am4core.create("eventsLineGraphChart", am4charts.XYChart);
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = "titre";
-    categoryAxis.title.text = "value";
+    categoryAxis.title.text = "Année";
 
     let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.title.text = "Nombre des personnes";
+    valueAxis.title.text = "Taux d'efficacité";
 
     // Create series
     var series = chart.series.push(new am4charts.ColumnSeries());
@@ -215,10 +229,14 @@ export class AnalyticsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.competence.TopFormateur();
+ 
     this.getTopFormateures()
+    this.getTauxEfficaciteAnnuelle()
     this.Piechart()
     this.Piechart2()
     this.PieChart3d()
     console.log(this.array)
+    
   }
 }

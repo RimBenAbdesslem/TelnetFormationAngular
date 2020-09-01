@@ -203,13 +203,13 @@ searchFromArray(arr, regex) {
 
 IDF : any;
   onSubmit() {
-  debugger
+ // debugger
     this.formation.registerFormation().subscribe(
       (res: any) => {
-        debugger
+   //     debugger
         console.log("res",res.besoinFormationId)
         this.IDF=res.besoinFormationId;
-        debugger
+      //  debugger
         this.OnRegisterParticipant()
         //this.formation.PostRegisterParticipant(res.besoinFormationId,data)
           this.toastr.success('New user created!', 'Registration successful.');
